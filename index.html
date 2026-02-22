@@ -1,29 +1,42 @@
 <!doctype html>
 <html lang="en">
-
-<!-- TODO: DRY -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- TODO: DRY -->
-    <header>
-        <h1>mrinal's digital archive</h1>
-    </header>
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h2 class="retro-text">mrinal's digital archive</h2>
+        <a href="./index.html" class="retro-text" style="color:#FFDE21"><i>home</i></a>
+        <a href="./pokemon-cards/index.html" class="retro-text"><i>favorite pokemon cards</i></a>
+        <a href="./ideas/index.html" class="retro-text">ideas</a>
+    </div>
 
-    <main>
+    <div id="main">
+        <div id="nav-overlay"></div>
+        <header>    
+            <span class="retro-text" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+            <h2 class="retro-text" style="text-align: center;">mrinal's digital archive</h2>
+        </header>
+        
         <section>
-            <i><p>currently under constructionnnn thx for visiting (ദ്ദി˙ᗜ˙)</p></i>
-            <nav aria-label="navigation">
-                <a href="ideas/index.html" title="ideas" class="nav-link">ideas</a>
-            </nav>
+            <div class="container">
+                <ul class="retro-text">
+                    <li><a href="../pokemon-cards/index.html" class="retro-text">favorite pokemon cards</a></li>
+                    <li><a href="./ideas/index.html" class="retro-text" style="font-size: 16px;">ideas</a></li>
+                </ul>
+            </div>
         </section>
-    </main>
 
-    <!-- TODO: DRY -->
-    <footer>
-        <p>&copy; 2026 mrinal save / atsumr </p>
-    </footer>
+        <!-- TODO: DRY -->
+        <footer class="retro-text" style="text-align:center">
+            <br/><p>&copy; 2026 mrinal save / atsumr </p>
+        </footer>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

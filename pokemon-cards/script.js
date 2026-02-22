@@ -85,8 +85,8 @@ const sidenav = document.getElementById('sidenav');
 const navOverlay = document.getElementById('nav-overlay');
 
 function openNav() {
-  sidenav.style.width = "300px";
-  main.style.marginLeft = "300px";
+  sidenav.style.width = "325px";
+  main.style.marginLeft = "325px";
   main.style.pointerEvents = 'none';
   navOverlay.classList.add("active");
 }
