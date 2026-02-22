@@ -13,14 +13,14 @@ fetch("cards.json")
       card.className = "card";
 
       const img = document.createElement("img");
-      img.src = `assets/cards/${file}`;
+      img.src = `assets/cards/thumbnail/${file}`;
       img.loading = "lazy";
 
       card.appendChild(img);
       grid.appendChild(card);
 
       card.addEventListener("click", () => {
-        lightboxImg.src = `assets/cards/${file}`;
+        lightboxImg.src = `assets/cards/fullsize/${file}`;
 
         const formattedName = file
           .replace(/\.[^/.]+$/, "")
