@@ -3,40 +3,49 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- todo: DRY -->
-    <header>
-        <h1>my digital archive</h1>
-        <p><a href="../index.html" title="home">home</a></p>
-        <p><a href="../ideas/index.html" title="ideas">ideas</a></p>
+    <!-- TODO: DRY -->
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h2 class="pokemon-text">my digital archive</h2>
+        <a href="../index.html" class="pokemon-text">home</a>
+        <a href="../ideas/index.html" class="pokemon-text">ideas</a>
+    </div>
 
-        <h4>full-art pokemon cards i like</h4>
-    </header>
-
-    <main>
-        <section>
-            <p>images sourced from <a href="https://www.tcgcollector.com">TCGCollector</a>.</p>
-            <p>currently under constructionnnn thx for visiting (ദ്ദി˙ᗜ˙)</p>
-        </section>
-
+    <div id="main">
+        <div id="nav-overlay"></div>
+        <header>    
+            <span class="pokemon-text" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+            <h2 class="pokemon-text" style="text-align: center;">my favorite full-art pokemon cards</h2>
+            <section>
+                <p class="pokemon-text" style="text-align: center; font-size: 16px;">
+                    images sourced from <a href="https://www.tcgcollector.com" target="_blank">TCGCollector</a> and
+                    inspired by <a href="https://pokemon.ryanyan.ca/" target="_blank">Ryan Yan</a>.
+                </p>
+            </section>
+        </header>
+        
         <div class="grid" id="grid"></div>
 
         <div class="lightbox" id="lightbox">
             <div class="lightbox-content">
-                <img id="lightbox-img" />
+                <img id="lightbox-img"/>
                 <p id="lightbox-caption"></p>
             </div>
         </div>
-    </main>
 
-    <!-- todo: DRY -->
-    <footer>
-        <p>&copy; 2026 mrinal save / atsumr </p>
-    </footer>
+        <div style="text-align: center">
+            <a href="#top" id="back-to-top" class="pokemon-text">⇡ back to top</a>
+        </div>
 
+        <!-- TODO: DRY -->
+        <footer class="pokemon-text" style="text-align: center">
+            <p>&copy; 2026 mrinal save / atsumr </p>
+        </footer>
+    </div>
+    
     <script src="script.js" defer></script>
 </body>
 </html>
