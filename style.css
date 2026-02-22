@@ -1,0 +1,118 @@
+/* #region general */
+html {
+    scroll-behavior: smooth;
+}
+
+ul {
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    list-style-position: inside;
+    list-style: none;
+}
+
+li {
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+/* Override default link styles. */
+a { text-decoration: none; color: black}
+a:hover, a:active { text-decoration: none; color:red }
+
+span:hover { text-decoration: none; color: red; }
+
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Source: https://www.w3schools.com/howto/howto_js_sidenav.asp. */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.sidenav h2 {
+    padding: 8px 8px 8px 21px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    position: relative;
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+#nav-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+#nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* On smaller screens, where height is less than 450px, change 
+the style of the sidenav (less padding and a smaller font size). */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* #endregion general */
+
+/* #region fonts */
+
+@font-face {
+    font-family: 'retro';
+    src: url('./assets/fonts/Retro-Gaming.ttf') format('truetype');
+}
+
+.a, .retro-text {
+    font-family: 'retro';
+}
+
+/* #endregion font */
