@@ -176,7 +176,7 @@ the style of the sidenav (less padding and a smaller font size). */
 
 @font-face {
     font-family: 'pokemon';
-    src: url('/assets/fonts/Pokemon-Hollow.ttf') format('truetype');
+    src: url('./assets/fonts/Pokemon-Hollow.ttf') format('truetype');
 }
 
 .a, .pokemon-text {
