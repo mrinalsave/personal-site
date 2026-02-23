@@ -2,10 +2,10 @@
 
 set -e
 
-INPUT_DIR="assets/images/cards/original"
-THUMBNAIL_DIR="assets/images/cards/thumbnail"
-FULLSIZE_DIR="assets/images/cards/fullsize"
-MANIFEST="cards.json"
+INPUT_DIR="./assets/images/cards/original"
+THUMBNAIL_DIR="./assets/images/cards/thumbnail"
+FULLSIZE_DIR="./assets/images/cards/fullsize"
+MANIFEST="./assets/data/cards.json"
 
 echo "Cleaning old builds..."
 rm -rf "$THUMBNAIL_DIR" "$FULLSIZE_DIR"

@@ -3,6 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>my favorite pokemon cards</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -12,7 +16,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <h2 class="retro-text">mrinal's digital archive</h2>
         <a href="../index.html" class="retro-text">home</a>
-        <a href="./index.html" class="retro-text" style="color:#FFDE21"><i>favorite pokemon cards</i></a>
+        <a href="./index.html" class="retro-text" style="color:#FFDE21"><i>my favorite pokemon cards</i></a>
         <a href="../ideas/index.html" class="retro-text">ideas</a>
     </div>
 
@@ -20,7 +24,16 @@
         <div id="nav-overlay"></div>
         <header>    
             <span class="pokemon-text" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-            <h2 class="pokemon-text" style="text-align: center;">favorite pokemon cards</h2>
+            
+            <div class="header">
+                <h2 class="pokemon-text" style="text-align: center">
+                    <a href="./index.html" style="color: black">
+                        <img id="random-gif" alt="random pokemon gif"/>
+                        my favorite pokemon cards !
+                    </a>
+                </h2>
+            </div>
+            
             <section>
                 <p class="pokemon-text" style="text-align: center; font-size: 16px;">
                     images sourced from <a href="https://www.tcgcollector.com" target="_blank">TCGCollector</a> and
@@ -38,8 +51,11 @@
             </div>
         </div>
 
-        <div style="text-align: center">
-            <a href="#top" id="back-to-top" class="pokemon-text">⇡ back to top</a>
+        <div style="text-align: center" class="end-of-page">
+            <a href="#top" id="back-to-top" class="pokemon-text">
+                <img src="./assets/images/pikachu-phd.gif" alt="phd pikachu"/>
+                back to top
+            </a>
         </div>
 
 
@@ -49,6 +65,7 @@
         </footer>
     </div>
     
+    <script src="vanilla-tilt.js"></script>
     <script src="script.js" defer></script>
 </body>
 </html>
