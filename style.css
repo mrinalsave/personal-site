@@ -1,26 +1,24 @@
 /* #region general */
-html {
+html, body {
     scroll-behavior: smooth;
+    min-height: 100%;
 }
 
-ul {
+a { text-decoration: none; color: black}
+a:hover, a:active { text-decoration: none; color:red }
+span:hover { text-decoration: none; color: red; }
+
+.container {
+    text-align: center;
+}
+.container ul {
     display: table;
     margin: 0 auto;
     text-align: center;
     list-style-position: inside;
     list-style: none;
+    display: inline-block;
 }
-
-li {
-    padding-left: 1em;
-    text-indent: -1em;
-}
-
-/* Override default link styles. */
-a { text-decoration: none; color: black}
-a:hover, a:active { text-decoration: none; color:red }
-
-span:hover { text-decoration: none; color: red; }
 
 .parent-container {
     display: flex;
@@ -66,6 +64,15 @@ span:hover { text-decoration: none; color: red; }
     color: #f1f1f1;
 }
 
+.sidenav .selected-link {
+    font-style: italic;
+    color: #FFDE21;
+}
+.sidenav .selected-link:hover {
+    font-style: italic;
+    color: #FFDE21;
+}
+
 .sidenav .closebtn {
     position: absolute;
     top: 0;
@@ -104,6 +111,69 @@ the style of the sidenav (less padding and a smaller font size). */
 
 /* #endregion general */
 
+
+/* #region mobile popup */
+
+.mobile-popup {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(95%, 650px);
+
+    background: black;
+    opacity: 0.8;
+    color: white;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    z-index: 1000;
+
+    display: none;
+    overflow: hidden;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.popup-title {
+    font-size: 13px;
+    margin: 0;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.popup-body {
+    padding: 10px 14px;
+    font-size: 12px;
+}
+
+.popup-body p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .mobile-popup {
+        display: block;
+    }
+}
+
+/* #endregion mobile popup */
+
 /* #region fonts */
 
 @font-face {
@@ -113,6 +183,24 @@ the style of the sidenav (less padding and a smaller font size). */
 
 .a, .retro-text {
     font-family: 'retro';
+}
+
+@font-face {
+    font-family: 'bmspa';
+    src: url('./assets/fonts/BMSPA___.ttf') format('truetype');
+}
+
+.bmspa-text {
+    font-family: 'bmspa';
+}
+
+@font-face {
+    font-family: '04b03';
+    src: url('./assets/fonts/04B_03__.ttf') format('truetype');
+}
+
+.bmspa-text {
+    font-family: 'bmspa';
 }
 
 /* #endregion font */

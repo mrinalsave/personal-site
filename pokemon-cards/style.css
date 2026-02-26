@@ -16,7 +16,7 @@ span:hover { text-decoration: none; color: red; }
 }
 
 .header img {
-    height: 50px;
+    height: 35px;
 }
 
 .end-of-page {
@@ -124,6 +124,14 @@ the style of the sidenav (less padding and a smaller font size). */
         auto-fit,
         minmax(200px, 1fr)
     );
+}
+
+@media (max-width: 768px) {
+    .grid {
+        padding: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 12px;
+    }
 }
 
 /* Reference: https://github.com/simeydotme/pokemon-cards-css/blob/main/public/css/cards/regular-holo.css. */

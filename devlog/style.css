@@ -1,0 +1,63 @@
+/* #region general */
+
+a { text-decoration: none; color: white}
+a:hover, a:active { text-decoration: none; color:#66FF66 }
+span { text-decoration: none; color: white }
+span:hover { text-decoration: none; color: #66FF66; }
+
+/* #endregion general */
+
+/* #region blog */
+
+body {
+    background-color: #242526;
+    font-family: '04b03';
+}
+
+.blog-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.post-preview {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.post-preview h2 a {
+    color: white;
+    text-decoration: none;
+}
+.post-preview h2 a:hover {
+    color: #66FF66;
+}
+
+.post-preview small {
+    color: #999;
+    font-size: 0.85em;
+}
+
+.post-content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgb(199, 199, 199);
+    font-size: 0.85em;
+}
+.post-content li {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgb(199, 199, 199);
+    font-size: 0.80em;
+}
+
+.post-content h1, 
+.post-content h2, 
+.post-content h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #66FF66;
+}
+
+/* #endregion blog */

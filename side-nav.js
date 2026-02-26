@@ -1,7 +1,3 @@
-/* #region sidenav push content with overlay */
-// Set the width of the side navigation to 300px and the left margin of 
-// the page content to the same, and add a black background color to body.
-
 const main = document.getElementById('main');
 const sidenav = document.getElementById('sidenav');
 const navOverlay = document.getElementById('nav-overlay');
@@ -30,5 +26,3 @@ navOverlay.addEventListener('click', closeNav);
 sidenav.addEventListener('click', (e) => {
   e.stopPropagation();
 });
-
-/* #endregion sidenav push content with overlay */

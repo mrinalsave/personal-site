@@ -12,14 +12,15 @@
         <h2 class="retro-text">mrinal's digital archive</h2>
         <a href="../index.html" class="retro-text">home</a>
         <a href="../pokemon-cards/index.html" class="retro-text">my favorite pokemon cards</a>
-        <a href="./index.html" class="retro-text" style="color:#FFDE21"><i>ideas</i></a>
+        <a href="./index.html" class="retro-text selected-link">coming soon</a>
+        <a href="../devlog/index.html" class="retro-text">devlog</a>
     </div>
 
     <div id="main" class="parent-container">
         <div id="nav-overlay"></div>
         <header>    
             <span class="retro-text" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-            <h2 class="retro-text" style="text-align: center;">ideas</h2>
+            <h2 class="retro-text" style="text-align: center;">coming<br/>soon</h2>
         </header>
 
         <section>
@@ -35,9 +36,24 @@
 
     <!-- TODO: DRY -->
     <footer class="retro-text" style="text-align:center">
-        <br/><p>&copy; 2026 mrinal save / atsumr </p>
+        <p>&copy; 2026 mrinal save / atsumr </p>
     </footer>
 
-    <script src="../script.js" defer></script>
+    <!-- TODO: DRY -->
+    <div id="mobile-popup" class="mobile-popup">
+        <div class="popup-header">
+            <h4 class="retro-text popup-title">hey listen!</h4>
+            <button id="close-popup" class="retro-text popup-close">OK</button>
+        </div>
+        <div class="popup-body">
+            <p class="retro-text">
+                this site is best experienced on desktop, so some functionality may be impacted on mobile.
+                please check it out on desktop when you get the chance !
+            </p>
+        </div>
+    </div>
+
+    <script src="../mobile-popup.js" defer></script>
+    <script src="../side-nav.js" defer></script>
 </body>
 </html>

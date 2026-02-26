@@ -6,37 +6,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- TODO: DRY -->
-    <div id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <h2 class="retro-text">mrinal's digital archive</h2>
-        <a href="./index.html" class="retro-text" style="color:#FFDE21"><i>home</i></a>
-        <a href="./pokemon-cards/index.html" class="retro-text"><i>my favorite pokemon cards</i></a>
-        <a href="./ideas/index.html" class="retro-text">ideas</a>
-    </div>
-
-    <div id="main">
-        <div id="nav-overlay"></div>
-        <header>    
-            <span class="retro-text" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-            <h2 class="retro-text" style="text-align: center;">mrinal's digital archive</h2>
+    <div id="main" style="text-align: center;">
+        <header>
+            <h2 class="retro-text">mrinal's digital archive</h2>
         </header>
         
         <section>
             <div class="container">
-                <ul class="retro-text">
+                <ul class="bmpsa-text">
                     <li><a href="../pokemon-cards/index.html" class="retro-text">my favorite pokemon cards</a></li>
-                    <li><a href="./ideas/index.html" class="retro-text" style="font-size: 16px;">ideas</a></li>
+                    <li><a href="./ideas/index.html" class="retro-text" style="font-size: 16px;">coming soon</a></li>
+                    <li><a href="./devlog/index.html" class="retro-text" style="font-size: 16px;">devlog</a></li>
                 </ul>
             </div>
         </section>
 
+        <div id="mobile-popup" class="mobile-popup">
+            <div class="popup-header">
+                <h4 class="retro-text popup-title">hey listen!</h4>
+                <button id="close-popup" class="retro-text popup-close">OK</button>
+            </div>
+            <div class="popup-body">
+                <p class="retro-text">
+                    this site is best experienced on desktop, so some functionality may be impacted on mobile.
+                    please check it out on desktop when you get the chance !
+                </p>
+            </div>
+        </div>
+
         <!-- TODO: DRY -->
-        <footer class="retro-text" style="text-align:center">
+        <footer class="retro-text" style="text-align:center; font-size: 12px">
             <br/><p>&copy; 2026 mrinal save / atsumr </p>
         </footer>
     </div>
-
-    <script src="script.js" defer></script>
+    
+    <script src="../mobile-popup.js" defer></script>
 </body>
 </html>

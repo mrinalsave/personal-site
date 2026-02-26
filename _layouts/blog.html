@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ page.title }}</title>
+    <!-- TODO: FAVICON -->
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/devlog/style.css">
+</head>
+
+<body style="background-color:#242526;">
+    {{ content }}
+
+    <!-- TODO: DRY -->
+    <div id="mobile-popup" class="mobile-popup">
+        <div class="popup-header">
+            <h4 class="retro-text popup-title">hey listen!</h4>
+            <button id="close-popup" class="retro-text popup-close">OK</button>
+        </div>
+        <div class="popup-body">
+            <p class="retro-text">
+                this site is best experienced on desktop, so some functionality may be impacted on mobile.
+                please check it out on desktop when you get the chance !
+            </p>
+        </div>
+    </div>
+
+    <!-- TODO: DRY -->
+    <footer class="bmpsa-text" style="color: white; text-align:center; font-size: 12px">
+        <br/><p>&copy; 2026 mrinal save / atsumr </p>
+    </footer>
+
+    <script src="/mobile-popup.js"></script>
+    <script src="/side-nav.js"></script>
+</body>
+</html>

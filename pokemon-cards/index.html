@@ -16,8 +16,9 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <h2 class="retro-text">mrinal's digital archive</h2>
         <a href="../index.html" class="retro-text">home</a>
-        <a href="./index.html" class="retro-text" style="color:#FFDE21"><i>my favorite pokemon cards</i></a>
-        <a href="../ideas/index.html" class="retro-text">ideas</a>
+        <a href="./index.html" class="retro-text selected-link"><i>my favorite pokemon cards</i></a>
+        <a href="../ideas/index.html" class="retro-text">coming soon</a>
+        <a href="../devlog/index.html" class="retro-text">devlog</a>
     </div>
 
     <div id="main">
@@ -32,14 +33,10 @@
                         my favorite pokemon cards !
                     </a>
                 </h2>
-            </div>
-            
-            <section>
-                <p class="pokemon-text" style="text-align: center; font-size: 16px;">
-                    images sourced from <a href="https://www.tcgcollector.com" target="_blank">TCGCollector</a> and
-                    inspired by <a href="https://pokemon.ryanyan.ca/" target="_blank">Ryan Yan</a>.
+                <p class="retro-text" style="font-size: 12px;">
+                    <a href="../devlog/2026/02/25/pokemon-cards.html" target="_blank">wanna know how this was made ?</a>
                 </p>
-            </section>
+            </div>
         </header>
         
         <div class="grid" id="grid"></div>
@@ -58,14 +55,30 @@
             </a>
         </div>
 
-
         <!-- TODO: DRY -->
-        <footer class="pokemon-text" style="text-align: center">
-            <br/><p>&copy; 2026 mrinal save / atsumr </p>
+        <footer class="retro-text" style="text-align: center">
+            <br/>
+            <p class="pokemon-text" style="font-size: 12px;">&copy; 2026 mrinal save / atsumr </p>
         </footer>
+    </div>
+
+    <!-- TODO: DRY -->
+    <div id="mobile-popup" class="mobile-popup">
+        <div class="popup-header">
+            <h4 class="retro-text popup-title">hey listen!</h4>
+            <button id="close-popup" class="retro-text popup-close">OK</button>
+        </div>
+        <div class="popup-body">
+            <p class="retro-text">
+                this site is best experienced on desktop, so some functionality may be impacted on mobile.
+                please check it out on desktop when you get the chance !
+            </p>
+        </div>
     </div>
     
     <script src="vanilla-tilt.js"></script>
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
+    <script src="../mobile-popup.js"></script>
+    <script src="../side-nav.js"></script>
 </body>
 </html>
