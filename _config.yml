@@ -24,3 +24,7 @@ exclude:
   - vite.config.js
   - package.json
   - package-lock.json
+  - vendor/bundle
+  - vendor/cache
+  - vendor/gems
+  - vendor/ruby
