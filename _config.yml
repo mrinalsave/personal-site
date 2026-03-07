@@ -1,8 +1,7 @@
 domain: mrinalsave.github.io
 url: https://mrinalsave.github.io
 baseurl: ""
-title: mrinal's digital archive
-description: under construction (ദ്ദി˙ᗜ˙)
+title: my digital archive
 
 plugins:
   - jekyll-feed
