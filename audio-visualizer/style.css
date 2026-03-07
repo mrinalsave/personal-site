@@ -1,0 +1,54 @@
+#visualizer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    transition: left 0.5s;
+}
+
+#main, header, footer {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+/* Override: overlay must be fixed and full-screen, above canvas but below sidenav */
+#nav-overlay {
+    position: fixed !important;
+    inset: 0;
+    z-index: 6 !important;
+}
+
+/* Close button must sit above the overlay */
+.sidenav .closebtn {
+    z-index: 12;
+    position: absolute;
+}
+
+a { text-decoration: none; color: white}
+a:hover, a:active { text-decoration: none; color:#51e2ff }
+span:hover { text-decoration: none; color: #51e2ff }
+
+/* #region fonts */
+
+@font-face {
+    font-family: 'audio';
+    src: url('./assets/fonts/AudioNugget.ttf') format('truetype');
+}
+
+.a, .audio-text, .lil-gui, .lil-gui * {
+    font-family: 'audio' !important;
+}
+
+.lil-gui {
+    /* Changes the font size for the value input fields */
+    --input-font-size: 7px; 
+    
+    /* Optional: change the font size for the labels */
+    --label-font-size: 4px; 
+}
+
+/* #endregion font */

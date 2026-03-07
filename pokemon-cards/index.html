@@ -14,9 +14,10 @@
     <!-- TODO: DRY -->
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <h2 class="retro-text">mrinal's digital archive</h2>
+        <h2 class="retro-text">my digital archive</h2>
         <a href="../index.html" class="retro-text">home</a>
-        <a href="./index.html" class="retro-text selected-link"><i>my favorite pokemon cards</i></a>
+        <a href="./index.html" class="retro-text selected-link">my favorite pokemon cards</a>
+        <a href="../audio-visualizer/index.html" class="retro-text">audio visualizer</a>
         <a href="../ideas/index.html" class="retro-text">coming soon</a>
         <a href="../devlog/index.html" class="retro-text">devlog</a>
     </div>
@@ -24,7 +25,7 @@
     <div id="main">
         <div id="nav-overlay"></div>
         <header>    
-            <span class="pokemon-text" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+            <span id="open-nav" class="pokemon-text" style="display:inline-block; width:fit-content;font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
             
             <div class="header">
                 <h2 class="pokemon-text" style="text-align: center">
@@ -33,7 +34,7 @@
                         my favorite pokemon cards !
                     </a>
                 </h2>
-                <p class="retro-text" style="font-size: 12px;">
+                <p class="retro-text" style="font-size: 12px; text-align: center">
                     <a href="../devlog/2026/02/25/pokemon-cards.html" target="_blank">wanna know how this was made ?</a>
                 </p>
             </div>

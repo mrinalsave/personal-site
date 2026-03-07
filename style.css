@@ -5,7 +5,7 @@ html, body {
 }
 
 a { text-decoration: none; color: black}
-a:hover, a:active { text-decoration: none; color:red }
+a:hover, a:active { text-decoration: none; color:red; }
 span:hover { text-decoration: none; color: red; }
 
 .container {
@@ -187,7 +187,7 @@ the style of the sidenav (less padding and a smaller font size). */
 
 @font-face {
     font-family: 'bmspa';
-    src: url('./assets/fonts/BMSPA___.ttf') format('truetype');
+    src: url('./assets/fonts/BMSPA___.TTF') format('truetype');
 }
 
 .bmspa-text {
@@ -196,7 +196,7 @@ the style of the sidenav (less padding and a smaller font size). */
 
 @font-face {
     font-family: '04b03';
-    src: url('./assets/fonts/04B_03__.ttf') format('truetype');
+    src: url('./assets/fonts/04B_03__.TTF') format('truetype');
 }
 
 .bmspa-text {
