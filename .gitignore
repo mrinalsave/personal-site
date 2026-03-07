@@ -1,0 +1,6 @@
+.DS_Store
+pokemon-cards/.DS_Store
+pokemon-cards/assets/.DS_Store
+Gemfile.lock
+node_modules/
+dist/

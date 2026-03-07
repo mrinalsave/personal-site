@@ -17,3 +17,10 @@ defaults:
     values:
       layout: blog
       permalink: /devlog/:year/:month/:day/:title.html
+
+exclude:
+  - node_modules
+  - dist
+  - vite.config.js
+  - package.json
+  - package-lock.json
