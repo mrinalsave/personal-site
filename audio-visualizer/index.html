@@ -10,7 +10,7 @@
 <body>
     <!-- TODO: DRY -->
     <div id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
         <h2 class="retro-text">my digital archive</h2>
         <a href="../index.html" class="retro-text">home</a>
         <a href="../pokemon-cards/index.html" class="retro-text">my favorite pokemon cards</a>
@@ -27,7 +27,7 @@
         <input type="file" id="audio" accept="audio/*" style="display:none">
 
         <header style="position:fixed; top:20px; left:20px; right:20px; z-index:10; color:white; pointer-events:none;">
-            <span id="open-nav" class="audio-text" style="display:inline-block; width:fit-content;font-size:20px;cursor:pointer;pointer-events:auto;" onclick="openNav()">&#9776; open</span>
+            <span id="open-nav" class="audio-text" style="display:inline-block; width:fit-content;font-size:20px;cursor:pointer;pointer-events:auto;">&#9776; open</span>
 
             <div class="header">
                 <h2 class="audio-text" style="text-align: center">audio visualizer</h2>
@@ -178,7 +178,7 @@
     </script>
 
     <script src="./script.js" type="module"></script>
-    <script src="../mobile-popup.js"></script>
-    <script src="../side-nav.js"></script>
+    <script src="../mobile-popup.js" type="module"></script>
+    <script src="../side-nav.js" type="module"></script>
 </body>
 </html>

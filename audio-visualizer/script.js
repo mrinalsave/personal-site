@@ -1,15 +1,19 @@
+// TODO: Figure out if doubly importing here is necessary.
+// (it was using only one style.css when building locally)
+import '../style.css';
+import './style.css';
+
 /*
     Source: Wael Yasmina
     https://github.com/WaelYasmina/audiovisualizer/tree/main.
 */
-
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass';
 import { GUI } from 'lil-gui';
-import { HalftonePass } from 'three/addons/postprocessing/HalftonePass.js';
+// import { HalftonePass } from 'three/addons/postprocessing/HalftonePass.js';
 
 // #region Scene Setup
 
@@ -39,8 +43,8 @@ document.addEventListener('mousemove', function (e) {
 // Includes audio and post-processing parameters.
 const params = {
   // Default colors are hot pink and cyan.
-  topHalf: '#ee00ff', 
-  bottomHalf: '#00d5ff',
+  topHalf: '#c29aea', 
+  bottomHalf: '#ff8d85',
 
   // Default bloom parameters after tweaking.
   threshold: 0.361,   
@@ -177,27 +181,27 @@ const outputPass = new OutputPass();
 
 // Set up halftone pass with parameters defined below.
 // Separated out from initialization for better readability and easier tweaking.
-const halfToneParams = {
-	shape: 2, // 1 = Dot, 2 = Ellipse, 3 = Line, 4 = Square, 5 = Diamond
-	radius: 1,
-	rotateR: Math.PI / 12,
-	rotateB: Math.PI / 12 * 2,
-	rotateG: Math.PI / 12 * 3,
-	scatter: 0.25,
-	blending: 1,
-	blendingMode: 1, // 1 = Linear, 2 = Multiply, 3 = Add, 4 = Lighter, 5 = Darker
-	opacity: 0.15, // Adjust opacity to make halftone effect more subtle.
-  greyscale: false,
-	disable: false
-};
-const halftonePass = new HalftonePass( halfToneParams );
+// const halfToneParams = {
+// 	shape: 2, // 1 = Dot, 2 = Ellipse, 3 = Line, 4 = Square, 5 = Diamond
+// 	radius: 1,
+// 	rotateR: Math.PI / 12,
+// 	rotateB: Math.PI / 12 * 2,
+// 	rotateG: Math.PI / 12 * 3,
+// 	scatter: 0.25,
+// 	blending: 1,
+// 	blendingMode: 1, // 1 = Linear, 2 = Multiply, 3 = Add, 4 = Lighter, 5 = Darker
+// 	opacity: 0.15, // Adjust opacity to make halftone effect more subtle.
+//   greyscale: false,
+// 	disable: false
+// };
+// const halftonePass = new HalftonePass( halfToneParams );
 
 // Set up the effect composer to apply all post-processing effects.
 const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
 composer.addPass(outputPass);
-composer.addPass(halftonePass);
+// composer.addPass(halftonePass);
 
 // Animate the scene.
 const clock = new THREE.Timer();

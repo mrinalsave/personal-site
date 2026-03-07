@@ -54,5 +54,7 @@ function closeNav() {
   navOverlay.classList.remove("active");
 }
 
+document.getElementById('open-nav').addEventListener('click', openNav);
+document.querySelector('.closebtn').addEventListener('click', closeNav);
 navOverlay.addEventListener('click', closeNav);
 sidenav.addEventListener('click', (e) => e.stopPropagation());
