@@ -82,6 +82,7 @@ const params = {
 const uniforms = {
   u_time: { value: 0.0 },
   u_frequency: { value: 0.0 },
+  u_bass: { value: 0.0 },
   u_topHalf: { value: new THREE.Color(params.topHalf) },
   u_bottomHalf: { value: new THREE.Color(params.bottomHalf) },
   u_audio: { value: params.audio }
@@ -100,7 +101,7 @@ const mat = new THREE.ShaderMaterial({
   fragmentShader: document.getElementById('fragmentshader').textContent,
 });
 
-const geo = new THREE.IcosahedronGeometry(4., 35);
+const geo = new THREE.IcosahedronGeometry(4, 30);
 const mesh = new THREE.Mesh(geo, mat);
 scene.add(mesh);
 

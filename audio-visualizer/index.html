@@ -157,7 +157,7 @@
 
         void main() {
             float noise = 6. * pnoise(position + u_time, vec3(10.));
-            float displacement = (u_frequency / 30.) * (noise / 10.) * 1.25;
+            float displacement = (u_frequency / 30.) * (noise / 10.) * 1.5;
             vec3 newPosition = position + normal * displacement;
             v_position = newPosition;
 
