@@ -55,13 +55,13 @@ controls.dampingFactor = 0.03;
 // Includes audio and post-processing parameters.
 const params = {
   // Default colors are hot pink and yellow.
-  topHalf: '#ff00ea', 
-  bottomHalf: '#fdcf2b',
+  topHalf: '#438fd6', 
+  bottomHalf: '#e56cac',
 
   // Default bloom parameters after tweaking.
-  threshold: 0.164,   
-  strength: 0.275,
-  radius: 0.972,
+  threshold: 0.14,   
+  strength: 0.176,
+  radius: 0.309,
 
   // Default audio is "Resonance" by HOME.
   volume: 0.8,
