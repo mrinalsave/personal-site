@@ -29,8 +29,21 @@
 }
 
 a { text-decoration: none; color: white}
-a:hover, a:active { text-decoration: none; color:#51e2ff }
-span:hover { text-decoration: none; color: #51e2ff }
+a:hover, a:active { text-decoration: none; color:#ff00ea }
+span:hover { text-decoration: none; color: #ff00ea }
+
+.lil-gui {
+    --input-font-size: 7px;
+    --label-font-size: 4px; 
+    z-index: 8 !important;
+}
+
+#gui-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 8;
+}
 
 /* #region fonts */
 
@@ -41,14 +54,6 @@ span:hover { text-decoration: none; color: #51e2ff }
 
 .a, .audio-text, .lil-gui, .lil-gui * {
     font-family: 'audio' !important;
-}
-
-.lil-gui {
-    /* Changes the font size for the value input fields */
-    --input-font-size: 7px; 
-    
-    /* Optional: change the font size for the labels */
-    --label-font-size: 4px; 
 }
 
 /* #endregion font */

@@ -13,6 +13,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass';
 import { GUI } from 'lil-gui';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // import { HalftonePass } from 'three/addons/postprocessing/HalftonePass.js';
 
 // #region Scene Setup
@@ -25,31 +26,42 @@ document.getElementById('visualizer').appendChild(renderer.domElement);
 // Set up the scene.
 const scene = new THREE.Scene();
 
+const textureLoader = new THREE.TextureLoader();
+const bgTexture = textureLoader.load('./assets/images/bg-texture.png', (texture) => {
+  texture.colorSpace = THREE.SRGBColorSpace; 
+});
+scene.background = bgTexture;
+
 // Set up the camera.
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(6, 8, 14);
+camera.position.set(10, 10, 10);
+camera.lookAt(0, 0, 0);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.03;
 
 // Let the blob move a little with the mouse.
-let mouseX = 0;
-let mouseY = 0;
-document.addEventListener('mousemove', function (e) {
-  let windowHalfX = window.innerWidth / 2;
-  let windowHalfY = window.innerHeight / 2;
-  mouseX = (e.clientX - windowHalfX) / 100;
-  mouseY = (e.clientY - windowHalfY) / 100;
-});
+// let mouseX = 0;
+// let mouseY = 0;
+// document.addEventListener('mousemove', function (e) {
+//   let windowHalfX = window.innerWidth / 2;
+//   let windowHalfY = window.innerHeight / 2;
+//   mouseX = (e.clientX - windowHalfX) / 100;
+//   mouseY = (e.clientY - windowHalfY) / 100;
+// });
 
 // Define uniforms and material for the scene.
 // Includes audio and post-processing parameters.
 const params = {
-  // Default colors are hot pink and cyan.
-  topHalf: '#c29aea', 
-  bottomHalf: '#ff8d85',
+  // Default colors are hot pink and yellow.
+  topHalf: '#ff00ea', 
+  bottomHalf: '#fdcf2b',
 
   // Default bloom parameters after tweaking.
-  threshold: 0.361,   
-  strength: 0.152,
-  radius: 0.603,
+  threshold: 0.164,   
+  strength: 0.275,
+  radius: 0.972,
 
   // Default audio is "Resonance" by HOME.
   volume: 0.8,
@@ -101,7 +113,8 @@ const mat = new THREE.ShaderMaterial({
   fragmentShader: document.getElementById('fragmentshader').textContent,
 });
 
-const geo = new THREE.IcosahedronGeometry(4, 30);
+const isMobile = window.innerWidth <= 768;
+const geo = new THREE.IcosahedronGeometry(isMobile ? 3 : 5, isMobile ? 20 : 32);
 const mesh = new THREE.Mesh(geo, mat);
 scene.add(mesh);
 
@@ -205,14 +218,12 @@ composer.addPass(outputPass);
 // composer.addPass(halftonePass);
 
 // Animate the scene.
-const clock = new THREE.Timer();
-const analyser = new THREE.AudioAnalyser(sound, 32);
+const clock = new THREE.Clock();
+const analyser = new THREE.AudioAnalyser(sound, 64);
 function animate() {
-  camera.position.x += (mouseX - camera.position.x) * 0.05;
-  camera.position.y += (-mouseY - camera.position.y) * 0.5;
-  camera.lookAt(scene.position);
+  controls.update();
 
-  uniforms.u_time.value = clock.getElapsed();
+  uniforms.u_time.value = clock.getElapsedTime();
   uniforms.u_frequency.value = analyser.getAverageFrequency();
   composer.render();
   requestAnimationFrame(animate);
@@ -261,9 +272,14 @@ bloomFolder.add(params, 'radius', 0, 3).onChange(function (value) {
   bloomPass.radius = Number(value);
 });
 
+// Default to a closed GUI on load for smaller screens for better screen space.
+if (window.innerWidth <= 768) {
+    gui.close();
+}
+
 // Resize the renderer and camera on window resize to maintain aspect ratio and fill the screen.
 window.addEventListener('resize', function () {
-  // Default to a closed GUI on smaller screens for better screen space.
+  // Default to a closed GUI for smaller screens for better screen space.
   if (window.innerWidth <= 768) {
     gui.close();
   } else {

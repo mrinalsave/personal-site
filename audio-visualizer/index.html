@@ -20,10 +20,10 @@
     </div>
 
     <div id="nav-overlay"></div>
+    <div id="gui-container" style="position: absolute; top: 10px; right: 10px;"></div>
 
     <div id="main">
         <div id="visualizer"></div>
-        <div id="gui-container" style="position: absolute; top: 10px; right: 10px;"></div>
         <input type="file" id="audio" accept="audio/*" style="display:none">
 
         <header style="position:fixed; top:20px; left:20px; right:20px; z-index:10; color:white; pointer-events:none;">
@@ -32,7 +32,7 @@
             <div class="header">
                 <h2 class="audio-text" style="text-align: center">audio visualizer</h2>
                 <p class="audio-text" style="font-size: 12px; text-align: center">
-                    <a href="../devlog/2026/02/25/pokemon-cards.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
+                    <a href="../devlog/2026/03/07/audio-visualizer.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
                 </p>
             </div>
         </header>
@@ -156,7 +156,7 @@
         varying vec3 v_position;
 
         void main() {
-            float noise = 6. * pnoise(position + u_time, vec3(10.));
+            float noise = 5. * pnoise(position + u_time, vec3(10.));
             float displacement = (u_frequency / 30.) * (noise / 10.) * 1.5;
             vec3 newPosition = position + normal * displacement;
             v_position = newPosition;
@@ -171,9 +171,9 @@
         varying vec3 v_position;
 
         void main() {
-            float gradient = (v_position.y + 2.) / 6.;
-            vec3 color = mix(u_bottomHalf, u_topHalf, gradient / 0.5);
-            gl_FragColor = vec4(color, 1. );
+            float gradient = (v_position.y + 4.) / 8.;
+            vec3 color = mix(u_bottomHalf, u_topHalf, gradient);
+            gl_FragColor = vec4(color, 1.);
         }
     </script>
 
