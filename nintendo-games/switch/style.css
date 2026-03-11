@@ -1,0 +1,520 @@
+/* #region loading */
+
+a:hover { text-decoration: none; color: rgb(86, 174, 183) }
+
+/* ── Page transitions ───────────────────────────────────────────────── */
+
+/* fade-out: whole body fades when navigating away */
+body.fade-out {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.35s ease !important;
+}
+
+/* fade-in: body starts invisible; page-loading class holds it until load */
+body.page-loading {
+    opacity: 0;
+}
+
+body {
+    transition: opacity 0.4s ease;
+}
+
+/*
+ * Staggered entrance: direct children of #main animate in individually.
+ * Each child starts translated down 12px and invisible, then eases into place.
+ * nth-child delays create the stagger.
+ */
+#main > * {
+    animation: fadeSlideIn 0.45s ease both;
+}
+
+body.page-loading #main > * {
+    animation: none;
+    opacity: 0;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#main > *:nth-child(1) { animation-delay: 0.05s; }
+#main > *:nth-child(2) { animation-delay: 0.12s; }
+#main > *:nth-child(3) { animation-delay: 0.19s; }
+#main > *:nth-child(4) { animation-delay: 0.26s; }
+#main > *:nth-child(5) { animation-delay: 0.33s; }
+
+#loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    height: 100vh;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-console-label {
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.continue-btn, .back-btn {
+    background: white;
+    border: 2px solid currentColor;
+    color: inherit;
+    padding: 10px 40px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.continue-btn:hover, .back-btn:hover {
+    background: rgb(232, 232, 232);
+    color: white;
+}
+
+/* #endregion loading */
+
+/* #region home/carousel */
+
+#home-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    gap: 8px;
+}
+
+#selected-title-wrapper {
+    position: relative;
+    height: 1.5em;
+    pointer-events: none;
+}
+
+#selected-title {
+    position: absolute;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: rgb(86, 174, 183);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    transition: left 0.3s ease;
+}
+
+/* Outer row: arrow | track | arrow */
+#carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 20px;
+}
+
+/*
+ * Track container: overflow:hidden clips the scrolling track to its flex width.
+ * min-width:0 is required so it doesn't blow out of the flex parent.
+ * Extra vertical padding makes room for the border div that bleeds outside each icon.
+ * Negative vertical margin compensates so the padding doesn't push other elements.
+ */
+#carousel-track-outer {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    cursor: grab;
+    /* 12px padding on all sides gives border room everywhere;
+       negative margin compensates so surrounding layout is unaffected */
+    padding: 12px;
+}
+
+#carousel-track-outer.dragging {
+    cursor: grabbing;
+}
+
+/* The scrolling strip of icons */
+#carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    will-change: transform;
+}
+
+#carousel-track .all-software-icon {
+    margin-left: clamp(12px, 1.8vw, 24px); /* extra gap before all-software icon only */
+}
+
+#carousel-track.animating {
+    transition: transform 0.3s ease;
+}
+
+/*
+ * Each icon is position:relative so the border child can use absolute inset.
+ * overflow:visible lets the border div bleed outside the icon bounds.
+ * The parent's overflow:hidden clips it horizontally (prevents page overflow)
+ * but the vertical padding on #carousel-track-outer gives it room top/bottom.
+ */
+.game-icon {
+    position: relative;
+    flex: 0 0 clamp(80px, 12vw, 160px);
+    height: clamp(80px, 12vw, 160px);
+    overflow: visible;
+    background: #151515;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.game-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+/*
+ * Border lives as an absolutely positioned child with negative inset.
+ * It renders outside the icon without affecting layout.
+ * The white gap between icon and teal border is achieved with outline.
+ */
+.game-icon-border {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    inset: -8px;
+    border: 4px solid rgb(136, 249, 222);
+    outline: 4px solid white;
+    outline-offset: -8px;
+}
+
+.game-icon.selected .game-icon-border {
+    display: block;
+}
+
+.all-software-icon {
+    flex-shrink: 0;
+    align-self: center;
+    width: clamp(60px, 9vw, 120px);
+    height: clamp(60px, 9vw, 120px);
+    border-radius: 50%;
+    border: 3px solid rgba(150, 150, 150, 0.6); /* gray by default */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+    box-sizing: border-box;
+}
+
+.all-software-icon:hover {
+    border-color: rgba(150, 150, 150, 0.9);
+}
+
+/* Only border changes on selected — no background fill */
+.all-software-icon.selected {
+    border-color: rgb(136, 249, 222);
+}
+
+.all-software-icon .grid-icon {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2px, 0.4vw, 5px);
+    margin-top: 4px;
+}
+
+.all-software-icon .grid-icon span {
+    width: clamp(7px, 1.05vw, 14px);
+    height: clamp(7px, 1.05vw, 14px);
+    border: 2px solid rgba(150, 150, 150, 0.6);
+    display: block;
+    box-sizing: border-box;
+}
+
+.all-software-icon .grid-label {
+    font-size: clamp(5px, 0.75vw, 10px);
+    letter-spacing: 0.08em;
+    color: rgba(150, 150, 150, 0.8); /* gray by default */
+}
+
+.carousel-arrow {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+    flex-shrink: 0;
+}
+
+.carousel-arrow:hover { opacity: 1; }
+.carousel-arrow:disabled { opacity: 0.15; cursor: default; }
+
+#carousel-footer {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#home-bottom-bar {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+    padding-right: 0; /* set by JS to match track-outer right edge */
+}
+
+#ok-btn:not(.inactive) {
+    opacity: 0.8;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+#ok-btn:not(.inactive):hover {
+    color: rgb(86, 174, 183);
+}
+
+/* #endregion home/carousel */
+/* #region all software screen */
+
+/* full viewport column layout, sits below the site's fixed header */
+#software-screen {
+    position: fixed;
+    top: 120px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 550px;
+}
+
+#software-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1020px; /* 6 × 160px + 5 × 12px gap */
+    flex-shrink: 0;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+#software-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#software-title h2 {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+}
+
+.grid-icon-static {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    pointer-events: none;
+}
+
+.grid-icon-static span {
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    display: block;
+    box-sizing: border-box;
+    opacity: 0.8;
+}
+
+#software-controls {
+    display: flex;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.control-btn {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 6px 16px;
+    border: 2px solid currentColor;
+    opacity: 0.4;
+}
+
+#software-divider {
+    border: none;
+    border-top: 1px solid currentColor;
+    opacity: 0.2;
+    margin: 0;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 1020px;
+}
+
+/* the only thing that scrolls — a fixed-size frame */
+#software-grid-wrapper {
+    flex: 1;
+    min-height: 0; /* required for flex child to scroll rather than overflow */
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 1020px;
+    padding: 16px 12px 0;
+    box-sizing: border-box;
+}
+
+#software-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    align-content: start;
+}
+
+#software-grid .game-icon {
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
+    flex: none;
+}
+
+#software-bottom-bar {
+    width: 100%;
+    max-width: 1020px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.bottom-btn {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.bottom-btn.inactive {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.btn-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    font-size: 10px;
+}
+
+/* #endregion all software screen */
+#back-btn {
+    pointer-events: auto;
+}
+
+#back-btn:hover {
+    color: rgb(86, 174, 183);
+    pointer-events: auto;
+}
+
+#back-btn.selected {
+    color: rgb(86, 174, 183);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#back-btn.selected .btn-label {
+    border-color: rgb(86, 174, 183);
+    pointer-events: auto;
+}
+
+/* OK button active state — shared between home and all-software */
+.bottom-btn:not(.inactive):hover {
+    color: rgb(86, 174, 183);
+}
+/* prevent native browser focus ring on bottom bar buttons */
+#ok-btn:focus, #back-btn:focus, #software-ok-btn:focus {
+    outline: none;
+}
+#navigation-bar {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Scale bottom bar buttons on home only */
+#home-bottom-bar .bottom-btn {
+    font-size: clamp(7px, 0.9vw, 12px);
+}
+
+#home-bottom-bar .btn-label {
+    width: clamp(12px, 1.5vw, 20px);
+    height: clamp(12px, 1.5vw, 20px);
+    font-size: clamp(6px, 0.75vw, 10px);
+}
+
+/* Scale all-software header elements */
+#software-title h3 {
+    font-size: clamp(12px, 1.8vw, 24px);
+}
+
+.grid-icon-static span {
+    width: clamp(7px, 1.05vw, 14px);
+    height: clamp(7px, 1.05vw, 14px);
+}
+
+.grid-icon-static {
+    gap: clamp(2px, 0.3vw, 4px);
+}
+
+.control-btn {
+    font-size: clamp(6px, 0.9vw, 12px);
+    padding: clamp(3px, 0.45vw, 6px) clamp(8px, 1.2vw, 16px);
+}
+
+#software-bottom-bar .bottom-btn {
+    font-size: clamp(7px, 0.9vw, 12px);
+}
+
+#software-bottom-bar .btn-label {
+    width: clamp(12px, 1.5vw, 20px);
+    height: clamp(12px, 1.5vw, 20px);
+    font-size: clamp(6px, 0.75vw, 10px);
+}

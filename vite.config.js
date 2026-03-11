@@ -7,6 +7,7 @@ export default {
     rollupOptions: {
       input: {
         audioVisualizer: resolve(__dirname, 'audio-visualizer/index.html'),
+        nintendoGames: resolve(__dirname, 'nintendo-games/index.html'),
       }
     }
   }

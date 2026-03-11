@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>nintendo games</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <link rel="stylesheet" href="../../style.css"> <!-- root -->
+    <link rel="stylesheet" href="../style.css"> <!-- nintendo-games -->
+    <link rel="stylesheet" href="./style.css"> <!-- switch -->
+</head>
+<body>
+    <!-- TODO: DRY -->
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        <h2 class="retro-text">my digital archive</h2>
+        <a href="../../index.html" class="retro-text">home</a>
+        <a href="../../pokemon-cards/index.html" class="retro-text">my favorite pokemon cards</a>
+        <a href="../../audio-visualizer/index.html" class="retro-text">audio visualizer</a>
+        <a href="../index.html" class="retro-text selected-link">nintendo games</a>
+        <a href="../../ideas/index.html" class="retro-text">coming soon</a>
+        <a href="../../devlog/index.html" class="retro-text">devlog</a>
+    </div>
+
+    <div id="nav-overlay"></div>
+
+    <div id="main">
+        <header style="position:fixed; top:20px; left:20px; right:20px; z-index:10; pointer-events:none;">
+            <span id="open-nav" class="nintendo-text" style="display:inline-block; width:fit-content; font-size:25px; cursor:pointer; pointer-events:auto;">&#9776; open</span>
+        
+            <div class="header">
+                <h2 class="nintendo-text" style="text-align: center; font-size: 35px">nintendo games</h2>
+                <p class="retro-text" style="font-size: 12px; text-align: center">
+                    <a href="../devlog/2026/03/07/audio-visualizer.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
+                </p>
+            </div>
+        </header>
+
+        <div id="software-screen">
+            <!-- header bar -->
+            <div id="software-header">
+                <div id="software-title">
+                    <div class="grid-icon-static">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <h3 class="switch-text">All Software</h3>
+                </div>
+                <div id="software-controls">
+                    <span class="switch-text control-btn inactive">&#76; Groups</span>
+                    <span class="switch-text control-btn inactive">&#82; Sort/Filter</span>
+                </div>
+            </div>
+
+            <hr id="software-divider" />
+
+            <!-- game grid -->
+            <div id="software-grid-wrapper">
+                <div id="software-grid">
+                    <!-- injected by script.js -->
+                </div>
+            </div>
+
+            <!-- bottom bar -->
+            <div id="software-bottom-bar">
+                <button id="back-btn" class="switch-text bottom-btn" tabindex="-1" onclick="if(window.navigateBackToHome) window.navigateBackToHome(); else window.location.href='./home.html'">
+                    <span class="btn-label">B</span> Back
+                </button>
+                <button id="software-ok-btn" class="switch-text bottom-btn" tabindex="-1" onclick="if(window._softwareConfirm) window._softwareConfirm()">
+                    <span class="btn-label">A</span> Start
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="nintendo-text" style="position:fixed; bottom:0; left:0; right:0; text-align:center; font-size:20px; z-index:2; color:black; pointer-events:none;">
+        <p>&copy; 2026 mrinal save / atsumr</p>
+    </footer>
+
+    <div id="mobile-popup" class="mobile-popup">
+        <div class="popup-header">
+            <h4 class="retro-text popup-title">hey listen!</h4>
+            <button id="close-popup" class="retro-text popup-close">OK</button>
+        </div>
+        <div class="popup-body">
+            <p class="retro-text">
+                this site is best experienced on desktop, so some functionality may be impacted on mobile.
+                please check it out on desktop when you get the chance !
+            </p>
+        </div>
+    </div>
+
+    <script src="./script.js" type="module"></script>
+    <script src="../../mobile-popup.js" type="module"></script>
+    <script src="../../side-nav.js" type="module"></script>
+</body>
+</html>

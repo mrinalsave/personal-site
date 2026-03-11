@@ -30,6 +30,7 @@ jobs:
         run: |
           # Copy your bundled JS/assets into the right place so Jekyll picks them up
           cp -r dist/audio-visualizer/* audio-visualizer/
+          cp -r dist/nintendo-games/* nintendo-games/
 
       - name: Setup Ruby and Jekyll
         uses: ruby/setup-ruby@v1
