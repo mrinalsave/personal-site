@@ -29,8 +29,57 @@
 }
 
 a { text-decoration: none; color: white}
-a:hover, a:active { text-decoration: none; color:#ff00ea }
-span:hover { text-decoration: none; color: #ff00ea }
+#main a:hover, #main a:active, #main span:hover {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #ffffff,
+      0 0 40px #ffffff;
+}
+
+/* Source: https://www.w3schools.com/howto/howto_js_sidenav.asp. */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    text-shadow: none;
+}
+
+.sidenav h2 {
+    padding: 8px 8px 8px 21px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    text-align: center;
+    text-shadow: none;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    text-shadow: none;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    text-shadow: none;
+}
 
 .lil-gui {
     --input-font-size: 7px;
