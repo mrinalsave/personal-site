@@ -280,7 +280,7 @@ body.page-loading #main > * {
 
 @font-face {
     font-family: 'switch-font';
-    src: url('./assets/fonts/NINTENDOSWITCHUI.ttf') format('truetype');
+    src: url('./assets/fonts/NINTENDOSWITCHUI.TTF') format('truetype');
 }
 
 .a, .switch-text {
