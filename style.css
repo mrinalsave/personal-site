@@ -172,6 +172,12 @@ the style of the sidenav (less padding and a smaller font size). */
     }
 }
 
+@media (max-height: 500px) {
+    .mobile-popup {
+        display: block;
+    }
+}
+
 /* #endregion mobile popup */
 
 /* #region fonts */

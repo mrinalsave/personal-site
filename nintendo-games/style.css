@@ -74,10 +74,6 @@ body {
     transition: opacity 0.4s ease;
 }
 
-header .h2 {
-    padding-bottom: 8px;
-}
-
 /*
  * Staggered entrance: direct children of #main animate in individually.
  * Each child starts translated down 12px and invisible, then eases into place.
@@ -284,7 +280,7 @@ body.page-loading #main > * {
 
 @font-face {
     font-family: 'switch-font';
-    src: url('./assets/fonts/NINTENDOSWITCHUI.TTF') format('truetype');
+    src: url('./assets/fonts/NINTENDOSWITCHUI.ttf') format('truetype');
 }
 
 .a, .switch-text {
@@ -301,3 +297,80 @@ body.page-loading #main > * {
 }
 
 /* #endregion Fonts */
+/* ── Sidenav & overlay fixes ─────────────────────────────────────────── */
+
+/*
+ * Root style.css sets .sidenav { z-index: 1 } and #nav-overlay { position: absolute; inset: 0 }
+ * which anchors the overlay to #main only (not the full viewport) and buries
+ * the sidenav under fixed headers. Override both here for all nintendo-games pages.
+ */
+
+.sidenav {
+    z-index: 11 !important;      /* above fixed header (z-index: 10) and overlay */
+    overflow-y: auto;            /* scrollable if content is tall */
+    -webkit-overflow-scrolling: touch;
+}
+
+#nav-overlay {
+    position: fixed !important;  /* cover full viewport, not just #main */
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10 !important;      /* above page content, below sidenav */
+}
+
+/* Landscape / short viewports (≤500px tall) */
+@media (max-height: 500px) {
+
+    /* Hide subtitle and shrink header to save vertical space */
+    header .header p {
+        display: none !important;
+    }
+
+    header .header h2 {
+        font-size: 13px !important;
+        margin: 0 !important;
+    }
+
+    /* Hide footer — no room */
+    footer {
+        display: none !important;
+    }
+
+    /* Home: tighter padding for short screens */
+    #home-screen {
+        padding-top: 48px;
+        padding-bottom: 36px;
+        gap: 2px;
+    }
+
+    /* All-software: keep fixed but reduce top clearance */
+    #software-screen {
+        position: fixed;
+        top: 48px;
+        height: auto;
+        bottom: 40px;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    #software-grid-wrapper {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #software-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        padding: 4px 12px;
+        background: rgb(235, 235, 235);
+        z-index: 5;
+    }
+
+    #navigation-bar {
+        width: 35% !important;
+    }
+}

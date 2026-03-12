@@ -120,7 +120,7 @@ if (track) {
         }
 
         const label = document.createElement('span');
-        label.className = 'grid-label switch-text';
+        label.className = 'grid-label retro-text';
 
         allSoftware.appendChild(gridIcon);
         allSoftware.appendChild(label);
@@ -181,7 +181,9 @@ if (track) {
 
         const titleWidth = selectedTitle.offsetWidth;
         const minLeft = titleWidth / 2;
-        const maxLeft = wrapperRect.width - titleWidth / 2;
+        // clamp to trackOuter's right edge (not full wrapperRect) so title stays within carousel bounds
+        const trackOuterRight = trackOuterRect.right - wrapperRect.left;
+        const maxLeft = trackOuterRight - titleWidth / 2;
         selectedTitle.style.left = Math.max(minLeft, Math.min(center, maxLeft)) + 'px';
     }
 
@@ -200,8 +202,9 @@ if (track) {
 
     // ── Scroll (view only) ─────────────────────────
     function maxScroll() {
-        const totalWidth = (games.length + 1) * STEP();
-        return Math.max(0, totalWidth - trackOuter.clientWidth);
+        // measure actual rendered track width instead of estimating
+        const totalWidth = track.scrollWidth;
+        return Math.max(0, totalWidth - trackOuter.clientWidth + 24); // +24 for trackOuter padding
     }
 
     function scrollTo(px, animate = false) {
@@ -358,16 +361,29 @@ if (softwareGrid) {
         document.querySelectorAll('#software-grid .game-icon').forEach((el, idx) => {
             el.classList.toggle('selected', idx === selectedIndex);
         });
-        // smooth scroll selected tile into view within the wrapper
+        // smooth scroll selected tile into view
         const wrapper = document.getElementById('software-grid-wrapper');
         const tile = softwareGrid.children[selectedIndex];
         if (wrapper && tile) {
-            const wRect = wrapper.getBoundingClientRect();
             const tRect = tile.getBoundingClientRect();
-            if (tRect.bottom > wRect.bottom) {
-                wrapper.scrollBy({ top: tRect.bottom - wRect.bottom + 12, behavior: 'smooth' });
-            } else if (tRect.top < wRect.top) {
-                wrapper.scrollBy({ top: -(wRect.top - tRect.top + 12), behavior: 'smooth' });
+            const wrapperScrollable = wrapper.scrollHeight > wrapper.clientHeight;
+            if (wrapperScrollable) {
+                // desktop/landscape: scroll within wrapper
+                const wRect = wrapper.getBoundingClientRect();
+                if (tRect.bottom > wRect.bottom) {
+                    wrapper.scrollBy({ top: tRect.bottom - wRect.bottom + 12, behavior: 'smooth' });
+                } else if (tRect.top < wRect.top) {
+                    wrapper.scrollBy({ top: -(wRect.top - tRect.top + 12), behavior: 'smooth' });
+                }
+            } else {
+                // mobile portrait: scroll the page, compare against viewport
+                const viewBottom = window.innerHeight;
+                const viewTop = 0;
+                if (tRect.bottom > viewBottom) {
+                    window.scrollBy({ top: tRect.bottom - viewBottom + 12, behavior: 'smooth' });
+                } else if (tRect.top < viewTop) {
+                    window.scrollBy({ top: tRect.top - viewTop - 12, behavior: 'smooth' });
+                }
             }
         }
     }

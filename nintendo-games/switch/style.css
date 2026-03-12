@@ -299,7 +299,7 @@ body.page-loading #main > * {
 /* full viewport column layout, sits below the site's fixed header */
 #software-screen {
     position: fixed;
-    top: 120px;
+    top: 115px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -517,4 +517,232 @@ body.page-loading #main > * {
     width: clamp(12px, 1.5vw, 20px);
     height: clamp(12px, 1.5vw, 20px);
     font-size: clamp(6px, 0.75vw, 10px);
+}
+
+/* ── Mobile & responsive fixes ───────────────────────────────────────── */
+
+/* Portrait mobile (≤768px wide) */
+@media (max-width: 768px) {
+
+    /* Restore "wanna know" link */
+    header .header p {
+        font-size: 10px !important;
+        margin: 0 !important;
+    }
+
+    header .header h2 {
+        font-size: 16px !important;
+        margin: 0 !important;
+    }
+
+    #home-screen {
+        height: 100svh;
+        padding-top: 80px;
+        padding-bottom: 55px;
+        box-sizing: border-box;
+        gap: 6px;
+    }
+
+    /* All-software portrait: fixed frame, internally scrolling, same as desktop */
+    #software-screen {
+        position: fixed;
+        top: 90px;    /* clears fixed header + wanna know link */
+        left: 0;
+        right: 0;
+        bottom: 28px; /* clears footer */
+        height: auto;
+        overflow: hidden;
+        padding: 0;
+        align-items: center;
+    }
+
+    #software-header {
+        max-width: 420px;
+        padding: 0 8px;
+    }
+
+    #software-divider {
+        max-width: 420px;
+    }
+
+    /* Grid scrolls internally within the fixed frame */
+    #software-grid-wrapper {
+        max-width: 420px;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Bottom bar in normal flex flow, right-aligned under grid */
+    #software-bottom-bar {
+        position: relative;
+        max-width: 420px;
+        width: 100%;
+        padding: 8px 8px;
+        background: transparent;
+        flex-shrink: 0;
+    }
+
+    /* Scale down footer */
+    footer p {
+        font-size: 10px !important;
+    }
+}
+
+/* Landscape / short viewports (≤500px tall) */
+@media (max-height: 500px) {
+
+    /* Shrink header to save vertical space */
+    header .header p {
+        font-size: 8px !important;
+        margin: 2px 0 0 !important;
+    }
+    header .header h2 {
+        font-size: 11px !important;
+        margin: 0 !important;
+    }
+
+    /* Shrink footer */
+    footer p {
+        font-size: 9px !important;
+    }
+
+    #home-screen {
+        position: relative;
+        height: 100svh;
+        justify-content: flex-start;
+        padding-top: 60px;
+        box-sizing: border-box;
+        gap: 4px;
+    }
+
+    /* Icons: scale by vh so they always fit */
+    .game-icon {
+        flex: 0 0 clamp(50px, 20vh, 120px) !important;
+        height: clamp(50px, 20vh, 120px) !important;
+    }
+
+    .all-software-icon {
+        width: clamp(38px, 15vh, 90px) !important;
+        height: clamp(38px, 15vh, 90px) !important;
+    }
+
+    /* Scale tiles inside all-software icon */
+    .all-software-icon .grid-icon span {
+        width: clamp(5px, 1.8vh, 12px) !important;
+        height: clamp(5px, 1.8vh, 12px) !important;
+    }
+    .all-software-icon .grid-icon {
+        gap: clamp(2px, 0.5vh, 4px) !important;
+    }
+    .all-software-icon .grid-label {
+        font-size: clamp(4px, 1.2vh, 9px) !important;
+    }
+
+    /* Tighten carousel gaps */
+    #carousel-track { gap: 6px; }
+    #carousel-wrapper { gap: 4px; padding: 0 8px; }
+
+    /* Constrain track-outer and collapse wrapper to content width */
+    #carousel-track-outer {
+        max-width: 500px;
+        flex: 0 1 500px;  /* don't grow beyond content */
+    }
+
+    #carousel-wrapper {
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    /* Title */
+    #selected-title { font-size: 10px !important; }
+    #selected-title-wrapper { position: absolute; margin-top: -15px; }
+
+    /* Navigation bar */
+    #navigation-bar { width: 28% !important; }
+
+    /* Bottom bar */
+    #home-bottom-bar .bottom-btn {
+        font-size: clamp(6px, 1.8vh, 11px) !important;
+    }
+    #home-bottom-bar .btn-label {
+        width: clamp(10px, 2.8vh, 18px) !important;
+        height: clamp(10px, 2.8vh, 18px) !important;
+        font-size: clamp(5px, 1.5vh, 9px) !important;
+    }
+
+    /* All-software: tight fixed layout */
+    #software-screen {
+        position: fixed;
+        top: 58px;
+        bottom: 36px;
+        height: auto;
+        overflow: hidden;
+        padding: 0;
+        justify-content: flex-start;
+    }
+
+    #software-header {
+        max-width: 420px;
+        padding: 0 8px;
+    }
+
+    #software-divider {
+        max-width: 420px;
+    }
+
+    #software-grid-wrapper {
+        max-width: 420px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #software-title h3 {
+        font-size: clamp(10px, 2.5vh, 18px) !important;
+    }
+
+    .grid-icon-static span {
+        width: clamp(6px, 1.5vh, 12px) !important;
+        height: clamp(6px, 1.5vh, 12px) !important;
+    }
+
+    .control-btn {
+        font-size: clamp(5px, 1.2vh, 10px) !important;
+        padding: clamp(2px, 0.5vh, 5px) clamp(6px, 1.2vh, 12px) !important;
+    }
+
+    #software-bottom-bar {
+        position: relative;
+        max-width: 420px;
+        padding: 4px 8px;
+        background: transparent;
+        z-index: 5;
+        justify-content: flex-end;
+        flex-shrink: 0;
+    }
+
+    #software-bottom-bar .bottom-btn {
+        font-size: clamp(6px, 1.8vh, 11px) !important;
+    }
+
+    #software-bottom-bar .btn-label {
+        width: clamp(10px, 2.8vh, 18px) !important;
+        height: clamp(10px, 2.8vh, 18px) !important;
+        font-size: clamp(5px, 1.5vh, 9px) !important;
+    }
+}
+
+/* Ensure header and footer are never hidden by stacking context from animations */
+@media (max-height: 500px) {
+    header {
+        z-index: 20 !important;
+    }
+    footer {
+        z-index: 20 !important;
+        display: block !important;
+    }
+    header .header p {
+        display: block !important;
+    }
 }
