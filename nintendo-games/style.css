@@ -214,6 +214,8 @@ body.page-loading #main > * {
     overflow-y: auto;
 }
 
+body.nav-open .sidenav { overflow-y: auto; }
+
 
 /* ── Short-viewport adjustments (landscape mobile / rotated tablet) ──── */
 /*

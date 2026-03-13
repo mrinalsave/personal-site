@@ -41,6 +41,7 @@ span:hover     { text-decoration: none; color: red; }
     left: 0;
     background-color: #111;
     overflow-x: hidden;
+    overflow-y: auto;
     padding-top: 60px;
     transition: 0.5s;
 }
@@ -86,9 +87,11 @@ span:hover     { text-decoration: none; color: red; }
 /* Prevent page scrolling while the nav is open */
 body.nav-open { overflow: hidden; }
 
-@media (max-height: 450px) {
+/* On short viewports (landscape mobile), shrink padding/font slightly
+ * so the top of the nav isn't wasted, then let overflow-y: auto handle the rest. */
+@media (max-height: 500px) {
     .sidenav { padding-top: 15px; }
-    .sidenav a { font-size: 18px; }
+    .sidenav a { font-size: 14px; }
 }
 
 

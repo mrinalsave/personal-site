@@ -51,6 +51,8 @@ a { color: white; }
     text-shadow: none;
 }
 
+body.nav-open .sidenav { overflow-y: auto; }
+
 .sidenav h2,
 .sidenav a { text-shadow: none; }
 
@@ -86,4 +88,5 @@ a { color: white; }
 
 .audio-text,
 .lil-gui,
-.lil-gui * { font-family: 'audio'; }
+.lil-gui *,
+.lil-gui .title { font-family: 'audio' !important; }
