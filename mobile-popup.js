@@ -1,17 +1,15 @@
-/* #region mobile popup */
+// mobile-popup.js
 
-const mobilePopup = document.getElementById("mobile-popup");
-const closePopup = document.getElementById("close-popup");
+const mobilePopup = document.getElementById('mobile-popup');
+const closePopup  = document.getElementById('close-popup');
 
-closePopup?.addEventListener("click", () => {
-  mobilePopup.style.display = "none";
-  localStorage.setItem("popupDismissed", "true");
+closePopup?.addEventListener('click', () => {
+    mobilePopup.style.display = 'none';
+    localStorage.setItem('popupDismissed', 'true');
 });
 
-if (window.innerWidth <= 768 || window.innerHeight <= 500) {
-  if (localStorage.getItem("popupDismissed") === "true") {
-    mobilePopup.style.display = "none";
-  }
+// Keep popup hidden across navigations if user already dismissed it
+if ((window.innerWidth <= 768 || window.innerHeight <= 500)
+        && localStorage.getItem('popupDismissed') === 'true') {
+    mobilePopup.style.display = 'none';
 }
-
-/* #endregion mobile popup */

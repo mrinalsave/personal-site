@@ -3,37 +3,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
     <title>nintendo games</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-
-    <link rel="stylesheet" href="../../style.css"> <!-- root -->
-    <link rel="stylesheet" href="../style.css"> <!-- nintendo-games -->
-    <link rel="stylesheet" href="./style.css"> <!-- switch -->
+    <link rel="stylesheet" href="../../style.css">    <!-- root -->
+    <link rel="stylesheet" href="../style.css">       <!-- nintendo-games -->
+    <link rel="stylesheet" href="./style.css">        <!-- switch -->
 </head>
 <body>
-    <!-- TODO: DRY -->
-    <div id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn">&times;</a>
-        <h2 class="retro-text">my digital archive</h2>
-        <a href="../../index.html" class="retro-text">home</a>
-        <a href="../../pokemon-cards/index.html" class="retro-text">my favorite pokemon cards</a>
-        <a href="../../audio-visualizer/index.html" class="retro-text">audio visualizer</a>
-        <a href="../index.html" class="retro-text selected-link">nintendo games</a>
-        <a href="../../ideas/index.html" class="retro-text">coming soon</a>
-        <a href="../../devlog/index.html" class="retro-text">devlog</a>
-    </div>
-
+    <div id="sidenav" class="sidenav"></div>
     <div id="nav-overlay"></div>
 
     <div id="main">
         <header style="position:fixed; top:20px; left:20px; right:20px; z-index:10; pointer-events:none;">
-            <span id="open-nav" class="nintendo-text" style="display:inline-block; width:fit-content; font-size:25px; cursor:pointer; pointer-events:auto;">&#9776; open</span>
-        
+            <span id="open-nav" class="nintendo-text"
+                  style="display:inline-block; width:fit-content; font-size:25px; cursor:pointer; pointer-events:auto;">
+                &#9776; open
+            </span>
             <div class="header">
-                <h2 class="nintendo-text" style="text-align: center; font-size: 35px">nintendo games</h2>
+                <h2 class="nintendo-text" style="text-align:center; font-size:35px">nintendo games</h2>
                 <p class="retro-text" style="font-size: 12px; text-align: center">
-                    <a href="./index.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
+                    <a href="../index.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
                 </p>
             </div>
         </header>
@@ -51,11 +40,11 @@
                 <button id="arrow-right" class="carousel-arrow switch-text" aria-label="scroll right">&#8594;</button>
             </div>
 
-            <img id="navigation-bar" src="./assets/images/navigation-bar.png" alt="switch navigation bar reference" />
+            <img id="navigation-bar" src="./assets/images/navigation-bar.png" alt="switch navigation bar reference">
 
-            <!-- bottom bar -->
             <div id="home-bottom-bar">
-                <button id="back-btn" class="switch-text bottom-btn" tabindex="-1" onclick="if(window.fadeTo) fadeTo('../index.html')">
+                <button id="back-btn" class="switch-text bottom-btn" tabindex="-1"
+                        onclick="fadeTo('../index.html')">
                     <span class="btn-label">B</span> Back
                 </button>
                 <button id="ok-btn" class="switch-text bottom-btn" tabindex="-1">
@@ -64,7 +53,8 @@
             </div>
         </div>
 
-        <footer class="nintendo-text" style="position:fixed; bottom:0; left:0; right:0; text-align:center; font-size:20px; z-index:2; color:black; pointer-events:none;">
+        <footer class="nintendo-text"
+                style="position:fixed; bottom:0; left:0; right:0; text-align:center; font-size:20px; z-index:2; color:black; pointer-events:none;">
             <p>&copy; 2026 mrinal save / atsumr</p>
         </footer>
     </div>
@@ -82,8 +72,8 @@
         </div>
     </div>
 
-    <script src="./script.js" type="module"></script>
+    <script src="./script.js"        type="module"></script>
     <script src="../../mobile-popup.js" type="module"></script>
-    <script src="../../side-nav.js" type="module"></script>
+    <script src="../../side-nav.js"     type="module"></script>
 </body>
 </html>

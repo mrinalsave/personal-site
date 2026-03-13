@@ -10,20 +10,10 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <!-- TODO: DRY -->
-    <div id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn">&times;</a>
-        <h2 class="retro-text">my digital archive</h2>
-        <a href="../index.html" class="retro-text">home</a>
-        <a href="../pokemon-cards/index.html" class="retro-text">my favorite pokemon cards</a>
-        <a href="./index.html" class="retro-text selected-link">audio visualizer</a>
-        <a href="../ideas/index.html" class="retro-text">coming soon</a>
-        <a href="../devlog/index.html" class="retro-text">devlog</a>
-    </div>
-
+    <div id="sidenav" class="sidenav"></div>
     <div id="nav-overlay"></div>
-    <div id="gui-container" style="position: absolute; top: 10px; right: 10px;"></div>
 
+    <div id="gui-container" style="position: absolute; top: 10px; right: 10px;"></div>
     <div id="main">
         <div id="visualizer"></div>
         <input type="file" id="audio" accept="audio/*" style="display:none">

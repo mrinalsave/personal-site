@@ -1,21 +1,22 @@
-/* #region general */
+/* ── General ─────────────────────────────────────────────────────────── */
+
 html, body {
     scroll-behavior: smooth;
     min-height: 100%;
 }
 
-a { text-decoration: none; color: black}
-a:hover, a:active { text-decoration: none; color:red; }
-span:hover { text-decoration: none; color: red; }
+a              { text-decoration: none; color: black; }
+a:hover,
+a:active       { text-decoration: none; color: red; }
+span:hover     { text-decoration: none; color: red; }
 
 .container {
     text-align: center;
 }
+
 .container ul {
-    display: table;
     margin: 0 auto;
     text-align: center;
-    list-style-position: inside;
     list-style: none;
     display: inline-block;
 }
@@ -27,7 +28,10 @@ span:hover { text-decoration: none; color: red; }
     height: 100vh;
 }
 
-/* Source: https://www.w3schools.com/howto/howto_js_sidenav.asp. */
+
+/* ── Side nav ────────────────────────────────────────────────────────── */
+/* Source: https://www.w3schools.com/howto/howto_js_sidenav.asp */
+
 .sidenav {
     height: 100%;
     width: 0;
@@ -43,7 +47,6 @@ span:hover { text-decoration: none; color: red; }
 
 .sidenav h2 {
     padding: 8px 8px 8px 21px;
-    text-decoration: none;
     font-size: 18px;
     color: white;
     display: block;
@@ -53,21 +56,15 @@ span:hover { text-decoration: none; color: red; }
 
 .sidenav a {
     padding: 8px 8px 8px 32px;
-    text-decoration: none;
     font-size: 16px;
     color: #818181;
     display: block;
     transition: 0.3s;
 }
 
-.sidenav a:hover {
-    color: #f1f1f1;
-}
+.sidenav a:hover { color: #f1f1f1; }
 
-.sidenav .selected-link {
-    font-style: italic;
-    color: #FFDE21;
-}
+.sidenav .selected-link,
 .sidenav .selected-link:hover {
     font-style: italic;
     color: #FFDE21;
@@ -81,16 +78,24 @@ span:hover { text-decoration: none; color: red; }
     margin-left: 50px;
 }
 
+@media screen and (max-height: 450px) {
+    .sidenav { padding-top: 15px; }
+    .sidenav a { font-size: 18px; }
+}
+
+
+/* ── Main & nav overlay ──────────────────────────────────────────────── */
+
 #main {
     position: relative;
-    transition: margin-left .5s;
+    transition: margin-left 0.5s;
     padding: 20px;
 }
 
 #nav-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -102,17 +107,8 @@ span:hover { text-decoration: none; color: red; }
     pointer-events: auto;
 }
 
-/* On smaller screens, where height is less than 450px, change 
-the style of the sidenav (less padding and a smaller font size). */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
 
-/* #endregion general */
-
-
-/* #region mobile popup */
+/* ── Mobile popup ────────────────────────────────────────────────────── */
 
 .mobile-popup {
     position: fixed;
@@ -120,14 +116,12 @@ the style of the sidenav (less padding and a smaller font size). */
     left: 50%;
     transform: translateX(-50%);
     width: min(95%, 650px);
-
     background: black;
     opacity: 0.8;
     color: white;
     border-radius: 14px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-
     display: none;
     overflow: hidden;
 }
@@ -136,10 +130,9 @@ the style of the sidenav (less padding and a smaller font size). */
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 8px 12px;
-    background: rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .popup-title {
@@ -166,47 +159,29 @@ the style of the sidenav (less padding and a smaller font size). */
     line-height: 1.4;
 }
 
-@media (max-width: 768px) {
-    .mobile-popup {
-        display: block;
-    }
-}
+@media (max-width: 768px)  { .mobile-popup { display: block; } }
+@media (max-height: 500px) { .mobile-popup { display: block; } }
 
-@media (max-height: 500px) {
-    .mobile-popup {
-        display: block;
-    }
-}
 
-/* #endregion mobile popup */
-
-/* #region fonts */
+/* ── Fonts ───────────────────────────────────────────────────────────── */
 
 @font-face {
     font-family: 'retro';
     src: url('./assets/fonts/Retro-Gaming.ttf') format('truetype');
 }
 
-.a, .retro-text {
-    font-family: 'retro';
-}
+.retro-text { font-family: 'retro'; }
 
 @font-face {
     font-family: 'bmspa';
     src: url('./assets/fonts/BMSPA___.TTF') format('truetype');
 }
 
-.bmspa-text {
-    font-family: 'bmspa';
-}
+.bmspa-text { font-family: 'bmspa'; }
 
 @font-face {
     font-family: '04b03';
     src: url('./assets/fonts/04B_03__.TTF') format('truetype');
 }
 
-.bmspa-text {
-    font-family: 'bmspa';
-}
-
-/* #endregion font */
+.b03-text { font-family: '04b03'; }
