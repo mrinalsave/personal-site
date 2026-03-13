@@ -1,10 +1,8 @@
 // side-nav.js
 //
-// Injects the shared sidenav into any page that has <div id="sidenav">.
-// The correct link is highlighted automatically by matching window.location.pathname.
-//
-// Each entry: { label, href }
-// `href` must be an absolute path from the site root (leading slash).
+// Injects the shared sidenav and handles open/close as a pure overlay.
+// Content never shifts — the nav slides over the page with a scrim behind it.
+// On mobile (≤ 768px wide) the nav expands to full viewport width.
 
 const NAV_LINKS = [
     { label: 'home',                      href: '/index.html'                  },
@@ -15,26 +13,14 @@ const NAV_LINKS = [
     { label: 'devlog',                    href: '/devlog/index.html'           },
 ];
 
-// ── Resolve which nav entry is "current" ─────────────────────────────
-//
-// A link is "selected" when the current pathname starts with the link's
-// directory. This means every page inside /nintendo-games/* highlights
-// the "nintendo games" entry, and so on.
-//
-// Special case: home (/index.html) only matches exactly so it isn't
-// highlighted on every other page too.
+// ── Active-link detection ─────────────────────────────────────────────
+// A link is selected when the current pathname starts with its directory.
+// Home is an exact match only so it doesn't highlight on every page.
 
 function isSelected(linkHref) {
-    const current = window.location.pathname
-        .replace(/\/$/, '/index.html'); // treat bare "/" as "/index.html"
-
+    const current = window.location.pathname.replace(/\/$/, '/index.html');
     const linkDir = linkHref.replace(/\/index\.html$/, '');
-
-    if (linkDir === '') {
-        // home — exact match only
-        return current === '/index.html' || current === '/';
-    }
-
+    if (linkDir === '') return current === '/index.html' || current === '/';
     return current.startsWith(linkDir);
 }
 
@@ -47,7 +33,7 @@ function buildNav() {
     const closeBtn = document.createElement('a');
     closeBtn.href = 'javascript:void(0)';
     closeBtn.className = 'closebtn';
-    closeBtn.textContent = '\u00D7'; // ×
+    closeBtn.textContent = '\u00D7';
 
     const heading = document.createElement('h2');
     heading.className = 'retro-text';
@@ -67,62 +53,53 @@ function buildNav() {
 
 buildNav();
 
-// ── Open / close behaviour ────────────────────────────────────────────
+// ── Open / close — overlay only, no content shifting ─────────────────
 
 const sidenav    = document.getElementById('sidenav');
 const navOverlay = document.getElementById('nav-overlay');
-const main       = document.getElementById('main');
+const header     = document.querySelector('header');
+const DESKTOP_NAV_WIDTH = 325; // px; on mobile CSS takes it to 100vw
 
-const NAV_WIDTH        = 325;
-const isVisualizerPage = !!document.getElementById('visualizer');
-
-function getFixedShiftTargets() {
-    return [
-        { el: document.getElementById('visualizer'), defaultLeft: 0  },
-        { el: document.querySelector('header'),      defaultLeft: 20 },
-        { el: document.querySelector('footer'),      defaultLeft: 0  },
-    ].filter(({ el }) => el);
+function navWidth() {
+    return window.innerWidth <= 768 ? window.innerWidth : DESKTOP_NAV_WIDTH;
 }
 
 function openNav() {
-    sidenav.style.width  = NAV_WIDTH + 'px';
-    sidenav.style.zIndex = '11';
-
-    if (isVisualizerPage) {
-        getFixedShiftTargets().forEach(({ el, defaultLeft }) => {
-            el.style.left = (NAV_WIDTH + defaultLeft) + 'px';
-        });
-        const gui = document.querySelector('.lil-gui');
-        if (gui) gui.style.visibility = 'hidden';
-    } else {
-        main.style.marginLeft    = NAV_WIDTH + 'px';
-        main.style.pointerEvents = 'none';
-    }
-
-    document.getElementById('open-nav').style.display = 'none';
+    sidenav.style.width = navWidth() + 'px';
     navOverlay.classList.add('active');
+    document.body.classList.add('nav-open');
+    document.getElementById('open-nav').style.display = 'none';
+
+    // Drop the header below the scrim so its contents aren't reachable.
+    // Must be done in JS because the header's z-index is set as an inline style,
+    // which stylesheet rules cannot override.
+    if (header) header.style.zIndex = '4';
+
+    // Visualizer page: hide lil-gui so it doesn't float above the scrim
+    const gui = document.querySelector('.lil-gui');
+    if (gui) gui.style.visibility = 'hidden';
 }
 
 function closeNav() {
     sidenav.style.width = '0';
-
-    if (isVisualizerPage) {
-        getFixedShiftTargets().forEach(({ el, defaultLeft }) => {
-            el.style.left = defaultLeft + 'px';
-        });
-        const gui = document.querySelector('.lil-gui');
-        if (gui) gui.style.visibility = 'visible';
-    } else {
-        main.style.marginLeft    = '0';
-        main.style.pointerEvents = 'auto';
-    }
-
-    document.getElementById('open-nav').style.display = 'block';
     navOverlay.classList.remove('active');
+    document.body.classList.remove('nav-open');
+    document.getElementById('open-nav').style.display = 'block';
+
+    if (header) header.style.zIndex = '10';
+
+    const gui = document.querySelector('.lil-gui');
+    if (gui) gui.style.visibility = 'visible';
 }
 
 document.getElementById('open-nav').addEventListener('click', openNav);
-// .closebtn is injected above, so query it after buildNav()
 sidenav.querySelector('.closebtn').addEventListener('click', closeNav);
 navOverlay.addEventListener('click', closeNav);
 sidenav.addEventListener('click', e => e.stopPropagation());
+
+// Keep nav correctly sized if the window is resized while open
+window.addEventListener('resize', () => {
+    if (sidenav.style.width !== '0px' && sidenav.style.width !== '') {
+        sidenav.style.width = navWidth() + 'px';
+    }
+});

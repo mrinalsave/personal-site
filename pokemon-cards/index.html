@@ -3,59 +3,57 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
     <title>pokemon cards</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css">   <!-- root -->
+    <link rel="stylesheet" href="./style.css">    <!-- pokemon-cards -->
 </head>
 <body>
     <div id="sidenav" class="sidenav"></div>
     <div id="nav-overlay"></div>
 
     <div id="main">
-        <div id="nav-overlay"></div>
-        <header>    
-            <span id="open-nav" class="pokemon-text" style="display:inline-block; width:fit-content;font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-            
+        <header>
+            <span id="open-nav" class="pokemon-text"
+                  style="display:inline-block; width:fit-content; font-size:20px; cursor:pointer;">
+                &#9776; open
+            </span>
+
             <div class="header">
-                <h2 class="pokemon-text" style="text-align: center">
-                    <a href="./index.html" style="color: black">
-                        <img id="random-gif" alt="random pokemon gif"/>
+                <h2 class="pokemon-text" style="text-align:center">
+                    <a href="./index.html" style="color:black">
+                        <img id="random-gif" alt="random pokemon gif">
                         favorite pokemon cards !
                     </a>
                 </h2>
-                <p class="retro-text" style="font-size: 12px; text-align: center">
+                <p class="retro-text" style="font-size:12px; text-align:center">
                     <a href="../devlog/2026/02/25/pokemon-cards.html" target="_blank">wanna know how this was made ?</a>
                 </p>
             </div>
         </header>
-        
+
         <div class="grid" id="grid"></div>
 
         <div class="lightbox" id="lightbox">
             <div class="lightbox-content">
-                <img id="lightbox-img"/>
+                <img id="lightbox-img">
                 <p id="lightbox-caption"></p>
             </div>
         </div>
 
-        <div style="text-align: center" class="end-of-page">
+        <div class="end-of-page">
             <a href="#top" id="back-to-top" class="pokemon-text">
-                <img src="./assets/images/pikachu-phd.gif" alt="phd pikachu"/>
+                <img src="./assets/images/pikachu-phd.gif" alt="phd pikachu">
                 back to top
             </a>
         </div>
 
-        <!-- TODO: DRY -->
-        <footer class="retro-text" style="text-align: center">
-            <br/>
-            <p class="pokemon-text" style="font-size: 12px;">&copy; 2026 mrinal save / atsumr </p>
+        <footer class="retro-text" style="text-align:center">
+            <br>
+            <p class="pokemon-text" style="font-size:12px">&copy; 2026 mrinal save / atsumr</p>
         </footer>
     </div>
 
-    <!-- TODO: DRY -->
     <div id="mobile-popup" class="mobile-popup">
         <div class="popup-header">
             <h4 class="retro-text popup-title">hey listen!</h4>
@@ -68,7 +66,7 @@
             </p>
         </div>
     </div>
-    
+
     <script src="vanilla-tilt.js"></script>
     <script src="script.js"></script>
     <script src="../mobile-popup.js"></script>

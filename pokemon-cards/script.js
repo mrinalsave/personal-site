@@ -1,169 +1,152 @@
-/* #region card grid and lightbox */
+// pokemon-cards/script.js
 
-const grid = document.getElementById("grid");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const caption = document.getElementById("lightbox-caption");
+/* #region Card grid and lightbox */
+
+const grid        = document.getElementById('grid');
+const lightbox    = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const caption     = document.getElementById('lightbox-caption');
 
 // Load card data from JSON and create card elements.
-fetch("./assets/data/cards.json")
-  .then(res => res.json())
-  .then(files => {
-    files.forEach(file => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.classList.add("data-tilt");
+fetch('./assets/data/cards.json')
+    .then(res => res.json())
+    .then(files => {
+        files.forEach(file => {
+            const card = document.createElement('div');
+            card.className = 'card data-tilt';
 
-      // Use thumbnail for grid and full-size for lightbox.
-      const img = document.createElement("img");
-      img.src = `assets/images/cards/thumbnail/${file}`;
-      img.loading = "lazy";
-      card.appendChild(img);
+            // Use thumbnail for the grid; full-size opens in the lightbox.
+            const img = document.createElement('img');
+            img.src     = `assets/images/cards/thumbnail/${file}`;
+            img.loading = 'lazy';
+            card.appendChild(img);
 
-      const shine = document.createElement("div");
-      shine.className = "shine";
-      card.appendChild(shine);
+            const shine = document.createElement('div');
+            shine.className = 'shine';
+            card.appendChild(shine);
 
-      const glare = document.createElement("div");
-      glare.className = "glare";
-      card.appendChild(glare);
+            const glare = document.createElement('div');
+            glare.className = 'glare';
+            card.appendChild(glare);
 
-      grid.appendChild(card);
+            grid.appendChild(card);
 
-      // Click event to open lightbox with full-size image and caption.
-      card.addEventListener("click", () => {
-        const fullsizeSrc = `assets/images/cards/fullsize/${file}`;
+            card.addEventListener('click', () => {
+                const fullsizeSrc = `assets/images/cards/fullsize/${file}`;
 
-        // Create a temporary image to preload.
-        const tempImg = new Image();
-        tempImg.src = fullsizeSrc;
+                // Preload full-size image, then fade it in.
+                const tempImg = new Image();
+                tempImg.src = fullsizeSrc;
+                lightboxImg.style.opacity = '0';
 
-        // Small fade-out before switching.
-        lightboxImg.style.opacity = "0";
+                tempImg.onload = () => {
+                    lightboxImg.src = fullsizeSrc;
+                    void lightboxImg.offsetWidth; // force reflow for smooth fade
+                    lightboxImg.style.opacity = '1';
 
-        tempImg.onload = () => {
-          lightboxImg.src = fullsizeSrc;
+                    // Extract card number from filename for the TCG Collector link.
+                    const cardNumber = file
+                        .replace(/\.[^/.]+$/, '')  // strip extension
+                        .replace(/[-_]/g, ' ')      // normalise separators
+                        .split(' ')
+                        .pop();
 
-          // Force reflow for smooth fade.
-          void lightboxImg.offsetWidth;
-          lightboxImg.style.opacity = "1";
+                    caption.textContent = '';
 
-          // Extract card number from filename for caption and link.
-          const url = "https://www.tcgcollector.com/cards/"
-          const formattedName = file
-            .replace(/\.[^/.]+$/, "")
-            .replace(/[-_]/g, " ");
-          const cardNumber = formattedName.split(" ").pop();
-          caption.textContent = "";
+                    const captionLink = document.createElement('a');
+                    captionLink.href      = `https://www.tcgcollector.com/cards/${cardNumber}`;
+                    captionLink.textContent = `source: TCG card #${cardNumber}`;
+                    captionLink.target    = '_blank';
+                    captionLink.rel       = 'noopener noreferrer';
+                    captionLink.classList.add('retro-text', 'caption-text');
+                    captionLink.addEventListener('click', e => e.stopPropagation());
 
-          const captionLink = document.createElement("a");
-          captionLink.href = (url + cardNumber);
-          captionLink.textContent = ("source: TCG card #" + cardNumber);
-          captionLink.target = "_blank";
-          captionLink.rel = "noopener noreferrer";
-          captionLink.classList.add("retro-text", "caption-text");
+                    caption.appendChild(captionLink);
+                    lightbox.classList.add('active');
+                };
+            });
+        });
 
-          // Don't interfere with other events.
-          captionLink.addEventListener("click", (e) => {
-            e.stopPropagation();
-          });
-          caption.appendChild(captionLink);
+        VanillaTilt.init(document.querySelectorAll('.card'), {
+            max:         15,
+            speed:       500,
+            scale:       1.2,
+            perspective: 900,
+        });
 
-          lightbox.classList.add("active");
-        };
-      });
-    });
-    
-    VanillaTilt.init(document.querySelectorAll(".card"), {
-      max: 15,
-      speed: 500,
-      scale: 1.2,
-      perspective: 900
-    });
+        // Reference: https://codepen.io/emilandersson/details/jEbermZ
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('tiltChange', e => {
+                const { tiltX, tiltY } = e.detail;
 
-    // Reference: https://codepen.io/emilandersson/details/jEbermZ.
-    document.querySelectorAll(".card").forEach((card) => {
-      card.addEventListener("tiltChange", (e) => {
-        const { tiltX, tiltY } = e.detail;
+                // Convert tilt angles to percentage-space pointer coordinates.
+                const px = 50 + tiltX * 2;
+                const py = 50 - tiltY * 2;
 
-        // Convert tilt to % space.
-        const px = 50 + tiltX * 2;
-        const py = 50 - tiltY * 2;
+                card.style.setProperty('--pointer-x',    `${px}%`);
+                card.style.setProperty('--pointer-y',    `${py}%`);
+                card.style.setProperty('--background-x', `${px}%`);
+                card.style.setProperty('--background-y', `${py}%`);
 
-        card.style.setProperty("--pointer-x", `${px}%`);
-        card.style.setProperty("--pointer-y", `${py}%`);
-        card.style.setProperty("--background-x", `${px}%`);
-        card.style.setProperty("--background-y", `${py}%`);
+                const intensity = Math.sqrt(tiltX ** 2 + tiltY ** 2);
+                const opacity   = Math.min(intensity / 15, 1) * 0.25;
+                card.style.setProperty('--card-opacity', opacity.toFixed(3));
+            });
 
-        const intensity = Math.sqrt(tiltX * tiltX + tiltY * tiltY);
-        const opacity = Math.min(intensity / 15, 1) * 0.25;
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--card-opacity', 0);
+            });
+        });
+    })
+    .catch(err => console.error(err));
 
-        card.style.setProperty("--card-opacity", opacity.toFixed(3));
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.setProperty("--card-opacity", 0);
-      });
-
-    });
-
-  })
-  .catch(err => console.error(err));
-
-// Click outside the image or press 'Escape' to close the lightbox.
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    lightbox.classList.remove("active");
-  }
+// Close lightbox by clicking outside the image or pressing Escape.
+lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) lightbox.classList.remove('active');
 });
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    lightbox.classList.remove("active");
-  }
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
 });
-/* #endregion card grid and lightbox */
 
-/* #region general */
+/* #endregion Card grid and lightbox */
 
-// Randomize the GIF shown each time the page is loaded (includes "back to top").
-const backToTopGif = document.getElementById("random-gif");
-const gifPath = "./assets/images/gifs/";
-fetch("./assets/data/gifs.json")
-  .then(response => response.json())
-  .then(data => {
-      gifs = data;
-      setRandomGif();
-  })
-  .catch(error => {
-      console.error("Failed to load gifs.json:", error);
-  });
 
-function getRandomGif() { 
-  const randomIndex = Math.floor(Math.random() * gifs.length); 
-  return gifs[randomIndex]; 
-} 
+/* #region Random GIF */
 
-function setRandomGif() { 
-  const selectedGif = getRandomGif(); 
-  backToTopGif.src = gifPath + selectedGif; 
-  backToTopGif.alt = selectedGif.replace(".gif", ""); 
+const randomGif = document.getElementById('random-gif');
+const gifPath   = './assets/images/gifs/';
+let gifs        = [];
+
+fetch('./assets/data/gifs.json')
+    .then(res => res.json())
+    .then(data => {
+        gifs = data;
+        setRandomGif();
+    })
+    .catch(err => console.error('Failed to load gifs.json:', err));
+
+function getRandomGif() {
+    return gifs[Math.floor(Math.random() * gifs.length)];
 }
 
-window.addEventListener("DOMContentLoaded", setRandomGif); 
+function setRandomGif() {
+    const selected  = getRandomGif();
+    randomGif.src   = gifPath + selected;
+    randomGif.alt   = selected.replace('.gif', '');
+}
 
-/* #endregion general */
+/* #endregion Random GIF */
 
-/* #region back to top link functionality */
-/*
-  Source - https://stackoverflow.com/a/69643526
-  Posted by D-Money, modified by community. See post 'Timeline' for change history
-*/
-const backToTopLink = document.getElementById("back-to-top");
-backToTopLink.addEventListener('click', (event) => {
-  event.preventDefault();
-  window.scrollTo(0, 0);
+
+/* #region Back to top */
+
+// Source: https://stackoverflow.com/a/69643526
+const backToTopLink = document.getElementById('back-to-top');
+
+backToTopLink.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+    setRandomGif();
 });
 
-backToTopLink.addEventListener("click", function() { setRandomGif(); });
-
-/* #endregion back to top link functionality */
+/* #endregion Back to top */

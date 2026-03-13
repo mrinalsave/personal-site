@@ -36,7 +36,7 @@ span:hover     { text-decoration: none; color: red; }
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 6;
     top: 0;
     left: 0;
     background-color: #111;
@@ -78,22 +78,30 @@ span:hover     { text-decoration: none; color: red; }
     margin-left: 50px;
 }
 
-@media screen and (max-height: 450px) {
+/* Nav takes full width on mobile so there's no awkward partial-cover */
+@media (max-width: 768px) {
+    .sidenav { width: 0; max-width: 100vw; }
+}
+
+/* Prevent page scrolling while the nav is open */
+body.nav-open { overflow: hidden; }
+
+@media (max-height: 450px) {
     .sidenav { padding-top: 15px; }
     .sidenav a { font-size: 18px; }
 }
+
 
 
 /* ── Main & nav overlay ──────────────────────────────────────────────── */
 
 #main {
     position: relative;
-    transition: margin-left 0.5s;
     padding: 20px;
 }
 
 #nav-overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
@@ -159,8 +167,9 @@ span:hover     { text-decoration: none; color: red; }
     line-height: 1.4;
 }
 
-@media (max-width: 768px)  { .mobile-popup { display: block; } }
-@media (max-height: 500px) { .mobile-popup { display: block; } }
+@media (max-width: 768px), (max-height: 500px) {
+    .mobile-popup { display: block; }
+}
 
 
 /* ── Fonts ───────────────────────────────────────────────────────────── */

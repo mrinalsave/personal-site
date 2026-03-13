@@ -1,30 +1,77 @@
-/* nintendo-games/style.css */
+/* nintendo-games/style.css
+ *
+ * Structure: mobile-first base styles, then min-width / min-height
+ * breakpoints to enhance for larger screens. clamp() handles fluid
+ * sizing in between so hard breakpoints are needed less often.
+ */
 
-a:hover, a:active { text-decoration: none; color: rgb(86, 174, 183); }
-span:hover { text-decoration: none; color: rgb(86, 174, 183); }
 
-html {
-    background: rgb(235, 235, 235);
+/* ── Color overrides ─────────────────────────────────────────────────── */
+
+a:hover, a:active { color: rgb(86, 174, 183); }
+span:hover        { color: rgb(86, 174, 183); }
+
+html { background: rgb(235, 235, 235); }
+
+
+/* ── Page transitions ────────────────────────────────────────────────── */
+
+body { transition: opacity 0.4s ease; }
+
+body.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
 }
 
-#console-picker {
+body.page-loading { opacity: 0; }
+
+#main > * { animation: fadeSlideIn 0.45s ease both; }
+
+body.page-loading #main > * {
+    animation: none;
+    opacity: 0;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+#main > *:nth-child(1) { animation-delay: 0.05s; }
+#main > *:nth-child(2) { animation-delay: 0.12s; }
+#main > *:nth-child(3) { animation-delay: 0.19s; }
+#main > *:nth-child(4) { animation-delay: 0.26s; }
+#main > *:nth-child(5) { animation-delay: 0.33s; }
+
+
+/* ── Console picker & loading screen ─────────────────────────────────── */
+
+#console-picker,
+#loading-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    /* clamp: tighter gap on short/small screens, roomier on large ones */
+    gap: clamp(16px, 4vh, 32px);
     height: 100vh;
     opacity: 1;
     transition: opacity 0.6s ease;
 }
 
-#console-picker.fade-out {
+#console-picker { gap: clamp(12px, 3vh, 24px); }
+
+#console-picker.fade-out,
+#loading-screen.fade-out {
     opacity: 0;
     pointer-events: none;
 }
 
-.picker-label {
-    font-size: 15px;
+.picker-label,
+.loading-console-label {
+    /* fluid font: readable on mobile, proportional on desktop */
+    font-size: clamp(11px, 1.5vw, 15px);
     letter-spacing: 0.1em;
     opacity: 0.7;
     margin: 0;
@@ -37,148 +84,42 @@ html {
     gap: 12px;
 }
 
-.picker-btn {
+.picker-btn,
+.continue-btn,
+.ds-btn {
     display: block;
-    padding: 10px 40px;
-    font-size: 12px;
+    padding: clamp(8px, 1vh, 10px) clamp(24px, 4vw, 40px);
+    font-size: clamp(10px, 1.2vw, 12px);
     letter-spacing: 0.08em;
     border: 2px solid currentColor;
     text-decoration: none;
     text-align: center;
     background: white;
-    transition: background 0.15s ease, color 0.15s ease;
-}
-
-.picker-btn:hover {
-    background: rgb(232, 232, 232);
-    color: white;
-}
-
-/* #region loading */
-
-a:hover { text-decoration: none; color: rgb(86, 174, 183) }
-
-/* ── Page transitions ───────────────────────────────────────────────── */
-
-/* fade-out: whole body fades when navigating away */
-body.fade-out {
-    opacity: 0 !important;
-    pointer-events: none;
-    transition: opacity 0.35s ease !important;
-}
-
-/* fade-in: body starts invisible; page-loading class holds it until load */
-body.page-loading {
-    opacity: 0;
-}
-
-body {
-    transition: opacity 0.4s ease;
-}
-
-/*
- * Staggered entrance: direct children of #main animate in individually.
- * Each child starts translated down 12px and invisible, then eases into place.
- * nth-child delays create the stagger.
- */
-#main > * {
-    animation: fadeSlideIn 0.45s ease both;
-}
-
-body.page-loading #main > * {
-    animation: none;
-    opacity: 0;
-}
-
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-#main > *:nth-child(1) { animation-delay: 0.05s; }
-#main > *:nth-child(2) { animation-delay: 0.12s; }
-#main > *:nth-child(3) { animation-delay: 0.19s; }
-#main > *:nth-child(4) { animation-delay: 0.26s; }
-#main > *:nth-child(5) { animation-delay: 0.33s; }
-
-#loading-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
-    height: 100vh;
-    opacity: 1;
-    transition: opacity 0.6s ease;
-}
-
-#loading-screen.fade-out {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loading-console-label {
-    font-size: 15px;
-    letter-spacing: 0.1em;
-    opacity: 0.7;
-    margin: 0;
-}
-
-.continue-btn, .ds-btn {
-    background: white;
-    border: 2px solid currentColor;
     color: inherit;
-    padding: 10px 40px;
-    font-size: 12px;
-    letter-spacing: 0.08em;
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
 }
 
-.continue-btn:hover, .ds-btn:hover {
+.picker-btn:hover,
+.continue-btn:hover,
+.ds-btn:hover {
     background: rgb(232, 232, 232);
     color: white;
 }
 
-#switch-btn:not(.inactive) {
-    opacity: 0.8;
-    cursor: pointer;
-    pointer-events: auto;
-}
 
-#switch-btn:not(.inactive):hover {
-    color: rgb(86, 174, 183);
-}
-
-/* #endregion loading */
-
-/* Scale bottom bar buttons on home only */
-#home-bottom-bar .bottom-btn {
-    font-size: clamp(7px, 0.9vw, 12px);
-}
-
-#home-bottom-bar .btn-label {
-    width: clamp(12px, 1.5vw, 20px);
-    height: clamp(12px, 1.5vw, 20px);
-    font-size: clamp(6px, 0.75vw, 10px);
-}
+/* ── Bottom bar & buttons ────────────────────────────────────────────── */
 
 #home-bottom-bar {
     position: relative;
     display: flex;
     justify-content: flex-end;
     pointer-events: none;
-    padding-right: 0; /* set by JS to match track-outer right edge */
 }
 
 .bottom-btn {
-    font-size: 12px;
+    /* fluid: smaller on short/narrow screens, full size on desktop */
+    font-size: clamp(7px, 0.9vw, 12px);
     letter-spacing: 0.06em;
     display: flex;
     align-items: center;
@@ -195,170 +136,118 @@ body.page-loading #main > * {
     cursor: default;
 }
 
+.bottom-btn:not(.inactive):hover { color: rgb(86, 174, 183); }
+
 .btn-label {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    /* fluid sizing — same clamp used to apply everywhere, not just #home-bottom-bar */
+    width:     clamp(12px, 1.5vw, 20px);
+    height:    clamp(12px, 1.5vw, 20px);
     border-radius: 50%;
     border: 2px solid currentColor;
-    font-size: 10px;
+    font-size: clamp(6px, 0.75vw, 10px);
 }
 
-/* #endregion all software screen */
-#ds-btn {
-    pointer-events: auto;
-}
+/* Suppress focus rings on bottom-bar buttons */
+#switch-btn:focus,
+#ds-btn:focus,
+#back-btn:focus,
+#software-switch-btn:focus { outline: none; }
 
-#ds-btn:hover {
-    color: rgb(86, 174, 183);
-    pointer-events: auto;
-}
 
-#ds-btn.selected {
-    color: rgb(86, 174, 183);
-    opacity: 1;
-    pointer-events: auto;
-}
+/* ── Console selector buttons (#switch-btn / #ds-btn) ───────────────── */
 
-#ds-btn.selected .btn-label {
-    border-color: rgb(86, 174, 183);
-    pointer-events: auto;
-}
-
-/* OK button active state — shared between home and all-software */
-.bottom-btn:not(.inactive):hover {
-    color: rgb(86, 174, 183);
-}
-/* prevent native browser focus ring on bottom bar buttons */
-#switch-btn:focus, #ds-btn:focus, #software-switch-btn:focus {
-    outline: none;
-}
-
-#ds-btn:focus, #switch-btn:focus, #back-btn:focus {
-    outline: none;
-}
-
-#ds-btn:not(.inactive), #switch-btn:not(.inactive) {
+#switch-btn:not(.inactive),
+#ds-btn:not(.inactive) {
     opacity: 0.8;
     cursor: pointer;
     pointer-events: auto;
 }
 
-#ds-btn:not(.inactive):hover, #switch-btn:not(.inactive):hover {
+#switch-btn:not(.inactive):hover,
+#ds-btn:not(.inactive):hover { color: rgb(86, 174, 183); }
+
+#ds-btn { pointer-events: auto; }
+
+#ds-btn.selected {
     color: rgb(86, 174, 183);
+    opacity: 1;
 }
 
-/* Scale bottom bar buttons on home only */
-#home-bottom-bar .bottom-btn {
-    font-size: clamp(7px, 0.9vw, 12px);
-}
+#ds-btn.selected .btn-label { border-color: rgb(86, 174, 183); }
 
-#home-bottom-bar .btn-label {
-    width: clamp(12px, 1.5vw, 20px);
-    height: clamp(12px, 1.5vw, 20px);
-    font-size: clamp(6px, 0.75vw, 10px);
-}
 
-/* #region Fonts */
+/* ── Fonts ───────────────────────────────────────────────────────────── */
+
 @font-face {
     font-family: 'pretendo-font';
     src: url('./assets/fonts/Pretendo.ttf') format('truetype');
 }
-
-.pretendo-text {
-    font-family: 'pretendo-font';
-}
+.pretendo-text { font-family: 'pretendo-font'; }
 
 @font-face {
     font-family: 'nintendo-font';
     src: url('./assets/fonts/Nintendo-DS-BIOS.ttf') format('truetype');
 }
-
-.nintendo-text {
-    font-family: 'nintendo-font';
-}
+.nintendo-text { font-family: 'nintendo-font'; }
 
 @font-face {
     font-family: 'switch-font';
     src: url('./assets/fonts/NINTENDOSWITCHUI.TTF') format('truetype');
 }
-
-.a, .switch-text {
-    font-family: 'switch-font';
-}
+.switch-text { font-family: 'switch-font'; }
 
 @font-face {
     font-family: 'ds-font';
     src: url('./assets/fonts/FOT-Rodin-Pro-DB.otf') format('opentype');
 }
+.ds-text { font-family: 'ds-font'; }
 
-.a, .ds-text {
-    font-family: 'ds-font';
-}
 
-/* #endregion Fonts */
-/* ── Sidenav & overlay fixes ─────────────────────────────────────────── */
-
-/*
- * Root style.css sets .sidenav { z-index: 1 } and #nav-overlay { position: absolute; inset: 0 }
- * which anchors the overlay to #main only (not the full viewport) and buries
- * the sidenav under fixed headers. Override both here for all nintendo-games pages.
- */
+/* ── Sidenav z-index override ────────────────────────────────────────── */
+/* Nintendo-games pages have a fixed header at z-index 10; bump sidenav above it. */
 
 .sidenav {
-    z-index: 11 !important;      /* above fixed header (z-index: 10) and overlay */
-    overflow-y: auto;            /* scrollable if content is tall */
-    -webkit-overflow-scrolling: touch;
+    z-index: 11;
+    overflow-y: auto;
 }
 
-#nav-overlay {
-    position: fixed !important;  /* cover full viewport, not just #main */
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 10 !important;      /* above page content, below sidenav */
-}
 
-/* Landscape / short viewports (≤500px tall) */
+/* ── Short-viewport adjustments (landscape mobile / rotated tablet) ──── */
+/*
+ * min-height: 501px is the "normal" case — base styles above cover it.
+ * Everything below handles viewports ≤ 500px tall (phone landscape, etc.)
+ * without needing !important because the base styles no longer set these
+ * properties with hard values.
+ */
+
 @media (max-height: 500px) {
 
-    /* Hide subtitle and shrink header to save vertical space */
-    header .header p {
-        display: none !important;
-    }
+    /* Shrink header to reclaim vertical space */
+    header .header p  { display: none; }
+    header .header h2 { font-size: 13px; margin: 0; }
+    footer            { display: none; }
 
-    header .header h2 {
-        font-size: 13px !important;
-        margin: 0 !important;
-    }
-
-    /* Hide footer — no room */
-    footer {
-        display: none !important;
-    }
-
-    /* Home: tighter padding for short screens */
     #home-screen {
         padding-top: 48px;
         padding-bottom: 36px;
         gap: 2px;
     }
 
-    /* All-software: keep fixed but reduce top clearance */
+    /* All-software screen: pin top & bottom, let grid scroll */
     #software-screen {
         position: fixed;
         top: 48px;
-        height: auto;
         bottom: 40px;
+        height: auto;
         overflow: hidden;
         padding: 0;
     }
 
     #software-grid-wrapper {
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
     }
 
     #software-bottom-bar {
@@ -366,13 +255,10 @@ body.page-loading #main > * {
         bottom: 0;
         left: 0;
         right: 0;
-        max-width: 100%;
         padding: 4px 12px;
         background: rgb(235, 235, 235);
         z-index: 5;
     }
 
-    #navigation-bar {
-        width: 35% !important;
-    }
+    #navigation-bar { width: 35%; }
 }
