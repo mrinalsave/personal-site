@@ -22,12 +22,27 @@
             <div class="header">
                 <h2 class="nintendo-text" style="text-align:center; font-size:35px">nintendo games</h2>
                 <p class="retro-text" style="font-size: 12px; text-align: center">
-                    <a href="../index.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
+                    <a href="../devlog/2026-03-21-nintendo-games.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
                 </p>
             </div>
         </header>
 
         <div id="home-screen">
+            <div id="home-top-bar">
+                <div id="home-top-bar-left">
+                    <img id="avatar" src="./assets/images/avatar.png" alt="avatar">
+                </div>
+
+                <div id="home-top-bar-right">
+                    <span id="current-time" class="switch-text"></span>
+                    <img id="wifi-icon" src="./assets/images/wifi.png" alt="wifi">
+                    <div id="battery-group">
+                        <span id="current-battery" class="switch-text"></span>
+                        <img id="battery-icon" src="./assets/images/battery.png" alt="battery">
+                    </div>
+                </div>
+            </div>
+
             <div id="selected-title-wrapper">
                 <span id="selected-title" class="switch-text"></span>
             </div>
@@ -43,13 +58,17 @@
             <img id="navigation-bar" src="./assets/images/navigation-bar.png" alt="switch navigation bar reference">
 
             <div id="home-bottom-bar">
-                <button id="back-btn" class="switch-text bottom-btn" tabindex="-1"
-                        onclick="fadeTo('../index.html')">
-                    <span class="btn-label">B</span> Back
-                </button>
-                <button id="ok-btn" class="switch-text bottom-btn" tabindex="-1">
-                    <span class="btn-label">A</span> Start
-                </button>
+                <img id="switch-icon" src="./assets/images/switch.png" alt="switch icon">
+
+                <div id="home-bottom-bar-right">
+                    <button id="back-btn" class="switch-text bottom-btn" tabindex="-1"
+                            onclick="fadeTo('../index.html')">
+                        <span class="btn-label">B</span> Back
+                    </button>
+                    <button id="ok-btn" class="switch-text bottom-btn" tabindex="-1">
+                        <span class="btn-label">A</span> Start
+                    </button>
+                </div>
             </div>
         </div>
 

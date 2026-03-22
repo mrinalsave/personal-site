@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
 if (document.getElementById('loading-screen')) {
     document.addEventListener('keydown', (e) => {
         const key = e.key.toUpperCase();
-        if (key === 'X') fadeTo('./switch/loading.html');
-        if (key === 'Y') fadeTo('./3ds/loading.html');
+        if (key === 'X') fadeTo('./switch/home.html');
+        if (key === 'Y') fadeTo('./3ds/home.html');
     });
 }

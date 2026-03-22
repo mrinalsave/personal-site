@@ -71,7 +71,10 @@ if (track) {
     async function loadGames() {
         const res = await fetch('./data/switch.json');
         const all = await res.json();
-        games = all.slice(0, 12); // always show exactly 12 on home
+
+        const shuffled = all.sort(() => Math.random() - 0.5);
+        games = shuffled.slice(0, 12); // always show exactly 12 on home
+        
         renderTrack();
         // restore index if returning from all-software, else start at 0
         const restore = sessionStorage.getItem('homeSelectedIndex');
@@ -81,8 +84,6 @@ if (track) {
         selectGame(idx);
         scrollToShowIndex(idx);
         updateArrows();
-        alignBottomBar();
-
     }
 
     function renderTrack() {
@@ -228,6 +229,10 @@ if (track) {
     // ── Keyboard: moves selection + scrolls to keep icon + border in view ──
     const BORDER = 8; // matches inset on .game-icon-border
     function scrollToShowIndex(i) {
+        if (i >= games.length) {
+            scrollToShowAllSoftware();
+            return;
+        }
         const iconLeft  = i * STEP();
         const iconRight = iconLeft + ICON_SIZE();
         const viewLeft  = scrollOffset;
@@ -237,6 +242,24 @@ if (track) {
             scrollTo(iconLeft - BORDER - GAP(), true);
         } else if (iconRight + BORDER > viewRight) {
             scrollTo(iconRight + BORDER - trackOuter.clientWidth + GAP(), true);
+        }
+    }
+
+    // Scroll the all-software tile into view by measuring its actual DOM position,
+    // since it has a different size and extra margin that i*STEP() can't account for.
+    function scrollToShowAllSoftware() {
+        const tile = track.querySelector('.all-software-icon');
+        if (!tile) return;
+        const tileRect  = tile.getBoundingClientRect();
+        const outerRect = trackOuter.getBoundingClientRect();
+        // convert to track-local coordinates by adding current scroll offset
+        const tileLeft  = tileRect.left  - outerRect.left + scrollOffset;
+        const tileRight = tileRect.right - outerRect.left + scrollOffset;
+        const viewRight = trackOuter.clientWidth;
+        if (tileRight + BORDER > viewRight + scrollOffset) {
+            scrollTo(tileRight + BORDER - trackOuter.clientWidth + GAP(), true);
+        } else if (tileLeft - BORDER < scrollOffset) {
+            scrollTo(tileLeft - BORDER - GAP(), true);
         }
     }
 
@@ -316,19 +339,64 @@ if (track) {
         if (!bar || !trackOuter) return;
         const trackRect = trackOuter.getBoundingClientRect();
         const barParentRect = bar.parentElement.getBoundingClientRect();
+        const leftOffset  = trackRect.left  - barParentRect.left;
         const rightOffset = barParentRect.right - trackRect.right;
+        console.log('[alignBottomBar] trackRect:', JSON.stringify(trackRect.toJSON()), 'barParentRect:', JSON.stringify(barParentRect.toJSON()), 'leftOffset:', leftOffset, 'rightOffset:', rightOffset);
+        bar.style.paddingLeft  = Math.max(0, leftOffset)  + 'px';
         bar.style.paddingRight = Math.max(0, rightOffset) + 'px';
     }
 
-    loadGames().then(() => alignBottomBar());
+    function alignTopBar() {
+        const bar = document.getElementById('home-top-bar');
+        if (!bar || !trackOuter) return;
+        const trackRect = trackOuter.getBoundingClientRect();
+        const barParentRect = bar.parentElement.getBoundingClientRect();
+        const leftOffset  = trackRect.left  - barParentRect.left;
+        const rightOffset = barParentRect.right - trackRect.right;
+        console.log('[alignTopBar] trackRect:', JSON.stringify(trackRect.toJSON()), 'barParentRect:', JSON.stringify(barParentRect.toJSON()), 'leftOffset:', leftOffset, 'rightOffset:', rightOffset);
+        bar.style.paddingLeft  = Math.max(0, leftOffset)  + 'px';
+        bar.style.paddingRight = Math.max(0, rightOffset) + 'px';
+    }
+
+    loadGames().then(() => {
+        requestAnimationFrame(() => {
+            alignBottomBar();
+            alignTopBar();
+            // diagnostic: log heights of all #home-screen children
+            const hs = document.getElementById('home-screen');
+            console.log('[layout] #home-screen height:', hs.offsetHeight, 'scrollHeight:', hs.scrollHeight);
+            Array.from(hs.children).forEach(el => {
+                console.log('[layout]', el.id || el.className, 'offsetHeight:', el.offsetHeight, 'paddingLeft:', el.style.paddingLeft, 'paddingRight:', el.style.paddingRight);
+            });
+        });
+    });
 
     window.addEventListener('resize', () => {
         updateArrows();
         scrollTo(selectedIndex * STEP(), false);
         positionTitle(selectedIndex);
         alignBottomBar();
+        alignTopBar();
     });
 }
+
+let time = document.getElementById('current-time');
+let battery = document.getElementById('current-battery');
+
+setInterval(() => {
+    let date = new Date();
+    time.textContent = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    if (navigator.getBattery) {
+        navigator.getBattery().then(bat => {
+            const level = Math.round(bat.level * 100) + '%';
+            battery.textContent = level;
+        });
+    } else {
+        battery.textContent = '100%';
+    }
+}, 1000);
+
 // ─── All Software Screen ──────────────────────────
 const softwareScreen = document.getElementById('software-screen');
 const softwareGrid = document.getElementById('software-grid');

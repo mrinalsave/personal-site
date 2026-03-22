@@ -20,6 +20,11 @@ body.page-loading {
 
 body {
     transition: opacity 0.4s ease;
+    overflow: hidden;
+}
+
+html {
+    overflow: hidden;
 }
 
 /*
@@ -95,6 +100,100 @@ body.page-loading #main > * {
 /* #endregion loading */
 
 /* #region home/carousel */
+
+/* ── Top status bar (avatar left · time/wifi/battery right) ─────────── */
+#home-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(12px, 2vw, 32px);
+    flex-shrink: 0;
+    /* no fixed height — let content dictate, bar sits naturally in flex column */
+}
+
+#home-top-bar-left {
+    display: flex;
+    align-items: center;
+}
+
+#avatar {
+    width: clamp(36px, 5vw, 64px);
+    height: clamp(36px, 5vw, 64px);
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+#home-top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.6vw, 10px);
+}
+
+#battery-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(1px, 0.15vw, 3px);
+}
+
+#current-time,
+#current-battery {
+    font-size: clamp(10px, 1.1vw, 16px);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+#wifi-icon,
+#battery-icon {
+    height: clamp(12px, 1.4vw, 20px);
+    width: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    /* keep pixel-art icons crisp */
+    image-rendering: pixelated;
+}
+
+/* Landscape / short viewports */
+@media (max-height: 500px) {
+    #home-top-bar {
+        padding: 0 clamp(6px, 1.5vw, 16px);
+    }
+    #avatar {
+        width: clamp(24px, 5vh, 40px) !important;
+        height: clamp(24px, 5vh, 40px) !important;
+    }
+    #wifi-icon,
+    #battery-icon {
+        height: clamp(8px, 2vh, 14px) !important;
+    }
+    #current-time,
+    #current-battery {
+        font-size: clamp(7px, 1.8vh, 12px) !important;
+    }
+}
+
+/* Portrait mobile */
+@media (max-width: 768px) {
+    #home-top-bar {
+        padding: 0 clamp(8px, 2vw, 16px);
+    }
+    #avatar {
+        width: clamp(28px, 6vw, 44px);
+        height: clamp(28px, 6vw, 44px);
+    }
+    #wifi-icon,
+    #battery-icon {
+        height: clamp(10px, 2.5vw, 16px);
+    }
+    #current-time,
+    #current-battery {
+        font-size: clamp(9px, 2.2vw, 13px);
+    }
+}
 
 #home-screen {
     display: flex;
@@ -280,9 +379,25 @@ body.page-loading #main > * {
 #home-bottom-bar {
     position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     pointer-events: none;
+    padding-left: 0;  /* set by JS to match track-outer left edge */
     padding-right: 0; /* set by JS to match track-outer right edge */
+}
+
+#switch-icon {
+    height: clamp(20px, 2.8vw, 40px);
+    width: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+#home-bottom-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 #ok-btn:not(.inactive) {
@@ -475,7 +590,7 @@ body.page-loading #main > * {
 }
 #navigation-bar {
     display: block;
-    width: 60%;
+    width: 45%;
     margin: 0 auto;
     pointer-events: none;
     user-select: none;
@@ -525,7 +640,6 @@ body.page-loading #main > * {
 
 /* Portrait mobile (≤768px wide) */
 @media (max-width: 768px) {
-
     /* Restore "wanna know" link */
     header .header p {
         font-size: 10px !important;
@@ -544,6 +658,9 @@ body.page-loading #main > * {
         box-sizing: border-box;
         gap: 6px;
     }
+
+    /* Title */
+    #selected-title { font-size: 11px !important; }
 
     /* All-software portrait: fixed frame, internally scrolling, same as desktop */
     #software-screen {
@@ -594,10 +711,21 @@ body.page-loading #main > * {
 
 /* Landscape / short viewports (≤500px tall) */
 @media (max-height: 500px) {
+    /* Ensure header and footer are never hidden by stacking context from animations */
+    header {
+        z-index: 20 !important;
+    }
+    footer {
+        z-index: 20 !important;
+        display: block !important;
+    }
+    header .header p {
+        display: block !important;
+    }
 
     /* Shrink header to save vertical space */
     header .header p {
-        font-size: 8px !important;
+        font-size: 6px !important;
         margin: 2px 0 0 !important;
     }
     header .header h2 {
@@ -614,7 +742,7 @@ body.page-loading #main > * {
         position: relative;
         height: 100svh;
         justify-content: flex-start;
-        padding-top: 60px;
+        padding-top: 85px;
         box-sizing: border-box;
         gap: 4px;
     }
@@ -658,13 +786,16 @@ body.page-loading #main > * {
     }
 
     /* Title */
-    #selected-title { font-size: 10px !important; }
-    #selected-title-wrapper { position: absolute; margin-top: -15px; }
+    #selected-title { font-size: 6px !important; }
+    #selected-title-wrapper { position: absolute; margin-top: 22px; }
 
     /* Navigation bar */
-    #navigation-bar { width: 28% !important; }
+    #navigation-bar { width: 15% !important; }
 
     /* Bottom bar */
+    #switch-icon {
+        height: clamp(14px, 3.5vh, 24px) !important;
+    }
     #home-bottom-bar .bottom-btn {
         font-size: clamp(6px, 1.8vh, 11px) !important;
     }
@@ -732,19 +863,5 @@ body.page-loading #main > * {
         width: clamp(10px, 2.8vh, 18px) !important;
         height: clamp(10px, 2.8vh, 18px) !important;
         font-size: clamp(5px, 1.5vh, 9px) !important;
-    }
-}
-
-/* Ensure header and footer are never hidden by stacking context from animations */
-@media (max-height: 500px) {
-    header {
-        z-index: 20 !important;
-    }
-    footer {
-        z-index: 20 !important;
-        display: block !important;
-    }
-    header .header p {
-        display: block !important;
     }
 }
