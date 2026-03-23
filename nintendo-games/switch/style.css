@@ -559,6 +559,40 @@ body.page-loading #main > * {
     font-size: 10px;
 }
 
+/* ── Game title tooltip (shown on selection in all-software grid) ────── */
+.game-title-tooltip {
+    position: absolute;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 4px 10px 4px 6px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 20;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.game-title-tooltip.visible {
+    display: flex;
+}
+
+.game-title-tooltip-icon {
+    width: 10px;
+    height: 10px;
+    background: rgb(86, 174, 183);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.game-title-tooltip-text {
+    font-size: clamp(9px, 1vw, 13px);
+    letter-spacing: 0.04em;
+    color: rgb(86, 174, 183);
+}
+
 /* #endregion all software screen */
 #back-btn {
     pointer-events: auto;
@@ -863,5 +897,11 @@ body.page-loading #main > * {
         width: clamp(10px, 2.8vh, 18px) !important;
         height: clamp(10px, 2.8vh, 18px) !important;
         font-size: clamp(5px, 1.5vh, 9px) !important;
+    }
+
+    .game-title-tooltip-text {
+        font-size: clamp(3px, 1vw, 8px);
+        letter-spacing: 0.04em;
+        color: rgb(86, 174, 183);
     }
 }

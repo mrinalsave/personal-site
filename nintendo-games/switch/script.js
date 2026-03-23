@@ -422,6 +422,7 @@ if (softwareGrid) {
         // clamp and check if we're going past the end
         if (i >= games.length) {
             setBackSelected(true);
+            tooltip.classList.remove('visible');
             return;
         }
         setBackSelected(false);
@@ -429,30 +430,55 @@ if (softwareGrid) {
         document.querySelectorAll('#software-grid .game-icon').forEach((el, idx) => {
             el.classList.toggle('selected', idx === selectedIndex);
         });
-        // smooth scroll selected tile into view
+        tooltip.classList.remove('visible'); // hide stale tooltip during scroll
+        // smooth scroll selected tile into view, then position tooltip once settled
         const wrapper = document.getElementById('software-grid-wrapper');
         const tile = softwareGrid.children[selectedIndex];
+        let needsScroll = false;
         if (wrapper && tile) {
             const tRect = tile.getBoundingClientRect();
             const wrapperScrollable = wrapper.scrollHeight > wrapper.clientHeight;
             if (wrapperScrollable) {
-                // desktop/landscape: scroll within wrapper
                 const wRect = wrapper.getBoundingClientRect();
                 if (tRect.bottom > wRect.bottom) {
                     wrapper.scrollBy({ top: tRect.bottom - wRect.bottom + 12, behavior: 'smooth' });
+                    needsScroll = true;
                 } else if (tRect.top < wRect.top) {
                     wrapper.scrollBy({ top: -(wRect.top - tRect.top + 12), behavior: 'smooth' });
+                    needsScroll = true;
                 }
             } else {
-                // mobile portrait: scroll the page, compare against viewport
                 const viewBottom = window.innerHeight;
                 const viewTop = 0;
                 if (tRect.bottom > viewBottom) {
                     window.scrollBy({ top: tRect.bottom - viewBottom + 12, behavior: 'smooth' });
+                    needsScroll = true;
                 } else if (tRect.top < viewTop) {
                     window.scrollBy({ top: tRect.top - viewTop - 12, behavior: 'smooth' });
+                    needsScroll = true;
                 }
             }
+        }
+
+        if (needsScroll) {
+            // Wait for scroll to finish before positioning — getBCR is only correct
+            // once the smooth scroll has settled. Track which element is scrolling.
+            const snapIndex = selectedIndex;
+            const snapTitle = games[selectedIndex].title;
+            const scrollTarget = (wrapper && wrapper.scrollHeight > wrapper.clientHeight)
+                ? wrapper : window;
+            let scrollEndTimer;
+            const onScroll = () => {
+                clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    scrollTarget.removeEventListener('scroll', onScroll);
+                    // Only show if selection hasn't changed while scrolling
+                    if (selectedIndex === snapIndex) positionTooltip(snapIndex, snapTitle);
+                }, 80);
+            };
+            scrollTarget.addEventListener('scroll', onScroll, { passive: true });
+        } else {
+            positionTooltip(selectedIndex, games[selectedIndex].title);
         }
     }
 
@@ -461,6 +487,70 @@ if (softwareGrid) {
         fadeTo('./home.html');
     }
     window.navigateBackToHome = navigateBackToHome;
+
+    // ── Tooltip (appended to software-screen, positioned via viewport coords) ──
+    const gridWrapper = document.getElementById('software-grid-wrapper');
+    const softwareScreenEl = document.getElementById('software-screen');
+    const tooltip = document.createElement('div');
+    tooltip.className = 'game-title-tooltip';
+    const tooltipDot = document.createElement('div');
+    tooltipDot.className = 'game-title-tooltip-icon';
+    const tooltipText = document.createElement('span');
+    tooltipText.className = 'game-title-tooltip-text switch-text';
+    tooltip.appendChild(tooltipDot);
+    tooltip.appendChild(tooltipText);
+    // Append to software-screen so it doesn't interfere with grid-wrapper layout
+    if (softwareScreenEl) softwareScreenEl.appendChild(tooltip);
+
+    // Pre-measure tooltip size off-screen so positionTooltip never reads
+    // layout while the element is visible/mid-position (avoids choppy jumps).
+    let ttW = 0, ttH = 0;
+    function measureTooltip(title) {
+        tooltipText.textContent = title;
+        tooltip.style.visibility = 'hidden';
+        tooltip.style.display = 'flex';
+        ttW = tooltip.offsetWidth;
+        ttH = tooltip.offsetHeight;
+        tooltip.style.display = '';
+        tooltip.style.visibility = '';
+    }
+
+    function positionTooltip(tileIndex, title) {
+        if (!softwareScreenEl || !gridWrapper || !softwareGrid) return;
+
+        measureTooltip(title);
+
+        // getBoundingClientRect is correct here — this is always called after
+        // any scroll has fully settled, so coordinates are final.
+        const tileEl = softwareGrid.children[tileIndex];
+        const sRect  = softwareScreenEl.getBoundingClientRect();
+        const tRect  = tileEl.getBoundingClientRect();
+        const wRect  = gridWrapper.getBoundingClientRect();
+
+        const tileCenter = tRect.left - sRect.left + tRect.width  / 2;
+        const tileTopRel = tRect.top  - sRect.top;
+        const tileBotRel = tRect.bottom - sRect.top;
+
+        const gridLeft  = wRect.left  - sRect.left;
+        const gridRight = wRect.right - sRect.left;
+        const minLeft = gridLeft  + ttW / 2;
+        const maxLeft = gridRight - ttW / 2;
+        const left = Math.max(minLeft, Math.min(tileCenter, maxLeft));
+
+        // Flip below for first row: not enough room above wrapper top
+        const roomAbove = tRect.top - wRect.top;
+        const showBelow = roomAbove < ttH + 8;
+
+        tooltip.style.left = left + "px";
+        if (showBelow) {
+            tooltip.style.top       = tileBotRel + 6 + "px";
+            tooltip.style.transform = "translateX(-50%)";
+        } else {
+            tooltip.style.top       = tileTopRel + "px";
+            tooltip.style.transform = "translateX(-50%) translateY(calc(-100% - 6px))";
+        }
+        tooltip.classList.add("visible");
+    }
 
     async function loadSoftwareGrid() {
         const res = await fetch('./data/switch.json');
