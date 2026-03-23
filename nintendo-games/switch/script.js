@@ -415,6 +415,7 @@ if (softwareGrid) {
         if (softwareOkBtn) softwareOkBtn.classList.toggle('inactive', val);
         if (val) {
             document.querySelectorAll('#software-grid .game-icon').forEach(el => el.classList.remove('selected'));
+            tooltip.classList.remove('visible');
         }
     }
 
