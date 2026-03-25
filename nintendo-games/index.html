@@ -4,11 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>nintendo games</title>
-    <link rel="icon" type="image/x-icon" href="/audio-visualizer/assets/favicon-DbA6gtNg.ico">
-  <script type="module" crossorigin src="/audio-visualizer/assets/nintendoGames-Bw8iRv2h.js"></script>
-  <link rel="modulepreload" crossorigin href="/audio-visualizer/assets/side-nav-ClXApTkh.js">
-  <link rel="stylesheet" crossorigin href="/audio-visualizer/assets/side-nav-D_Nrnlp5.css">
-  <link rel="stylesheet" crossorigin href="/audio-visualizer/assets/nintendoGames-Bcd85xaU.css">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div id="sidenav" class="sidenav"></div>
@@ -31,15 +29,15 @@
         <div id="home-screen">
             <div id="home-top-bar">
                 <div id="home-top-bar-left">
-                    <img id="avatar" src="/audio-visualizer/assets/avatar-C8ApTGIO.png" alt="avatar">
+                    <img id="avatar" src="./assets/images/avatar.png" alt="avatar">
                 </div>
 
                 <div id="home-top-bar-right">
                     <span id="current-time" class="switch-text"></span>
-                    <img id="wifi-icon" src="/audio-visualizer/assets/wifi-B_Fybv_0.png" alt="wifi">
+                    <img id="wifi-icon" src="./assets/images/wifi.png" alt="wifi">
                     <div id="battery-group">
                         <span id="current-battery" class="switch-text"></span>
-                        <img id="battery-icon" src="/audio-visualizer/assets/battery-BjS_4XbL.png" alt="battery">
+                        <img id="battery-icon" src="./assets/images/battery.png" alt="battery">
                     </div>
                 </div>
             </div>
@@ -56,10 +54,10 @@
                 <button id="arrow-right" class="carousel-arrow switch-text" aria-label="scroll right">&#8594;</button>
             </div>
 
-            <img id="navigation-bar" src="/audio-visualizer/assets/navigation-bar-WEn6LgVg.png" alt="switch navigation bar reference">
+            <img id="navigation-bar" src="./assets/images/navigation-bar.png" alt="switch navigation bar reference">
 
             <div id="home-bottom-bar">
-                <img id="switch-icon" src="/audio-visualizer/assets/switch-XFIqT7FG.png" alt="switch icon">
+                <img id="switch-icon" src="./assets/images/switch.png" alt="switch icon">
 
                 <div id="home-bottom-bar-right">
                     <button id="back-btn" class="switch-text bottom-btn" tabindex="-1"
@@ -92,5 +90,8 @@
         </div>
     </div>
 
+    <script src="./script.js"        type="module"></script>
+    <script src="../mobile-popup.js" type="module"></script>
+    <script src="../side-nav.js"     type="module"></script>
 </body>
 </html>
