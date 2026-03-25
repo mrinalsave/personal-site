@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>nintendo games</title>
-    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
-    
-    <link rel="stylesheet" href="../style.css"> <!-- root -->
-    <link rel="stylesheet" href="./style.css"> <!-- nintendo-games -->
+    <link rel="icon" type="image/x-icon" href="/audio-visualizer/assets/favicon-DbA6gtNg.ico">
+  <script type="module" crossorigin src="/audio-visualizer/assets/nintendoGames-Bw8iRv2h.js"></script>
+  <link rel="modulepreload" crossorigin href="/audio-visualizer/assets/side-nav-ClXApTkh.js">
+  <link rel="stylesheet" crossorigin href="/audio-visualizer/assets/side-nav-D_Nrnlp5.css">
+  <link rel="stylesheet" crossorigin href="/audio-visualizer/assets/nintendoGames-Bcd85xaU.css">
 </head>
 <body>
     <div id="sidenav" class="sidenav"></div>
@@ -20,24 +21,55 @@
                 &#9776; open
             </span>
             <div class="header">
-                <h2 class="nintendo-text" style="text-align:center; font-size:35px">nintendo games</h2>
-                <p class="retro-text" style="font-size:12px; text-align:center">
+                <h2 class="nintendo-text" style="text-align:center; font-size:35px">nintendo switch games</h2>
+                <p class="retro-text" style="font-size: 12px; text-align: center">
                     <a href="../devlog/2026/03/21/nintendo-games.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
                 </p>
             </div>
         </header>
 
-        <div id="loading-screen">
-            <p class="nintendo-text picker-label" style="font-size:20px">select console...</p>
+        <div id="home-screen">
+            <div id="home-top-bar">
+                <div id="home-top-bar-left">
+                    <img id="avatar" src="/audio-visualizer/assets/avatar-C8ApTGIO.png" alt="avatar">
+                </div>
+
+                <div id="home-top-bar-right">
+                    <span id="current-time" class="switch-text"></span>
+                    <img id="wifi-icon" src="/audio-visualizer/assets/wifi-B_Fybv_0.png" alt="wifi">
+                    <div id="battery-group">
+                        <span id="current-battery" class="switch-text"></span>
+                        <img id="battery-icon" src="/audio-visualizer/assets/battery-BjS_4XbL.png" alt="battery">
+                    </div>
+                </div>
+            </div>
+
+            <div id="selected-title-wrapper">
+                <span id="selected-title" class="switch-text"></span>
+            </div>
+
+            <div id="carousel-wrapper">
+                <button id="arrow-left" class="carousel-arrow switch-text" aria-label="scroll left">&#8592;</button>
+                <div id="carousel-track-outer">
+                    <div id="carousel-track"></div>
+                </div>
+                <button id="arrow-right" class="carousel-arrow switch-text" aria-label="scroll right">&#8594;</button>
+            </div>
+
+            <img id="navigation-bar" src="/audio-visualizer/assets/navigation-bar-WEn6LgVg.png" alt="switch navigation bar reference">
+
             <div id="home-bottom-bar">
-                <button id="switch-btn" class="nintendo-text bottom-btn" style="font-size:16px" tabindex="-1"
-                        onclick="fadeTo('./switch/home.html')">
-                    <span class="btn-label">X</span> Switch
-                </button>
-                <button id="ds-btn" class="nintendo-text bottom-btn" style="font-size:16px" tabindex="-1"
-                        onclick="fadeTo('./3ds/home.html')">
-                    <span class="btn-label">Y</span> 3DS
-                </button>
+                <img id="switch-icon" src="/audio-visualizer/assets/switch-XFIqT7FG.png" alt="switch icon">
+
+                <div id="home-bottom-bar-right">
+                    <button id="back-btn" class="switch-text bottom-btn" tabindex="-1"
+                            onclick="fadeTo('../index.html')">
+                        <span class="btn-label">B</span> Back
+                    </button>
+                    <button id="ok-btn" class="switch-text bottom-btn" tabindex="-1">
+                        <span class="btn-label">A</span> Start
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -60,8 +92,5 @@
         </div>
     </div>
 
-    <script src="./script.js" type="module"></script>
-    <script src="../mobile-popup.js" type="module"></script>
-    <script src="../side-nav.js" type="module"></script>
 </body>
 </html>

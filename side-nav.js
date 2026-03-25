@@ -8,7 +8,7 @@ const NAV_LINKS = [
     { label: 'home',                      href: '/index.html'                  },
     { label: 'favorite pokemon cards',    href: '/pokemon-cards/index.html'    },
     { label: 'audio visualizer',          href: '/audio-visualizer/index.html' },
-    { label: 'nintendo games',            href: '/nintendo-games/index.html'   },
+    { label: 'nintendo switch games',     href: '/nintendo-games/index.html'   },
     { label: 'coming soon',               href: '/ideas/index.html'            },
     { label: 'devlog',                    href: '/devlog/index.html'           },
 ];
@@ -68,7 +68,6 @@ function openNav() {
     sidenav.style.width = navWidth() + 'px';
     navOverlay.classList.add('active');
     document.body.classList.add('nav-open');
-    document.getElementById('open-nav').style.display = 'none';
 
     // Drop the header below the scrim so its contents aren't reachable.
     // Must be done in JS because the header's z-index is set as an inline style,
