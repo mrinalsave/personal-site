@@ -167,7 +167,7 @@ if (track) {
 
     if (okBtn) okBtn.addEventListener('click', confirmSelection);
     if (backBtn) backBtn.addEventListener('click', () => { 
-        fadeTo('../index.html');
+        fadeTo('../explore/index.html');
     } );
 
     // ── Scroll (view only) ─────────────────────────
@@ -250,7 +250,7 @@ if (track) {
             confirmSelection();
         }
         if (e.key === 'b' || e.key === 'B') {
-            fadeTo('../index.html');
+            fadeTo('../explore/index.html');
         }
     });
 

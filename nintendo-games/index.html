@@ -3,29 +3,44 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>nintendo games</title>
-    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>nintendo switch games</title>
+    
+    <link rel="icon" type="image/x-icon" href="/audio-visualizer/assets/favicon-DWAF3478.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Monsieur+La_Doulaise&family=Figtree:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../drawer.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="sidenav" class="sidenav"></div>
-    <div id="nav-overlay"></div>
+    <header>
+        <a href="../index.html" class="header-logo">🍀</a>
+        <p class="retro-text header-title">nintendo switch games</p>
+        <nav>
+            <a href="../index.html">home</a>
+            <a href="../explore/index.html">explore</a>
+            <a href="../devlog/index.html">blog</a>
+            <a href="../about/index.html">about</a>
+            <a id="build-notes" href="../devlog/2026/03/21/nintendo-games.html">📑</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="drawer-scrim" id="drawerScrim"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="/index.html">home</a>
+        <a href="/explore/index.html">explore</a>
+        <a href="/devlog/index.html">blog</a>
+        <a href="/about/index.html">about</a>
+        <a id="build-notes" href="../devlog/2026/03/21/nintendo-games.html">📑 see build notes</a>
+    </div>
 
     <div id="main">
-        <header style="position:fixed; top:20px; left:20px; right:20px; z-index:10; pointer-events:none;">
-            <span id="open-nav" class="nintendo-text"
-                  style="display:inline-block; width:fit-content; font-size:25px; cursor:pointer; pointer-events:auto;">
-                &#9776; open
-            </span>
-            <div class="header">
-                <h2 class="nintendo-text" style="text-align:center; font-size:35px">nintendo switch games</h2>
-                <p class="retro-text" style="font-size: 12px; text-align: center">
-                    <a href="../devlog/2026/03/21/nintendo-games.html" target="_blank" style="pointer-events:auto;">wanna know how this was made ?</a>
-                </p>
-            </div>
-        </header>
-
         <div id="home-screen">
             <div id="home-top-bar">
                 <div id="home-top-bar-left">
@@ -70,28 +85,24 @@
                 </div>
             </div>
         </div>
-
-        <footer class="nintendo-text"
-                style="position:fixed; bottom:0; left:0; right:0; text-align:center; font-size:20px; z-index:2; color:black; pointer-events:none;">
-            <p>&copy; 2026 mrinal save / atsumr</p>
-        </footer>
     </div>
+
+    <footer class="footer-strip">
+        &copy; 2026 • all rights reserved. • "繋 (つな) ぐ"ということ"
+    </footer>
 
     <div id="mobile-popup" class="mobile-popup">
         <div class="popup-header">
-            <h4 class="retro-text popup-title">hey listen!</h4>
-            <button id="close-popup" class="retro-text popup-close">OK</button>
+            <h4 class="popup-title">hey listen!</h4>
+            <button id="close-popup" class="popup-close">ok</button>
         </div>
         <div class="popup-body">
-            <p class="retro-text">
-                this site is best experienced on desktop, so some functionality may be impacted on mobile.
-                please check it out on desktop when you get the chance !
-            </p>
+            <p>this site is best experienced on desktop, so some functionality may be impacted on mobile. please check it out on desktop when you get the chance !</p>
         </div>
     </div>
 
     <script src="./script.js"        type="module"></script>
     <script src="../mobile-popup.js" type="module"></script>
-    <script src="../side-nav.js"     type="module"></script>
+    <script src="../script.js"        type="module"></script>
 </body>
 </html>

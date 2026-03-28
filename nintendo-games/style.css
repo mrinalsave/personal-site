@@ -11,8 +11,9 @@
 a:hover, a:active { color: rgb(86, 174, 183); }
 span:hover        { color: rgb(86, 174, 183); }
 
-html { background: rgb(235, 235, 235); }
+html, #main, main{ background: rgb(235, 235, 235); }
 
+button h3 { color: var(--dark-grey); }
 
 /* ── Page transitions ────────────────────────────────────────────────── */
 
@@ -226,12 +227,6 @@ body.nav-open .sidenav { overflow-y: auto; }
  */
 
 @media (max-height: 500px) {
-
-    /* Shrink header to reclaim vertical space */
-    header .header p  { display: none; }
-    header .header h2 { font-size: 13px; margin: 0; }
-    footer            { display: none; }
-
     #home-screen {
         padding-top: 48px;
         padding-bottom: 36px;
@@ -939,17 +934,6 @@ body.page-loading #main > * {
 
 /* Portrait mobile (≤768px wide) */
 @media (max-width: 768px) {
-    /* Restore "wanna know" link */
-    header .header p {
-        font-size: 10px !important;
-        margin: 0 !important;
-    }
-
-    header .header h2 {
-        font-size: 16px !important;
-        margin: 0 !important;
-    }
-
     #home-screen {
         height: 100svh;
         padding-top: 80px;
@@ -1010,26 +994,9 @@ body.page-loading #main > * {
 
 /* Landscape / short viewports (≤500px tall) */
 @media (max-height: 500px) {
-    /* Ensure header and footer are never hidden by stacking context from animations */
-    header {
-        z-index: 20 !important;
-    }
     footer {
         z-index: 20 !important;
         display: block !important;
-    }
-    header .header p {
-        display: block !important;
-    }
-
-    /* Shrink header to save vertical space */
-    header .header p {
-        font-size: 6px !important;
-        margin: 2px 0 0 !important;
-    }
-    header .header h2 {
-        font-size: 11px !important;
-        margin: 0 !important;
     }
 
     /* Shrink footer */

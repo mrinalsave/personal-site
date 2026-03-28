@@ -1,199 +1,392 @@
-/* ── General ─────────────────────────────────────────────────────────── */
+/* Drawer/hamburger rules live in drawer.css */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --white:      #ffffff;
+    --off-white:  #f7f5f2;
+    --off-off-white:  #c4c2c0;
+    --grey:  #9b9a9a;
+    --dark-grey:        #434343;
+    --ink:        #1a1a1a;
+    --muted:      #888;
+    --border:     rgba(0,0,0,0.08);
+    --header-h:   52px;
+}
 
 html, body {
-    scroll-behavior: smooth;
     min-height: 100%;
+    overflow-x: hidden; /* prevents horizontal scroll only */
+    overflow-y: auto;   /* allow vertical scroll */
+    scroll-behavior: smooth;
+    background: var(--off-white);
+    color: var(--ink);
+    font-family: 'Figtree', sans-serif;
+    font-weight: 300;
 }
 
-a              { text-decoration: none; color: black; }
-a:hover,
-a:active       { text-decoration: none; color: red; }
-span:hover     { text-decoration: none; color: red; }
-
-.container {
-    text-align: center;
-}
-
-.container ul {
-    margin: 0 auto;
-    text-align: center;
-    list-style: none;
-    display: inline-block;
-}
-
-.parent-container {
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    background: rgba(247, 245, 242, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 100;
 }
 
-
-/* ── Side nav ────────────────────────────────────────────────────────── */
-/* Source: https://www.w3schools.com/howto/howto_js_sidenav.asp */
-
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 6;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-top: 60px;
-    transition: 0.5s;
-}
-
-.sidenav h2 {
-    padding: 8px 8px 8px 21px;
-    font-size: 18px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-    text-align: center;
-}
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    font-size: 16px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover { color: #f1f1f1; }
-
-.sidenav .selected-link,
-.sidenav .selected-link:hover {
-    font-style: italic;
-    color: #FFDE21;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* Nav takes full width on mobile so there's no awkward partial-cover */
-@media (max-width: 768px) {
-    .sidenav { width: 0; max-width: 100vw; }
-}
-
-/* Prevent page scrolling while the nav is open */
-body.nav-open { overflow: hidden; }
-
-/* On short viewports (landscape mobile), shrink padding/font slightly
- * so the top of the nav isn't wasted, then let overflow-y: auto handle the rest. */
-@media (max-height: 500px) {
-    .sidenav { padding-top: 15px; }
-    .sidenav a { font-size: 14px; }
-}
-
-
-
-/* ── Main & nav overlay ──────────────────────────────────────────────── */
-
-#main {
-    position: relative;
-    padding: 20px;
-}
-
-#nav-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+.header-logo {
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--muted);
+    letter-spacing: 0.01em;
     opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 5;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+}
+.header-logo:hover { color: var(--ink); }
+
+.header-title {
+    text-align: center;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
 }
 
-#nav-overlay.active {
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav a {
+    font-family: 'Figtree', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+nav a:nth-child(1) { animation-delay: 0.15s; }
+nav a:nth-child(2) { animation-delay: 0.22s; }
+nav a:nth-child(3) { animation-delay: 0.29s; }
+nav a:nth-child(4) { animation-delay: 0.36s; }
+nav a:hover { color: var(--ink); }
+
+main {
+    min-height: 100vh;
+    padding-top: var(--header-h);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 3rem 3rem 4rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+}
+
+.eyebrow {
+    font-family: 'retro', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-family: 'blacksignature';
+    font-size: clamp(3rem, 4.3vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 1.1vw, 1.25rem);
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.02em;
+}
+
+.links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.links-list li {
+    border-top: 1px solid var(--border);
+}
+.links-list li:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.links-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    font-weight: 400;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.links-list a:hover {
+    color: var(--muted);
+    padding-left: 0.5rem;
+}
+
+.links-list a .arrow {
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.links-list a:hover .arrow {
     opacity: 1;
-    pointer-events: auto;
 }
 
+.tag {
+    font-family: 'retro';
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--border);
+    padding: 2px 6px;
+    border-radius: 2px;
+}
 
-/* ── Mobile popup ────────────────────────────────────────────────────── */
+/* ── RIGHT PANEL ─────────────────────────────────────── */
+.right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.9s ease 0.5s forwards;
+}
+
+.gradient-blob {
+    position: absolute;
+    inset: 1.5rem;
+    border-radius: 4px;
+    background: 
+        conic-gradient(from 200deg at 40% 60%,
+            #a8edcc 0deg,
+            #f9e070 60deg,
+            #f7a541 120deg,
+            #f06b8a 180deg,
+            #c96ddb 240deg,
+            #7b9ef7 300deg,
+            #a8edcc 360deg
+        );
+    filter: blur(0px);
+    animation: hueShift 12s linear infinite;
+}
+
+@keyframes hueShift {
+    from { filter: hue-rotate(0deg); }
+    to   { filter: hue-rotate(360deg); }
+}
+
+/* subtle grain overlay on gradient */
+.gradient-blob::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+.footer-strip {
+    font-family: 'Figtree', sans-serif;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    background: rgba(247, 245, 242, 0.7);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border);
+    z-index: 100;
+}
 
 .mobile-popup {
+    display: none; /* shown via JS */
     position: fixed;
-    bottom: 15px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    width: min(95%, 650px);
-    background: black;
-    opacity: 0.8;
-    color: white;
-    border-radius: 14px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: none;
-    overflow: hidden;
+    width: min(90vw, 380px);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    animation: slideUp 0.4s ease forwards;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateX(-50%) translateY(0); }
+    to   { opacity: 0; transform: translateX(-50%) translateY(12px); }
+}
+
+.mobile-popup.hiding {
+    animation: fadeOut 0.4s ease forwards;
 }
 
 .popup-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 0.5rem;
 }
 
 .popup-title {
-    font-size: 13px;
-    margin: 0;
+    font-family: 'retro';
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .popup-close {
     background: none;
-    border: none;
-    color: white;
-    font-size: 18px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'retro';
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
     cursor: pointer;
-    line-height: 1;
+    padding: 3px 10px;
+    transition: color 0.2s, border-color 0.2s;
 }
-
-.popup-body {
-    padding: 10px 14px;
-    font-size: 12px;
-}
+.popup-close:hover { color: var(--ink); border-color: var(--ink); }
 
 .popup-body p {
-    margin: 0;
-    line-height: 1.4;
+    font-family: 'retro';
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
 }
 
-@media (max-width: 768px), (max-height: 500px) {
-    .mobile-popup { display: block; }
+.end-of-page { 
+    text-align: center; 
+    margin-top: 0px;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.45s forwards;
+}
+
+.end-of-page a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--muted);
 }
 
 
-/* ── Fonts ───────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto;
+        height: auto;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        min-height: unset;
+        padding-top: var(--header-h);
+        padding-bottom: 40px;
+    }
+
+    .left {
+        padding: 2rem 1.5rem 3rem;
+        order: 1;
+    }
+
+    .right {
+        order: 0;
+        height: 55vw;
+        min-height: 200px;
+        max-height: 340px;
+    }
+
+    .gradient-blob { inset: 0; border-radius: 0; }
+
+    nav { display: none; }
+}
 
 @font-face {
     font-family: 'retro';
     src: url('./assets/fonts/Retro-Gaming.ttf') format('truetype');
 }
-
 .retro-text { font-family: 'retro'; }
 
 @font-face {
     font-family: 'bmspa';
     src: url('./assets/fonts/BMSPA___.TTF') format('truetype');
 }
-
 .bmspa-text { font-family: 'bmspa'; }
 
 @font-face {
     font-family: '04b03';
     src: url('./assets/fonts/04B_03__.TTF') format('truetype');
 }
-
 .b03-text { font-family: '04b03'; }
+
+
+@font-face {
+    font-family: 'blacksignature';
+    src: url('./assets/fonts/BlackSignature_PERSONAL_USE_ONLY.otf') format('opentype');
+}
+.b03-text { font-family: 'blacksignature'; }

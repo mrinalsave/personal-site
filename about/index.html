@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mrinal save</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Monsieur+La+Doulaise&family=Figtree:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../drawer.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <a href="/index.html" class="header-logo">🍀</a>
+
+        <nav>
+            <a href="../index.html">home</a>
+            <a href="../explore/index.html">explore</a>
+            <a href="../devlog/index.html">blog</a>
+            <a href="./index.html">about</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="drawer-scrim" id="drawerScrim"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="../index.html">home</a>
+        <a href="../explore/index.html">explore</a>
+        <a href="../devlog/index.html">blog</a>
+        <a href="./index.html">about</a>
+    </div>
+
+    <main>
+        <div class="left">
+            <p class="eyebrow">hi there!</p>
+            <h1>about me:</h1>
+            <p class="subtitle">
+                💼 i'm mrinal, a senior software engineer based in the DMV. i have a bachelor's degree in 
+                computer science from virginia tech (2020) and just recently completed a masters in computer science 
+                with an artificial intelligence specialization from georgia tech (2025) while working full-time.
+                
+                i work on the integration of new IoT protocols into smart home platforms, and have led two successful 
+                large-scale products from ideation to launch — these experiences taught me a great deal
+                about product development, cross-team collaboration, and leadership.
+                
+                <br/><br/>
+                
+                🎪 when i was a kid, the internet was a playground for creativity and exploration, aspects which i feel have been 
+                somewhat lost in the modernization and standardization of the web. 
+                i want to bring some of that magic back by applying my passion for the intersection of art and technology
+                to build fun and whimsical digital experiences. 
+                this site is a collection of my projects, learnings, and thoughts in those spaces 
+                — a love letter to the internet, if you will.
+            
+                <br/><br/>
+
+                🎨 outside of work, i enjoy drawing, games, collecting trinkets, baking, and music. 
+                i used to draw a lot when i was younger, but somewhere along the road, i just stopped pursuing it.
+                during the pandemic though, i started @atsumr_ (<a href="https://www.tiktok.com/@atsumr_" target="_blank">15K on Tiktok</a> 
+                and <a href="https://www.twitter.com/atsumr_" target="_blank">1.8K on Twitter</a>), which reignited that passion for art. 
+                i lost some momentum during grad school, but i'm getting back into it again and hoping to continue growing my online artist identity. ☺︎
+
+                <br/><br/>
+                
+                🥂 thanks for stopping by — i hope you find something here that sparks your interest!
+            </p>
+        </div>
+
+        <div class="right">
+            <figure class="image-figure">
+                <img src="../assets/images/gogh.PNG" alt="avatars by gogh">
+                <figcaption>avatars by <a href="https://gogh.gg/" target="_blank"">gogh</a></figcaption>
+            </figure>
+        </div>
+    </main>
+
+    <footer class="footer-strip">
+        &copy; 2026 • all rights reserved • "繋 (つな) ぐ"ということ"
+    </footer>
+
+    <div id="mobile-popup" class="mobile-popup">
+        <div class="popup-header">
+            <h4 class="popup-title">hey listen!</h4>
+            <button id="close-popup" class="popup-close">ok</button>
+        </div>
+        <div class="popup-body">
+            <p>this site is best experienced on desktop, so some functionality may be impacted on mobile. please check it out on desktop when you get the chance !</p>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script src="../mobile-popup.js" defer></script>
+    <script src="../script.js"></script>
+</body>
+</html>
