@@ -12,7 +12,10 @@
     padding: 4px;
     background: none;
     border: none;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.36s forwards;
 }
+
 .hamburger span {
     display: block;
     width: 22px;
@@ -60,7 +63,7 @@
 }
 
 /* ── Reveal on mobile ───────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .hamburger        { display: flex; }
     .mobile-drawer    { display: flex; }
     .drawer-scrim     { display: block; visibility: hidden; }

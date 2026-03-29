@@ -1,17 +1,15 @@
-/* nintendo-games/style.css
- *
- * Structure: mobile-first base styles, then min-width / min-height
- * breakpoints to enhance for larger screens. clamp() handles fluid
- * sizing in between so hard breakpoints are needed less often.
- */
-
+:root { --screen-bg: rgb(235, 235, 235); }
+html.dark { --screen-bg: var(--dark-background); }
 
 /* ── Color overrides ─────────────────────────────────────────────────── */
 
-a:hover, a:active { color: rgb(86, 174, 183); }
-span:hover        { color: rgb(86, 174, 183); }
+a:hover, 
+a:active,
+span:hover:not(#current-time):not(#current-battery) { 
+    color: rgb(86, 174, 183); 
+}
 
-html, #main, main{ background: rgb(235, 235, 235); }
+html:not(.dark), #main, main { background: var(--screen-bg); }
 
 button h3 { color: var(--dark-grey); }
 
@@ -139,6 +137,11 @@ body.page-loading #main > * {
 
 .bottom-btn:not(.inactive):hover { color: rgb(86, 174, 183); }
 
+.bottom-btn .btn-label,
+.bottom-btn .btn-text {
+    color: inherit;
+}
+
 .btn-label {
     display: inline-flex;
     align-items: center;
@@ -253,7 +256,7 @@ body.nav-open .sidenav { overflow-y: auto; }
         left: 0;
         right: 0;
         padding: 4px 12px;
-        background: rgb(235, 235, 235);
+        background: var(--screen-bg);
         z-index: 5;
     }
 
@@ -416,6 +419,32 @@ body.page-loading #main > * {
     /* keep pixel-art icons crisp */
     image-rendering: pixelated;
 }
+
+#switch-icon {
+    height: clamp(20px, 2.8vw, 40px);
+    width: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+#wifi-icon-dark,  #battery-icon-dark {
+    height: clamp(12px, 1.4vw, 20px);
+    width: auto;
+    pointer-events: none;
+    user-select: none;
+    /* keep pixel-art icons crisp */
+    image-rendering: pixelated;
+}
+
+#switch-icon-dark {
+    height: clamp(20px, 2.8vw, 40px);
+    width: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+.dark-icon { display: none; }
 
 /* Landscape / short viewports */
 @media (max-height: 500px) {
@@ -644,14 +673,6 @@ body.page-loading #main > * {
     pointer-events: none;
     padding-left: 0;  /* set by JS to match track-outer left edge */
     padding-right: 0; /* set by JS to match track-outer right edge */
-}
-
-#switch-icon {
-    height: clamp(20px, 2.8vw, 40px);
-    width: auto;
-    display: block;
-    pointer-events: none;
-    user-select: none;
 }
 
 #home-bottom-bar-right {
@@ -1137,3 +1158,27 @@ body.page-loading #main > * {
         color: rgb(86, 174, 183);
     }
 }
+
+/* ── DARK MODE ───────────────────────────────────────── */
+html.dark, body.dark {
+    background-color: var(--dark-background);
+}
+
+body.dark main, body.dark #main {
+    background-color:var(--dark-background);
+}
+
+body.dark a, body.dark span, body.dark button {
+    color: var(--off-white);
+}
+
+body.dark .game-title-tooltip-text {
+    color: rgb(86, 174, 183);
+}
+
+body.dark .all-software-icon .grid-icon span {
+    border: 2px solid rgba(204, 204, 204, 0.6);
+}
+
+body.dark .dark-icon { display: block; }
+body.dark #wifi-icon, body.dark #battery-icon, body.dark #switch-icon  { display: none; }

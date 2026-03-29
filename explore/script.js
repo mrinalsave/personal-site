@@ -12,7 +12,11 @@ filterBtns.forEach(btn => {
 
         cards.forEach(card => {
             const tags = card.dataset.tags.split(',');
-            const show = filter === 'all' || tags.includes(filter);
+            const isWip = tags.includes('coming-soon');
+            // Coming Soong cards only show under "all".
+            const show = filter === 'all'
+                ? true
+                : (!isWip && tags.includes(filter));
             card.classList.toggle('hidden', !show);
             if (show) visible++;
         });

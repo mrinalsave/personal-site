@@ -23,8 +23,7 @@ span:hover     { text-decoration: none; color: var(--white); }
     gap: 10px;
 }
 
-#random-gif { height: 20px; }
-
+#random-gif { height: 25px; }
 
 /* ── End of page / back-to-top ───────────────────────────────────────── */
 
@@ -44,8 +43,9 @@ span:hover     { text-decoration: none; color: var(--white); }
     color: var(--muted);
 }
 
-.end-of-page img { width: 25px; }
-
+.end-of-page a:hover {
+    color: var(--ink);
+}
 
 /* ── Card grid ───────────────────────────────────────────────────────── */
 main {
@@ -196,10 +196,25 @@ main {
 
 
 /* ── Font ────────────────────────────────────────────────────────────── */
-
 @font-face {
     font-family: 'pokemon';
     src: url('./assets/fonts/Pokemon-Hollow.ttf') format('truetype');
 }
-
 .pokemon-text { font-family: 'pokemon'; }
+
+/* ── DARK MODE ────────────────────────────────────────── */
+body.dark .card {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .lightbox {
+    background: rgba(5, 5, 5, 0.85);
+}
+
+body.dark .lightbox p {
+    color: var(--off-off-white);
+}
+
+body.dark #back-to-top:hover {
+    color: var(--white);
+}

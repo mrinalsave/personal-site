@@ -4,13 +4,15 @@
 
 :root {
     --white:      #ffffff;
-    --off-white:  #f7f5f2;
+    --off-white:  #f3f1ee;
     --off-off-white:  #c4c2c0;
     --grey:  #9b9a9a;
     --dark-grey:        #434343;
+    --dark-background: #242526;
     --ink:        #1a1a1a;
     --muted:      #888;
     --border:     rgba(0,0,0,0.08);
+    --light-border:     rgba(255, 255, 255, 0.08);
     --header-h:   52px;
 }
 
@@ -111,8 +113,8 @@ main {
 }
 
 h1 {
-    font-family: 'blacksignature';
-    font-size: clamp(3rem, 4.3vw, 5rem);
+    font-family: 'gloudy';
+    font-size: clamp(3rem, 4vw, 5rem);
     font-weight: 300;
     line-height: 1.1;
     color: var(--ink);
@@ -120,7 +122,7 @@ h1 {
 }
 
 .subtitle {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Figtree', serif;
     font-size: clamp(1rem, 1.1vw, 1.25rem);
     font-weight: 300;
     color: var(--muted);
@@ -147,9 +149,9 @@ h1 {
     align-items: center;
     justify-content: space-between;
     padding: 0.85rem 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
-    font-weight: 400;
+    font-family: 'Figtree', serif;
+    font-size: clamp(0.85rem, 0.85vw, 0.85rem);
+    font-weight: 100;
     color: var(--ink);
     text-decoration: none;
     transition: color 0.2s, padding-left 0.2s;
@@ -250,7 +252,9 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
     width: min(90vw, 380px);
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.1rem 1.25rem;
@@ -324,7 +328,6 @@ h1 {
     color: var(--muted);
 }
 
-
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -332,6 +335,11 @@ h1 {
 @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
 }
 
 @media (max-width: 768px) {
@@ -354,6 +362,10 @@ h1 {
         order: 1;
     }
 
+    .header-title {
+        font-size: 0.75rem;
+    }
+
     .right {
         order: 0;
         height: 55vw;
@@ -364,6 +376,12 @@ h1 {
     .gradient-blob { inset: 0; border-radius: 0; }
 
     nav { display: none; }
+}
+
+@media (max-width: 480px) {
+    .header-title {
+        font-size: 0.6rem;
+    }
 }
 
 @font-face {
@@ -384,9 +402,153 @@ h1 {
 }
 .b03-text { font-family: '04b03'; }
 
-
 @font-face {
     font-family: 'blacksignature';
-    src: url('./assets/fonts/BlackSignature_PERSONAL_USE_ONLY.otf') format('opentype');
+    src: url('./assets/fonts/BlackSignature.otf') format('opentype');
 }
-.b03-text { font-family: 'blacksignature'; }
+.blacksignature-text { font-family: 'blacksignature'; }
+
+@font-face {
+    font-family: 'mondwest';
+    src: url('./assets/fonts/ppmondwest-regular.otf') format('opentype');
+}
+.mondwest-text { font-family: 'mondwest'; }
+
+@font-face {
+    font-family: 'gloudy';
+    src: url('./assets/fonts/GloudyPixel-Regular.otf') format('opentype');
+}
+.gloudy-text { font-family: 'gloudy'; }
+
+/* ── DARK MODE ───────────────────────────────────────── */
+html.dark, body.dark {
+    background-color: var(--dark-background);
+}
+
+body.dark main, body.dark #main {
+    background-color:var(--dark-background);
+}
+
+body.dark main a {
+    color: var(--off-white);
+}
+
+body.dark h1, body.dark h3 {
+    color: var(--white);
+}
+
+body.dark .subtitle {
+    color: var(--off-off-white);
+}
+
+body.dark .eyebrow {
+    color: var(--off-off-white);
+}
+
+body.dark .links-list a {
+    color: var(--off-off-white);
+}
+
+body.dark .links-list a:hover {
+    color: var(--white);
+}
+
+body.dark .links-list li {
+    border-top: 1px solid var(--light-border);
+}
+
+body.dark .links-list li:last-child {
+    border-bottom: 1px solid var(--light-border);
+}
+
+body.dark .filter-btn {
+    color: var(--off-white);
+    border: 1px solid var(--light-border);
+}
+
+body.dark .filter-btn:hover,
+body.dark .filter-btn.active {
+    color: var(--white);
+    border-color: var(--off-off-white);
+    background: var(--dark-grey);
+}
+
+body.dark .project-card {
+    background: var(--dark-background);
+    border: 1px solid var(--light-border);
+}
+
+body.dark .project-card::after {
+    color: var(--off-off-white);
+}
+
+body.dark .project-card:hover {
+    background: var(--ink);
+}
+
+body.dark .card-name {
+    color: var(--off-white);
+}
+
+body.dark .card-tag {
+    color: var(--off-off-white);
+    background: var(--light-border);
+}
+
+body.dark header {
+    z-index: 200;
+    background: rgba(18, 18, 20, 0.55) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark header .header-logo,
+body.dark header nav a {
+    color: var(--muted);
+}
+
+body.dark header .header-logo:hover,
+body.dark header nav a:hover {
+    color: var(--white);
+}
+
+body.dark .hamburger span {
+    background: rgba(200, 200, 205, 0.75);
+}
+
+body.dark .mobile-drawer {
+    background: rgba(18, 18, 20) !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+    z-index: 300 !important;
+}
+
+body.dark .mobile-drawer a { color: rgba(200, 200, 205) !important; }
+body.dark .mobile-drawer a:hover { color: var(--white) !important; }
+
+body.dark .drawer-scrim { z-index: 250 !important; }
+
+body.dark .footer-strip {
+    background: rgba(18, 18, 20, 0.55) !important;
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(200, 200, 205, 0.5);
+}
+
+body.dark .mobile-popup {
+    background: rgba(18, 18, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+body.dark .popup-title { color: var(--off-white); }
+body.dark .popup-close {
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+}
+
+body.dark .popup-close:hover {
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark .popup-body p { color: var(--muted); }

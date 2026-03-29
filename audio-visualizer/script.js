@@ -28,7 +28,7 @@ document.getElementById('visualizer').appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 
 const textureLoader = new THREE.TextureLoader();
-const bgTexture = textureLoader.load('./assets/images/bg-texture.png', (texture) => {
+const bgTexture = textureLoader.load('./assets/images/bg-texture.webp', (texture) => {
     texture.colorSpace = THREE.SRGBColorSpace;
 });
 scene.background = bgTexture;
@@ -230,7 +230,6 @@ gui.domElement.style.setProperty('--font-family', 'audio');
 gui.remembers = false;
 
 document.getElementById('gui-container').appendChild(gui.domElement);
-gui.domElement.addEventListener('click', e => e.stopPropagation());
 
 const audioFolder = gui.addFolder('audio');
 audioFolder.add(params, 'upload').name('upload');
@@ -254,6 +253,15 @@ bloomFolder.add(params, 'radius',    0, 3).onChange(value => { bloomPass.radius 
 // Default to closed GUI on smaller screens to preserve screen space.
 if (window.innerWidth <= 768) gui.close();
 
+function scaleGui() {
+    const guiEl     = document.getElementById('gui-container');
+    const guiHeight = guiEl.offsetHeight;
+    // Available height: viewport minus the top offset (68 px) and a small bottom margin (16 px).
+    const available = window.innerHeight - 68 - 16;
+    const scale     = guiHeight > available ? available / guiHeight : 1;
+    guiEl.style.transform = `scale(${scale})`;
+}
+
 window.addEventListener('resize', function () {
     if (window.innerWidth <= 768) {
         gui.close();
@@ -265,80 +273,8 @@ window.addEventListener('resize', function () {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
+
+    scaleGui();
 });
 
 // #endregion GUI
-
-// #region Draggable GUI
-
-(function makeDraggable(el) {
-    let startX, startY, startLeft, startTop, didDrag;
-
-    const handle = el.querySelector('.lil-gui.root > .title') || el;
-    handle.style.cursor = 'grab';
-
-    handle.addEventListener('mousedown', onDragStart);
-    handle.addEventListener('touchstart', onDragStart, { passive: false });
-
-    function onDragStart(e) {
-        e.stopPropagation();
-
-        // Switch from right-anchored to left-anchored on first drag
-        if (el.style.left === '') {
-            const rect = el.getBoundingClientRect();
-            el.style.left  = rect.left + 'px';
-            el.style.right = 'unset';
-        }
-
-        const touch  = e.touches ? e.touches[0] : e;
-        startX    = touch.clientX;
-        startY    = touch.clientY;
-        startLeft = parseInt(el.style.left, 10) || 0;
-        startTop  = parseInt(el.style.top,  10) || 0;
-        didDrag   = false;
-
-        handle.style.cursor = 'grabbing';
-        document.addEventListener('mousemove', onDragMove);
-        document.addEventListener('mouseup',   onDragEnd);
-        document.addEventListener('touchmove', onDragMove, { passive: false });
-        document.addEventListener('touchend',  onDragEnd);
-    }
-
-    function onDragMove(e) {
-        e.preventDefault();
-        const touch = e.touches ? e.touches[0] : e;
-        const dx    = touch.clientX - startX;
-        const dy    = touch.clientY - startY;
-
-        // Only count it as a drag if the cursor actually moved
-        if (Math.abs(dx) > 2 || Math.abs(dy) > 2) didDrag = true;
-        if (!didDrag) return;
-
-        const maxLeft = window.innerWidth  - el.offsetWidth;
-        const maxTop  = window.innerHeight - el.offsetHeight;
-
-        el.style.left = Math.max(0, Math.min(startLeft + dx, maxLeft)) + 'px';
-        el.style.top  = Math.max(0, Math.min(startTop  + dy, maxTop))  + 'px';
-    }
-
-    function onDragEnd() {
-        handle.style.cursor = 'grab';
-        document.removeEventListener('mousemove', onDragMove);
-        document.removeEventListener('mouseup',   onDragEnd);
-        document.removeEventListener('touchmove', onDragMove);
-        document.removeEventListener('touchend',  onDragEnd);
-
-        // If the mouse moved at all, swallow the click that lil-gui would
-        // otherwise receive and use to toggle the panel open/closed
-        if (didDrag) {
-            handle.addEventListener('click', suppressClick, { capture: true, once: true });
-        }
-    }
-
-    function suppressClick(e) {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-    }
-})(document.getElementById('gui-container'));
-
-// #endregion Draggable GUI

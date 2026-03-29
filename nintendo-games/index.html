@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>nintendo switch games</title>
-    
-    <link rel="icon" type="image/x-icon" href="/audio-visualizer/assets/favicon-DWAF3478.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Monsieur+La_Doulaise&family=Figtree:wght@300;400&display=swap" rel="stylesheet">
@@ -24,6 +24,7 @@
             <a href="../devlog/index.html">blog</a>
             <a href="../about/index.html">about</a>
             <a id="build-notes" href="../devlog/2026/03/21/nintendo-games.html">📑</a>
+            <a href="#">☀️</a>
         </nav>
 
         <button class="hamburger" id="hamburger" aria-label="open menu">
@@ -38,21 +39,24 @@
         <a href="/devlog/index.html">blog</a>
         <a href="/about/index.html">about</a>
         <a id="build-notes" href="../devlog/2026/03/21/nintendo-games.html">📑 see build notes</a>
+        <a href="#">☀️ toggle light mode</a>
     </div>
 
     <div id="main">
         <div id="home-screen">
             <div id="home-top-bar">
                 <div id="home-top-bar-left">
-                    <img id="avatar" src="./assets/images/avatar.png" alt="avatar">
+                    <img id="avatar" src="./assets/images/avatar.webp" alt="avatar">
                 </div>
 
                 <div id="home-top-bar-right">
                     <span id="current-time" class="switch-text"></span>
-                    <img id="wifi-icon" src="./assets/images/wifi.png" alt="wifi">
+                    <img id="wifi-icon" src="./assets/images/wifi.webp" alt="wifi">
+                    <img id="wifi-icon-dark" src="./assets/images/wifi-light.webp" alt="wifi" class="dark-icon">
                     <div id="battery-group">
                         <span id="current-battery" class="switch-text"></span>
-                        <img id="battery-icon" src="./assets/images/battery.png" alt="battery">
+                        <img id="battery-icon" src="./assets/images/battery.webp" alt="battery">
+                        <img id="battery-icon-dark" src="./assets/images/battery-light.webp" alt="battery" class="dark-icon">
                     </div>
                 </div>
             </div>
@@ -69,18 +73,19 @@
                 <button id="arrow-right" class="carousel-arrow switch-text" aria-label="scroll right">&#8594;</button>
             </div>
 
-            <img id="navigation-bar" src="./assets/images/navigation-bar.png" alt="switch navigation bar reference">
+            <img id="navigation-bar" src="./assets/images/navigation-bar.webp" alt="switch navigation bar reference">
 
             <div id="home-bottom-bar">
-                <img id="switch-icon" src="./assets/images/switch.png" alt="switch icon">
+                <img id="switch-icon" src="./assets/images/switch.webp" alt="switch icon">
+                <img id="switch-icon-dark" src="./assets/images/switch-light.webp" alt="switch icon" class="dark-icon">
 
                 <div id="home-bottom-bar-right">
                     <button id="back-btn" class="switch-text bottom-btn" tabindex="-1"
                             onclick="fadeTo('../index.html')">
-                        <span class="btn-label">B</span> Back
+                        <span class="btn-label">B</span><span class="btn-text"> Back</span>
                     </button>
                     <button id="ok-btn" class="switch-text bottom-btn" tabindex="-1">
-                        <span class="btn-label">A</span> Start
+                        <span class="btn-label">A</span><span class="btn-text"> Start</span>
                     </button>
                 </div>
             </div>
@@ -103,6 +108,6 @@
 
     <script src="./script.js"        type="module"></script>
     <script src="../mobile-popup.js" type="module"></script>
-    <script src="../script.js"        type="module"></script>
+    <script src="../script.js"       type="module"></script>
 </body>
 </html>

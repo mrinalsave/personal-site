@@ -16,50 +16,6 @@ main {
     color: white;
 }
 
-/* Dark mode header — overrides root's off-white background */
-header {
-    z-index: 200;
-    background: rgba(18, 18, 20, 0.55) !important;
-    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-header .header-logo,
-header nav a {
-    color: rgba(200, 200, 205, 0.75);
-}
-header .header-logo:hover,
-header nav a:hover {
-    color: #ffffff;
-}
-
-.hamburger span {
-    background: rgba(200, 200, 205, 0.75);
-}
-
-.mobile-drawer {
-    background: rgba(18, 18, 20) !important;
-    border-left-color: rgba(255, 255, 255, 0.08) !important;
-    z-index: 300 !important; /* above header (200) */
-}
- 
-.mobile-drawer a {
-    color: rgba(200, 200, 205) !important;
-}
-.mobile-drawer a:hover {
-    color: #ffffff !important;
-}
- 
-.drawer-scrim {
-    z-index: 250 !important; /* between drawer (300) and header (200) */
-}
-
-/* Dark mode footer — overrides root's off-white background */
-.footer-strip {
-    background: rgba(18, 18, 20, 0.55) !important;
-    border-top-color: rgba(255, 255, 255, 0.08) !important;
-    color: rgba(200, 200, 205, 0.5);
-}
-
 a { color: white; }
 
 main a:hover,
@@ -115,6 +71,41 @@ body.nav-open .sidenav { overflow-y: auto; }
     top: 68px;
     right: 10px;
     z-index: 8;
+    transform-origin: top right;  /* scale shrinks toward top-right corner */
+}
+
+@media (max-width: 768px) {
+    #gui-container .lil-gui {
+        --font-size: 10px;
+        --title-font-size: 10px;
+        --number-font-size: 10px;
+        --input-font-size: 10px;
+        --widget-height: 16px;
+        --name-width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    #gui-container .lil-gui {
+        --font-size: 8px;
+        --title-font-size: 8px;
+        --number-font-size: 8px;
+        --input-font-size: 8px;
+        --widget-height: 14px;
+        --name-width: 45%;
+    }
+}
+
+/* Landscape on phones/small tablets — caught by height, not width */
+@media (max-height: 500px) {
+    #gui-container .lil-gui {
+        --font-size: 8px;
+        --title-font-size: 8px;
+        --number-font-size: 8px;
+        --input-font-size: 8px;
+        --widget-height: 12px;
+        --name-width: 45%;
+    }
 }
 
 /* ── Font ────────────────────────────────────────────────────────────── */
