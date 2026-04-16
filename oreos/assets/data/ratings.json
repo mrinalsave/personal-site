@@ -1,0 +1,2753 @@
+{
+    "Post Malone": [
+        {
+            "Name": "Average",
+            "Rating": 7.81,
+            "Comment": "honestly a good cookie, can easily have a lot of them. lost only a little on the sweetness.",
+
+            "Wafers": ["chocolate", "golden"],
+            "Type": "original",
+            "Tags": ["caramel", "salted caramel", "shortbread", "collaboration"],
+            "Image": "post-malone.webp"
+        }
+    ],
+    "White Peach Oolong Tea": [
+        {
+            "Name": "Average",
+            "Rating": 4.34,
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["peach", "oolong", "tea", "drink", "international"],
+            "Image": "peach-oolong.webp"
+        }
+    ],
+    "Space Dunk": [
+        {
+            "Name": "joro",
+            "Rating": 3.0,
+            "Comment": "pop rocks not a fan"
+        },
+        {
+            "Name": "nari",
+            "Rating": 2.0,
+            "Comment": "this is gross and tastes too artificial"
+        },
+        {
+            "Name": "mina",
+            "Rating": 4.5,
+            "Comment": "smells really strong, but it's not actually that bad"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6.0,
+            "Comment": "meh, it's ok. not a fan of cheesecake"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.0,
+            "Comment": "it's good"
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.0,
+            "Comment": "originally a 7.5, potent smell and strong aftertaste brought down flavor"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 5.5,
+            "Comment": "if it was this or no cookie, still not sure which I'd pick"
+        },
+        {
+            "Name": "ausi",
+            "Rating": 8.5,
+            "Comment": "in a 1 to 1 comparison, this is better than a normal Oreo. but I could have 5 regular Oreos and only 1 of these"
+        },
+        {
+            "Name": "juk",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 5.55,
+            "Comment": "very split here — you either like it or hate it. potent smell too.",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["popping candy", "marshmallow"],
+            "Image": "space-dunk.webp"
+        }
+    ],
+    "Tiramisu": [
+        {
+            "Name": "jayjay",
+            "Rating": 4.9,
+            "Comment": "not a fan"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.3,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.0,
+            "Comment": "solid 6, it's just coffee"
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.0,
+            "Comment": "I wouldn't like, NOT eat it. also very mild"
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 6.4,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.0,
+            "Comment": "it's very mild and it doesn't smell good!!"
+        },
+        {
+            "Name": "joro",
+            "Rating": 4.0,
+            "Comment": "the thinness brought it UP. this is not a good tiramisu"
+        },
+        {
+            "Name": "ausi",
+            "Rating": 10.0,
+            "Comment": "way *eyeroll* better than a normal Oreo"
+        },
+        {
+            "Name": "collee",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "vutu",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "niko",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mael",
+            "Rating": 5.0,
+            "Comment": "tastes like a Pirouline"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.54,
+            "Comment": "there isn't enough filling and it's a pretty mild flavor",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["coffee", "dessert"],
+            "Image": "tiramisu-thins.webp"
+        }
+    ],
+    "Pokémon Strawberry Creme": [
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": "these are pretty good"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6.25,
+            "Comment": "artificial-ish and tastes like a strawberry poptart"
+        },
+        {
+            "Name": "juk",
+            "Rating": 2.0,
+            "Comment": "absolutely tastes like a strawberry poptart and god are they awful"
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.25,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 4.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 4.0,
+            "Comment": "too artificial"
+        },
+        {
+            "Name": "aram",
+            "Rating": 4.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 2.5,
+            "Comment": "I have regret for putting this whole thing in my mouth"
+        },
+        {
+            "Name": "Average",
+            "Rating": 4.25,
+            "Comment": "well... the pokèmon are cute!",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["strawberry", "collaboration"],
+            "Image": "pokemon-strawberry-creme.webp"
+        }
+    ],
+    "Birthday Cake": [
+        {
+            "Name": "joro",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 5.75,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 2.7,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.0,
+            "Comment": "best one we've had so far. I'd eat these interchangeably with a normal Oreo"
+        },
+        {
+            "Name": "oli",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 8.0,
+            "Comment": "6 or less cookies, it's an 8. more than that and it's a 6"
+        },
+        {
+            "Name": "drae",
+            "Rating": 4.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 4.5,
+            "Comment": "it was fine until I tasted it"
+        },
+        {
+            "Name": "Average",
+            "Rating": 5.83,
+            "Comment": "mixed reviews, tasted like frosting, which you either like or you don't",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["cake", "dessert"],
+            "Image": "birthday-cake.webp"
+        }
+    ],
+    "Coca-Cola": [
+        {
+            "Name": "lola",
+            "Rating": 4.5,
+            "Comment": "lots to say, not a huge fan"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.7,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.0,
+            "Comment": "took a lot of pondering, bumped up from a 5.5"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 6.3,
+            "Comment": "not bad"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.95,
+            "Comment": "was a 9 but the aftertaste brought it down. honestly, with a single sip of milk I'd be sold."
+        },
+        {
+            "Name": "mina",
+            "Rating": 5.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 5.5,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.0,
+            "Comment": "!!!"
+        },
+        {
+            "Name": "joro",
+            "Rating": 4.0,
+            "Comment": "MUCH consideration done"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.2875000000000005,
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["drink", "popping candy", "collaboration"],
+            "Image": "coca-cola.webp"
+        }
+    ],
+    "Cinnamon Bun": [
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.9,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 10.0,
+            "Comment": "almost flawless!"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.75,
+            "Comment": "too sweet but still good"
+        },
+        {
+            "Name": "lola",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.6,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.25,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 9.5,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 8.22,
+            "Comment": "a bit sweet, probably better with milk. if you're less inclined to the chocolate flavors, then this is a hit.",
+
+            "Wafers": ["golden", "cinnamon"],
+            "Type": "original",
+            "Tags": ["cinnamon", "dessert"],
+            "Image": "cinnamon-bun.webp"
+        }
+    ],
+    "S'mOREO ": [
+        {
+            "Name": "jayjay",
+            "Rating": 7,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 7,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 6,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 7,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 9,
+            "Comment": "I could eat all of those"
+        },
+        {
+            "Name": "drae",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.8,
+            "Comment": "if it was closer to an actual s'more, it would be over an 8. but it's missing the chocolate."
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.8,
+            "Comment": "I don't like marshmallow"
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.3,
+            "Comment": "tastes veeerryy similar to a regular Oreo"
+        },
+        {
+            "Name": "tron",
+            "Rating": 9,
+            "Comment": "slightly improved vanilla Oreo"
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.63,
+            "Comment": "not enough chocolate taste. similar to the OG oreo!",
+
+            "Wafers": ["golden", "graham cracker"],
+            "Type": "original",
+            "Tags": ["chocolate", "marshmallow", "graham cracker"],
+            "Image": "smoreo.webp"
+        }
+    ],
+    "Irish Crème": [
+        {
+            "Name": "aram",
+            "Rating": 3.6,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 4.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 1.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 2.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 1.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 1.5,
+            "Comment": "nasty"
+        },
+        {
+            "Name": "joro",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 5.5,
+            "Comment": "a sophisticated/acquired taste"
+        },
+        {
+            "Name": "Average",
+            "Rating": 3.66,
+            "Comment": "tastes very similar to irish crème (bailey's) so if we we're judging on accuracy of flavor then 10/10. but we aren't, and we all learned we don't like irish crème by itself much.",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["drink", "coffee", "liquer"],
+            "Image": "irish-creme.webp"
+        }
+    ],
+    "Java Chip": [
+        {
+            "Name": "clai",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.0,
+            "Comment": "fine but should've been stronger"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.9,
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["coffee", "chocolate chips"],
+            "Image": "java-chip.webp"
+        }
+    ],
+    "Blueberry Raspberry": [
+        {
+            "Name": "aram",
+            "Rating": 1.8,
+            "Comment": "smells like the dentist to me"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 4.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 4.75,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 4,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 3,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 3,
+            "Comment": "*gagging*"
+        },
+        {
+            "Name": "lola",
+            "Rating": 5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 4,
+            "Comment": "feels like I'm chewing gum"
+        },
+        {
+            "Name": "tron",
+            "Rating": 6,
+            "Comment": "first bite was off-putting, but it got better"
+        },
+        {
+            "Name": "joro",
+            "Rating": 5,
+            "Comment": "it's not horrible but it's not good. it's like a jolly rancher"
+        },
+        {
+            "Name": "Average",
+            "Rating": 4.1,
+            "Comment": "arman clearly has some dental PTSD",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["fruit", "blueberry", "raspberry", "mix"],
+            "Image": "blueberry-raspberry.webp"
+        }
+    ],
+    "Matcha and Fig": [
+        {
+            "Name": "tron",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 5.7,
+            "Comment": "aftertaste caused a .3 reduction"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.0,
+            "Comment": "it's like a blank canvas of a cookie"
+        },
+        {
+            "Name": "lola",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 5.2,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.31,
+            "Comment": "lack of filling has made it tough to really taste much",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["fruit", "matcha", "fig", "fruit", "mix"],
+            "Image": "matcha-fig.webp"
+        }
+    ],
+    "Dark Chocolate": [
+        {
+            "Name": "calo",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.7,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 7.3,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": "it just tastes like the cracker"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.4,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.69,
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["chocolate"],
+            "Image": "dark-chocolate.webp"
+        }
+    ],
+    "Crystal Grape and Peach": [
+        {
+            "Name": "calo",
+            "Rating": 6.1,
+            "Comment": "I tend to like things that are medicinal, in regards to flavors"
+        },
+        {
+            "Name": "lola",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 4.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 3.85,
+            "Comment": "it was surprisingly tart"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 5.3,
+            "Comment": "reminded me of a PEZ flavor, but worse"
+        },
+        {
+            "Name": "collee",
+            "Rating": 3.141596,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 4.4,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 4.2,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 2.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 4.14,
+            "Comment": "strong fruit smell and medicinal taste. just not great.",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["fruit", "grape", "peach", "mix"],
+            "Image": "grape-peach.webp"
+        }
+    ],
+    "Cheese": [
+        {
+            "Name": "lara",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "goos",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.2,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.12,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 4.5,
+            "Comment": "because it's dis-cheese-ing"
+        },
+        {
+            "Name": "aram",
+            "Rating": 6.2,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": "tastes like a normal Oreo, but slightly worse because I know there's cheese in it"
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.5,
+            "Comment": "just kinda worse than a regular Oreo"
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.5,
+            "Comment": "expected worse, but it's neither super cheesy nor super different",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["savory", "cheese"],
+            "Image": "cheese.webp"
+        }
+    ],
+    "Peanut Butter": [
+        {
+            "Name": "juk",
+            "Rating": 9.0,
+            "Comment": "peanut butter not strong enough"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": "rather have a normal Oreo"
+        },
+        {
+            "Name": "mina",
+            "Rating": 6.9,
+            "Comment": "tastes like those square orange peanut butter crackers"
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.0,
+            "Comment": "that's def peanut butter, like a Reese's"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.25,
+            "Comment": ""
+        },
+        {
+            "Name": "cayi",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "aymi",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 3.0,
+            "Comment": "so dry, need water"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.2,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.2,
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["savory", "peanut butter"],
+            "Image": "peanut-butter.webp"
+        }
+    ],
+    "Chocolate Covered Pretzel": [
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.1,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.55,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.2,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 8.5,
+            "Comment": "practically just a golden Oreo *everyone disagreed*"
+        },
+        {
+            "Name": "joro",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 9.8,
+            "Comment": "this might be the best so far"
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.22,
+            "Comment": "",
+
+            "Wafers": ["golden", "pretzel"],
+            "Type": "original",
+            "Tags": ["chocolate", "pretzel", "savory"],
+            "Image": "chocolate-covered-pretzel.webp"
+        }
+    ],
+    "Chocolate": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["chocolate"],
+            "Image": "chocolate.webp"
+        }
+    ],
+    "Ice Cream Matcha": [
+        {
+            "Name": "nattle",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.1,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 7.6,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.3,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.92,
+            "Comment": "the \"cool\" effect is actually really cool. flavor is decent enough that the novelty is fun"
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.0,
+            "Comment": "why's it tingly? why is it doing that?"
+        },
+        {
+            "Name": "oli",
+            "Rating": 8.9,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 4.0,
+            "Comment": "(adjusted from a 2) I don't like matcha AND the smell is off-putting"
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.48,
+            "Comment": "the novelty of the cooling aftertaste is definitely getting bonus points, and the flavor is good enough to be simple yet tasty",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["matcha", "ice cream", "dessert", "cooling"],
+            "Image": "ice-cream-matcha.webp"
+        }
+    ],
+    "White Cream": [
+        {
+            "Name": "jayjay",
+            "Rating": 7.0,
+            "Comment": "it tastes very light but it's missing the mouth-filling part"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 7.1,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.25,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.98,
+            "Comment": "not really much to not like about it, leaves you wanting just a bit more after eating",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["cream"],
+            "Image": "white-cream.webp"
+        }
+    ],
+    "Selena Gomez": [
+        {
+            "Name": "mina",
+            "Rating": 6.9,
+            "Comment": "smells like a graham cracker"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": "tastes like a christmas cookie"
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 7.25,
+            "Comment": "was a 6.25, got bumped. something wrong with the middle, too sweet"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 9.54,
+            "Comment": "it's like the cinnamon bun one, but with chocolate"
+        },
+        {
+            "Name": "nari",
+            "Rating": 9.1,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 10.0,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 9.0,
+            "Comment": "shared sentiment re: cinnamon bun-esque"
+        },
+        {
+            "Name": "ozzy",
+            "Rating": 9.5,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 8.14,
+            "Comment": "similar to the cinnamon bun one (not in a bad way)",
+
+            "Wafers": ["chocolate", "cinnamon"],
+            "Type": "original",
+            "Tags": ["chocolate", "cinnamon", "condensed milk", "drink", "horchata", "mix", "collaboration"],
+            "Image": "selena-gomez.webp"
+        }
+    ],
+    "Cherry Blossom Matcha": [
+        {
+            "Name": "nari",
+            "Rating": 8.6,
+            "Comment": "bonus points for presentation"
+        },
+        {
+            "Name": "joro",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.15,
+            "Comment": "nice floral aftertaste, cookie taste was too strong"
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.75,
+            "Comment": ""
+        },
+        {
+            "Name": "soto",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jojo",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.65,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "vutu",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 7.2,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.7,
+            "Comment": "like with all thins, the lack of filling was detrimental to the flavor. it got overpowered by the cookie. what could be tasted, however, was very good",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["cherry blossom", "matcha", "floral", "limited"],
+            "Image": "cherry-blossom-matcha-thins.webp"
+        }
+    ],
+    "Raspberry & Vanilla": [
+        {
+            "Name": "calo",
+            "Rating": 7.7,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 5.0,
+            "Comment": "not a fan of the blueberry aftertaste"
+        },
+        {
+            "Name": "mina",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.8,
+            "Comment": "initially really good but the aftertaste was a bit too fake tasting"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 4.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 9.2,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 5.0,
+            "Comment": "the filling tasted like medicine"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.56,
+            "Comment": "a little sweet and the fruity taste was hit or miss. it did \"different\" well. also had a good filling ratio",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["fruit", "raspberry", "vanilla", "mix"],
+            "Image": "raspberry-vanilla.webp"
+        }
+    ],
+    "Orange Chocolate": [
+        {
+            "Name": "calo",
+            "Rating": 7.2,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 4.0,
+            "Comment": "immediately, this is terrible"
+        },
+        {
+            "Name": "tron",
+            "Rating": 4.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 6.5,
+            "Comment": "misleading to call it orange spice due to lack of orange flavor"
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.0,
+            "Comment": "it's trying to be a Jaffa cake but it isn't"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 5.0,
+            "Comment": "taste is meh, it's super dry, and smells almost off-putting. it's almost like those chocolates with orange filling, but worse"
+        },
+        {
+            "Name": "drae",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 0.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 4.69,
+            "Comment": "the smell isn't great, it's dry and lacks flavor. but it looks fun!",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Cloud Cakes",
+            "Tags": ["chocolate", "orange", "international"],
+            "Image": "orange-chocolate.webp"
+        }
+    ],
+    "Lemon": [
+        {
+            "Name": "nattle",
+            "Rating": 10.0,
+            "Comment": "10/10, would recommend to a friend"
+        },
+        {
+            "Name": "aram",
+            "Rating": 6.48,
+            "Comment": "raised from a 6.25. I realized I would have more than one. but no more than 5 (if I was hungry)"
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.29,
+            "Comment": "might've been better microwaved"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.5,
+            "Comment": "not too sweet"
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.6,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.7,
+            "Comment": "thought was a bit sweeter than desired, very dessert-y"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.95,
+            "Comment": "within the margin of error of a normal Oreo"
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.0,
+            "Comment": "doesn't like Oreos"
+        },
+        {
+            "Name": "collee",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "ozzy",
+            "Rating": 9.2,
+            "Comment": "brought back childhood memories"
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.86,
+            "Comment": "back and forth about the sweetness level, so must've been just right. compared a lot to golden Oreos. the taste is very similar to a lemon shortbread",
+            
+            "Wafers": ["golden"],
+            "Type": "original",
+            "Tags": ["fruit", "lemon"],
+            "Image": "lemon.webp"
+        }
+    ],
+    "Blueberry Pie": [
+        {
+            "Name": "joro",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.5,
+            "Comment": "bit too fake tasting but still good"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": "tastes like Belvita"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 9.0,
+            "Comment": "because I can no longer give a 10"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.85,
+            "Comment": "really good for what it is"
+        },
+        {
+            "Name": "juk",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.5,
+            "Comment": "too sweet!"
+        },
+        {
+            "Name": "Average",
+            "Rating": 8.12,
+            "Comment": "tastes legitimately close to a blueberry pie. lives up to the name! just on the sweeter side",
+            
+            "Wafers": ["golden", "graham"],
+            "Type": "original",
+            "Tags": ["fruit", "blueberry", "pie", "dessert"],
+            "Image": "blueberry-pie.webp"
+        }
+    ],
+    "Toffee Crunch": [
+        {
+            "Name": "nari",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.8934,
+            "Comment": "pretty good!"
+        },
+        {
+            "Name": "mina",
+            "Rating": 5.5,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.8,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 8.5,
+            "Comment": "because I bought them XD (I have an affinity for toffee)"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.57,
+            "Comment": "very strong smell, tastes like toffee, mixed feelings about the \"crunch\". we have learned lane judges extremely incorrectly. the protection of the sanctity of the ranking system is tearing this group apart.",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["toffee", "crunch"],
+            "Image": "toffee-crunch.webp"
+        }
+    ],
+    "Apple Pie A La Mode": [
+        {
+            "Name": "juk",
+            "Rating": 8.0,
+            "Comment": "(derogatory) I'm not happy I'm giving it an 8"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.5,
+            "Comment": "want more apple"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.78,
+            "Comment": "want a little more oomph but dang is it good"
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.1,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 5.5,
+            "Comment": "tastes like a candle"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.77,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.52,
+            "Comment": "hasn't risen to the challenge, but it's still good. we all want just a bit more from it",
+            
+            "Wafers": ["golden"],
+            "Type": "original",
+            "Tags": ["fruit", "apple", "vanilla", "pie", "dessert"],
+            "Image": "apple-pie-a-la-mode.webp"
+        }
+    ],
+    "Sesame Milk Shortbread": [
+        {
+            "Name": "jayjay",
+            "Rating": 5.0,
+            "Comment": "tastes like a rice cake, but not in a super good way"
+        },
+        {
+            "Name": "drae",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 5.9,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 5.5,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 4.5,
+            "Comment": "(solid 4.5)"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.1,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 5.0,
+            "Comment": "it tastes stale"
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 5.0,
+            "Comment": "smokey aftertaste"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.14,
+            "Comment": "they are objectively good, but just overall not a fan of the flavor itself",
+            
+            "Wafers": ["golden", "shortbread"],
+            "Type": "original",
+            "Tags": ["sesame", "shortbread", "international"],
+            "Image": "sesame.webp"
+        }
+    ],
+    "Reese's": [
+        {
+            "Name": "aram",
+            "Rating": 8.3,
+            "Comment": "the flavors don't compliment each other as well as a normal Oreo, but it's still good"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 8.0,
+            "Comment": "tastes like a Nutter Butter"
+        },
+        {
+            "Name": "drae",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 9.2,
+            "Comment": "can taste the Nutter Butter (I like Nutter Butter) but wish it was more Reese's-ish"
+        },
+        {
+            "Name": "mina",
+            "Rating": 8.25,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.9,
+            "Comment": "hard to eat but it's good"
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "ozzy",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.82,
+            "Comment": "wish for more Reese's flavor, it's kind of heavy and hard to eat a lot of. but still a tasty cookie",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["peanut butter", "chocolate", "collaboration"],
+            "Image": "reeses.webp"
+        }
+    ],
+    "Peony": [
+        {
+            "Name": "aram",
+            "Rating": 7.6,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 5.5,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 6.7,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6.89,
+            "Comment": "the artificial aftertaste isn't fun, but the cookie is nice"
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.9,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.3,
+            "Comment": "would've been a lot better with tea"
+        },
+        {
+            "Name": "nari",
+            "Rating": 5.5,
+            "Comment": "definitely unique"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.85,
+            "Comment": "tastes mostly like the cookie, the artificial flavor hurt it",
+
+            "Wafers": ["colored"],
+            "Type": "original",
+            "Tags": ["peony", "floral", "international"],
+            "Image": "peony.webp"
+        }
+    ],
+    "Crushed Vanilla": [
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 5.3,
+            "Comment": "it makes me mad. it's so unsatisfying. the Oreo has a level of insatiability akin to a Listerine breath strip."
+        },
+        {
+            "Name": "oli",
+            "Rating": 8.1,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 5.5,
+            "Comment": "it's just pompous"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.99,
+            "Comment": "I could eat a lot of these so long as I don't get the aftertaste"
+        },
+        {
+            "Name": "rink",
+            "Rating": 4.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.6,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.84,
+            "Comment": "Arman has led a crusade against these Oreos on the lack of inspiration from Mondelez. one band of peeps liked the cookie, the other did not",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["vanilla"],
+            "Image": "crushed-vanilla-thins.webp"
+        }
+    ],
+    "Mint": [
+        {
+            "Name": "jayjay",
+            "Rating": 10.0,
+            "Comment": "it's a Thin Mint. Oreo handled their business"
+        },
+        {
+            "Name": "drae",
+            "Rating": 9.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 10.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.9,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 9.5,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 8.7,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.0,
+            "Comment": "still good but tastes like a worse Thin Mint"
+        },
+        {
+            "Name": "tron",
+            "Rating": 6.9,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 8.61,
+            "Comment": "multiple comparisons to Thin Mints, for better or for worse",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["mint"],
+            "Image": "mint-thins.webp"
+        }
+    ],
+    "White Fudge Covered": [
+        {
+            "Name": "joro",
+            "Rating": 4,
+            "Comment": "I'm so sorry but, this ain't it. way too heavy"
+        },
+        {
+            "Name": "drae",
+            "Rating": 3,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7,
+            "Comment": "density problems"
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.9,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6,
+            "Comment": "tastes like frosted animal crackers"
+        },
+        {
+            "Name": "juk",
+            "Rating": 7,
+            "Comment": "the fudge isn't great"
+        },
+        {
+            "Name": "tron",
+            "Rating": 9.1,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 6.7,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 9.5,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.97,
+            "Comment": "very heavy feeling, pretty good but hard to eat. not down with the thickness",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["chocolate", "fudge", "covered"],
+            "Image": "white-fudge-covered.webp"
+        }
+    ],
+    "Loaded": [
+        {
+            "Name": "calo",
+            "Rating": 7.4,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 7.5,
+            "Comment": "Oreo flavored Oreos is crazy"
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 10.0,
+            "Comment": "it's giving me more of what I like (the cream)"
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.0,
+            "Comment": "exact same as a normal Oreo"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.8,
+            "Comment": "too much cream"
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.3,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 9.2,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 8.13,
+            "Comment": "it tastes just like an Oreo, so basically an 8. points were added or subtracted based on the love of cream.",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Loaded",
+            "Tags": ["cream"],
+            "Image": "loaded.webp"
+        }
+    ],
+    "Milk Chocolate Covered": [
+        {
+            "Name": "tron",
+            "Rating": 7,
+            "Comment": "better than expected"
+        },
+        {
+            "Name": "drae",
+            "Rating": 6.5,
+            "Comment": "not as sweet as I thought it'd be"
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 6.8,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.3,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.3,
+            "Comment": "not enough Oreo flavor"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.9,
+            "Comment": "if it had sea salt, I'd eat 9-11 of them"
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.3,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.32,
+            "Comment": "not bad for all the chocolate in it, it's a pretty good cookie",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["chocolate", "fudge", "covered"],
+            "Image": "milk-chocolate-covered.webp"
+        }
+    ],
+    "Cookie Dough": [
+        {
+            "Name": "mina",
+            "Rating": 7.7,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 7.2,
+            "Comment": "I like it (I think) but it's a bit sweet and doesn't really taste like cookie dough. more like kinda bland choccy chip cookies"
+        },
+        {
+            "Name": "tron",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.0,
+            "Comment": "tastes somewhat like a graham cracker (I don't like graham crackers)"
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.4,
+            "Comment": "it's almost like a complex wine with notes of smokiness, cinnamon, etc."
+        },
+        {
+            "Name": "robby",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.75,
+            "Comment": "no flavor, not dense like you'd expect cookie dough to be"
+        },
+        {
+            "Name": "nari",
+            "Rating": 9.1,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.57,
+            "Comment": "a little too sweet and the flavor is good but lacking",
+
+            "Wafers": ["golden", "chocolate chip"],
+            "Type": "original",
+            "Tags": ["cookie dough", "chocolate chips"],
+            "Image": "cookie-dough.webp"
+        }
+    ],
+    "Brown Sugar Bubble Tea": [
+        {
+            "Name": "zoff",
+            "Rating": 9.5,
+            "Comment": ""
+        },
+        {
+            "Name": "kiv",
+            "Rating": 6.9,
+            "Comment": ""
+        },
+        {
+            "Name": "joro",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 9.5,
+            "Comment": ""
+        },
+        {
+            "Name": "nari",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 9.5,
+            "Comment": "tastes like the lemon cookie!"
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.95,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.75,
+            "Comment": "can dunk"
+        },
+        {
+            "Name": "mina",
+            "Rating": 8.2,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "ozzy",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 9.1,
+            "Comment": "made my throat feel like it does after having bubble tea! (am I allergic to bubble tea?)"
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.99,
+            "Comment": "",
+
+            "Wafers": ["golden"],
+            "Type": "original",
+            "Tags": ["drink", "brown sugar", "bubble tea", "international"],
+            "Image": "brown-sugar-bubble-tea.webp"
+        }
+    ],
+    "Chocolate Ganache": [
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": "extra point for the packaging"
+        },
+        {
+            "Name": "mina",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.7,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 8.0,
+            "Comment": "bumped up from a 7.9 due to enjoying being able to eat more for less"
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.8,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.0,
+            "Comment": "I don't hate all chocolate (editor's note: he likes brownies)"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "kisi",
+            "Rating": 6.0,
+            "Comment": "this was chocolate cardboard"
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.49,
+            "Comment": "this being a \"Thin\" was a better \"form factor\" for the flavor. Oreo did well with it and is reminiscent of a brownie",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["chocolate"],
+            "Image": "chocolate-ganache-thins.webp"
+        }
+    ],
+    "Sour Patch Kids Lime": [
+        {
+            "Name": "lola",
+            "Rating": 5.3,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 7.7,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 9.75,
+            "Comment": "would be a 10 if it was Swedish Fish"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "collee",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 5.6,
+            "Comment": "I admire the creativity"
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.5,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.2,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.2,
+            "Comment": "good but not sour"
+        },
+        {
+            "Name": "juk",
+            "Rating": 8.0,
+            "Comment": "not as sour as expected"
+        },
+        {
+            "Name": "ozzy",
+            "Rating": 8.5,
+            "Comment": "reminded of my childhood"
+        },
+        {
+            "Name": "Average",
+            "Rating": 7.4,
+            "Comment": "a good throwback flavor, lacking in the sour department but a good cookie",
+            
+            "Wafers": ["golden", "sour patch kids"],
+            "Type": "Double Stuf",
+            "Tags": ["candy", "sour", "lime", "collaboration"],
+            "Image": "sour-patch-kids-lime.webp"
+        }
+    ],
+    "Hazelnut": [
+        {
+            "Name": "drae",
+            "Rating": 5.3,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 5.5,
+            "Comment": "cookie is too hard, can't taste the creme"
+        },
+        {
+            "Name": "oli",
+            "Rating": 6.3,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "aram",
+            "Rating": 7.2,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 6.0,
+            "Comment": "uninspiring and taste no different from normal. the fact they're tiny upsets me because I have to eat more just to get an idea of them."
+        },
+        {
+            "Name": "calo",
+            "Rating": 6.3,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.01,
+            "Comment": "plain, boring, uninspiring. needs way more creme/hazelnut. higher scores came from the cookie.",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Minis",
+            "Tags": ["hazelnut"],
+            "Image": "hazelnut-minis.webp"
+        }
+    ],
+    "Zero Sugar": [
+        {
+            "Name": "calo",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "mina",
+            "Rating": 6.25,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "oli",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 4.0,
+            "Comment": "this is the saddest excuse for an Oreo we've ever tried. I got no joy from this \"cookie\""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.0,
+            "Comment": "I don't taste a difference *EVERYONE disagreed*"
+        },
+        {
+            "Name": "Average",
+            "Rating": 6.76,
+            "Comment": "lackluster filling, tastes kinda off-brand, plain",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["zero sugar"],
+            "Image": "zero-sugar.webp"
+        }
+    ],
+    "Cadbury Creme Egg": [
+        {
+            "Name": "calo",
+            "Rating": 7.6,
+            "Comment": "too much creme for this flavor"
+        },
+        {
+            "Name": "mina",
+            "Rating": 8.2,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.0,
+            "Comment": "tastes very similar to a regular Oreo, just creme-ier"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": "8.129",
+            "Comment": "very similar to a regular Oreo, many agreed it was creamier. not much to the flavor though — its description was listed as '45% fondant', which was weird given the name?",
+            
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["chocolate", "egg", "candy", "fondant", "collaboration", "international"],
+            "Image": "creme-egg.webp"
+        }
+    ],
+
+    "BABYMONSTER": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)", "colored"],
+            "Type": "original",
+            "Tags": ["marshmallow", "collaboration", "international"],
+            "Image": "babymonster.webp"
+        }
+    ],
+    "Dark Chocolate Mudcake": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Double Stuff",
+            "Tags": ["chocolate", "dessert", "cake", "international"],
+            "Image": "dark-choc-mudcake.webp"
+        }
+    ],
+    "Mocha Frappe": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Double Stuff",
+            "Tags": ["chocolate", "coffee", "mocha", "international"],
+            "Image": "mocha-frappe.webp"
+        }
+    ],
+    "Pascall Marshmallow": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["colored"],
+            "Type": "Double Stuff",
+            "Tags": ["marshmallow", "candy", "collaboration", "international"],
+            "Image": "pascall.webp"
+        }
+    ],
+    "Dill Pickle Flavored Fudge": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["pickle", "fudge", "covered"],
+            "Image": "dill-pickle.webp"
+        }
+    ],
+    "MARVEL™ Stuf of Doom": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["marshmallow", "toasted marshmallow", "color changing", "collaboration"],
+            "Image": "dr-doom.webp"
+        }
+    ]
+}

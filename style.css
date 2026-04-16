@@ -31,15 +31,15 @@ header {
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--header-h);
-    background: rgba(247, 245, 242, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(247, 245, 242, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .header-logo {
@@ -240,9 +240,10 @@ h1 {
     letter-spacing: 0.12em;
     color: var(--muted);
     background: rgba(247, 245, 242, 0.7);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid var(--border);
-    z-index: 100;
+    z-index: 1000;
 }
 
 .mobile-popup {

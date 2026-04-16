@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Hamburger button (visible only on mobile) ─────────── */
-.hamburger {
+header .hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
@@ -16,7 +16,7 @@
     animation: fadeUp 0.6s ease 0.36s forwards;
 }
 
-.hamburger span {
+header .hamburger span {
     display: block;
     width: 22px;
     height: 1.5px;
@@ -64,8 +64,8 @@
 
 /* ── Reveal on mobile ───────────────────────────────────── */
 @media (max-width: 1024px) {
-    .hamburger        { display: flex; }
-    .mobile-drawer    { display: flex; }
-    .drawer-scrim     { display: block; visibility: hidden; }
+    header .hamburger  { display: flex; }
+    .mobile-drawer     { display: flex; }
+    .drawer-scrim      { display: block; visibility: hidden; }
     .drawer-scrim.active { visibility: visible; }
 }

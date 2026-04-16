@@ -15,12 +15,12 @@
 
 <body>
     <header>
-        <a href="../index.html" class="header-logo">🍀</a>
+        <a href="../" class="header-logo">🍀</a>
         <nav>
-            <a href="../index.html">home</a>
-            <a href="./index.html">explore</a>
-            <a href="../devlog/index.html">blog</a>
-            <a href="../about/index.html">about</a>
+            <a href="../">home</a>
+            <a href="./">explore</a>
+            <a href="../devlog/">blog</a>
+            <a href="../about/">about</a>
             <a href="#">☀️</a>
         </nav>
         <button class="hamburger" id="hamburger" aria-label="open menu">
@@ -30,10 +30,10 @@
 
     <div class="drawer-scrim" id="drawerScrim"></div>
     <div class="mobile-drawer" id="mobileDrawer">
-        <a href="../index.html">home</a>
-        <a href="./index.html">explore</a>
-        <a href="../devlog/index.html">blog</a>
-        <a href="../about/index.html">about</a>
+        <a href="../">home</a>
+        <a href="./">explore</a>
+        <a href="../devlog/">blog</a>
+        <a href="../about/">about</a>
         <a href="#">☀️ toggle light mode</a>
     </div>
 
@@ -44,7 +44,6 @@
 
         <div class="filter-bar" id="filterBar">
             <button class="filter-btn active" data-filter="all">all</button>
-            <button class="filter-btn" data-filter="interactive">interactive</button>
             <button class="filter-btn" data-filter="three.js">three.js</button>
             <button class="filter-btn" data-filter="games">games</button>
             <button class="filter-btn" data-filter="catalog">catalog</button>
@@ -53,30 +52,39 @@
 
         <div class="project-grid" id="projectGrid">
 
-            <a href="../pokemon-cards/index.html" class="project-card" data-tags="interactive,games,catalog,vanilla-tilt.js">
+            <a href="../pokemon-cards/" class="project-card" data-tags="vanilla-tilt.js,games,catalog">
                 <span class="card-name">favorite pokémon cards</span>
                 <div class="card-tags">
                     <span class="card-tag">vanilla-tilt.js</span>
-                    <span class="card-tag">interactive</span>
                     <span class="card-tag">games</span>
                     <span class="card-tag">catalog</span>
                 </div>
             </a>
 
-            <a href="../audio-visualizer/index.html" class="project-card" data-tags="three.js,webgl,interactive">
+            <a href="../audio-visualizer/" class="project-card" data-tags="three.js,webgl,music">
                 <span class="card-name">audio visualizer</span>
                 <div class="card-tags">
                     <span class="card-tag">three.js</span>
                     <span class="card-tag">webgl</span>
-                    <span class="card-tag">interactive</span>
+                    <span class="card-tag">music</span>
                 </div>
             </a>
 
-            <a href="../nintendo-games/index.html" class="project-card" data-tags="interactive,games,catalog">
+            <a href="../nintendo-games/" class="project-card" data-tags="games,catalog">
                 <span class="card-name">nintendo switch games</span>
                 <div class="card-tags">
-                    <span class="card-tag">interactive</span>
                     <span class="card-tag">games</span>
+                    <span class="card-tag">catalog</span>
+                </div>
+            </a>
+
+            <a href="../oreos/" class="project-card" data-tags="data visualization,analytics,food,snacks,catalog">
+                <span class="card-name">oreo dashboard</span>
+                <div class="card-tags">
+                    <span class="card-tag">chart.js</span>
+                    <span class="card-tag">data visualization</span>
+                    <span class="card-tag">food</span>
+                    <span class="card-tag">snacks</span>
                     <span class="card-tag">catalog</span>
                 </div>
             </a>
@@ -84,13 +92,6 @@
             <!-- COMING SOON -->
             <div class="project-card project-card--coming-soon" data-tags="coming-soon">
                 <span class="card-name">art</span>
-                <div class="card-tags">
-                    <span class="card-tag card-tag--coming-soon">coming soon</span>
-                </div>
-            </div>
-
-            <div class="project-card project-card--coming-soon" data-tags="coming-soon">
-                <span class="card-name">oreos</span>
                 <div class="card-tags">
                     <span class="card-tag card-tag--coming-soon">coming soon</span>
                 </div>

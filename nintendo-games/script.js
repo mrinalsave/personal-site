@@ -159,7 +159,7 @@ if (track) {
 
     function confirmSelection() {
         if (selectedIndex === games.length) {
-            fadeTo('./all-software.html');
+            fadeTo('./all-software');
         } else if (games[selectedIndex]?.url) {
             window.open(games[selectedIndex].url, '_blank');
         }
@@ -167,7 +167,7 @@ if (track) {
 
     if (okBtn) okBtn.addEventListener('click', confirmSelection);
     if (backBtn) backBtn.addEventListener('click', () => { 
-        fadeTo('../explore/index.html');
+        fadeTo('../explore/index');
     } );
 
     // ── Scroll (view only) ─────────────────────────
@@ -250,7 +250,7 @@ if (track) {
             confirmSelection();
         }
         if (e.key === 'b' || e.key === 'B') {
-            fadeTo('../explore/index.html');
+            fadeTo('../explore/index');
         }
     });
 
@@ -454,7 +454,7 @@ if (softwareGrid) {
 
     function navigateBackToHome() {
         sessionStorage.setItem('homeSelectedIndex', String(games.length));
-        fadeTo('./index.html');
+        fadeTo('./index');
     }
     window.navigateBackToHome = navigateBackToHome;
 
