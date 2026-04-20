@@ -24,7 +24,6 @@ const imageList = [
   "0507.webp",
   "051024.webp",
   "0702.webp",
-  "0310.webp",
   "0615.webp",
   "0707.webp",
   "0108.webp"

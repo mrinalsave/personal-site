@@ -519,7 +519,55 @@ if (softwareGrid) {
             tooltip.style.top       = tileTopRel + "px";
             tooltip.style.transform = "translateX(-50%) translateY(calc(-100% - 6px))";
         }
+        tooltip.style.opacity = '';
         tooltip.classList.add("visible");
+    }
+
+    // ── Keep tooltip anchored to its tile while the grid is scrolled ──────
+    // Called on every scroll event inside software-grid-wrapper.
+    function onGridScroll() {
+        if (!tooltip.classList.contains('visible')) return;
+        if (backSelected) return;
+        const tileEl = softwareGrid.children[selectedIndex];
+        if (!tileEl) return;
+
+        const sRect = softwareScreenEl.getBoundingClientRect();
+        const tRect = tileEl.getBoundingClientRect();
+        const wRect = gridWrapper.getBoundingClientRect();
+
+        // Hide tooltip when the tile is fully scrolled out of the wrapper's viewport
+        if (tRect.bottom <= wRect.top || tRect.top >= wRect.bottom) {
+            tooltip.style.opacity = '0';
+            return;
+        }
+        tooltip.style.opacity = '';
+
+        const tileCenter = tRect.left - sRect.left + tRect.width / 2;
+        const tileTopRel = tRect.top  - sRect.top;
+        const tileBotRel = tRect.bottom - sRect.top;
+
+        const gridLeft  = wRect.left  - sRect.left;
+        const gridRight = wRect.right - sRect.left;
+        const minLeft = gridLeft  + ttW / 2;
+        const maxLeft = gridRight - ttW / 2;
+        const left = Math.max(minLeft, Math.min(tileCenter, maxLeft));
+
+        const roomAbove = tRect.top - wRect.top;
+        const showBelow = roomAbove < ttH + 8;
+
+        tooltip.style.left = left + "px";
+        if (showBelow) {
+            tooltip.style.top       = tileBotRel + 6 + "px";
+            tooltip.style.transform = "translateX(-50%)";
+        } else {
+            tooltip.style.top       = tileTopRel + "px";
+            tooltip.style.transform = "translateX(-50%) translateY(calc(-100% - 6px))";
+        }
+    }
+
+    // Attach once gridWrapper exists (it's in the static HTML so it's always present)
+    if (gridWrapper) {
+        gridWrapper.addEventListener('scroll', onGridScroll, { passive: true });
     }
 
     async function loadSoftwareGrid() {

@@ -122,7 +122,7 @@ main {
 .post-content p {
     line-height: 1.6;
     margin-bottom: 15px;
-    color: var(--muted);
+    color: var(--dark-grey);
     font-size: 0.85em;
 }
 .post-content ul,
@@ -134,7 +134,7 @@ main {
 .post-content li {
     line-height: 1.6;
     margin-bottom: 15px;
-    color: var(--muted);
+    color: var(--dark-grey);
     font-size: 0.80em;
 }
 

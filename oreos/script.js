@@ -1,36 +1,25 @@
-// ═══════════════════════════════════════════════════════════════════
-//  OREO DASHBOARD  —  script.js
-//  Drop in alongside oreo-dashboard.html.
-//  Set DATA_URL below to point at your JSON file (or inline it).
-// ═══════════════════════════════════════════════════════════════════
-
 const DATA_URL = './assets/data/ratings.json';
+let FLAVORS   = [];
+let REVIEWERS = [];
 
-// ─── GLOBALS (populated after load) ────────────────────────────────
-let FLAVORS   = [];   // [{id, name, type, tags, avgRating, stddev, reviews:[{name,rating,comment}]}]
-let REVIEWERS = [];   // [{id, name, initials, color, avgRating, stddev, bias, coverage, highest, lowest}]
-
-// ═══════════════════════════════════════════════════════════════════
-//  PARSE JSON → internal structures
-// ═══════════════════════════════════════════════════════════════════
 function parseData(raw) {
-  const flavorList   = [];
-  const reviewerMap  = {}; // name → { ratings:[], comments:{} }
-  let   flavorId     = 0;
+  const flavorList = [];
+  const reviewerMap = {};
+  let flavorId = 0;
 
   for (const [flavorName, entries] of Object.entries(raw)) {
-    // Split Average (metadata) from individual reviews
-    const avgEntry     = entries.find(e => e.Name === 'Average');
+    // Separate average + metadata from individual reviews.
+    const avgEntry = entries.find(e => e.Name === 'Average');
     const reviewEntries = entries.filter(e => e.Name !== 'Average');
 
-    // Flavor metadata from the Average entry
+    // Pull metadata from the "Average" entry.
     const wafers = (avgEntry?.Wafers ?? []).map(t => t.toLowerCase().trim());
     const type = (avgEntry?.Type ?? 'original').toLowerCase().trim();
     const tags = (avgEntry?.Tags ?? []).map(t => t.toLowerCase().trim());
     const avgComment = avgEntry?.Comment ?? '';
     const image = avgEntry?.Image ?? null;
 
-    // Collect all individual ratings for this flavor
+    // Collect all individual ratings for this flavor.
     const individualRatings = reviewEntries
       .filter(e => typeof e.Rating === 'number')
       .map(e => e.Rating);
@@ -39,48 +28,46 @@ function parseData(raw) {
       ? null
       : parseFloat(avgEntry?.Rating);
 
-    // Unrated: no usable average AND no individual ratings
+    // Unrated: no usable average AND no individual ratings.
     const isUnrated = avgEntryRating === null && individualRatings.length === 0;
 
-    // avgOnly: has a numeric average but no individual reviewer ratings recorded
+    // Numeric average, but no individual reviewer ratings recorded (early cookies).
     const isAvgOnly = !isUnrated && avgEntryRating !== null && individualRatings.length === 0;
 
-    // Compute avg (prefer Average entry rating; fall back to mean of individuals)
+    // Prefer "Average" entry rating; fallback to mean of individuals (latter should never happen).
     const avgRating = isUnrated
       ? null
       : avgEntryRating !== null
         ? avgEntryRating
         : individualRatings.reduce((s, r) => s + r, 0) / individualRatings.length;
 
-    // Compute standard deviation (null for avgOnly — nothing to compare)
+    // Compute standard deviation (null for avgOnly because there's nothing to compare).
     const stddev = isUnrated || isAvgOnly ? null : computeStddev(individualRatings, avgRating);
 
-    // Controversy classification (null for avgOnly)
+    // Controversy classification (again, null for avgOnly).
     const controversy = isUnrated ? 'none' : isAvgOnly ? null : stddev >= 2.0 ? 'high' : stddev >= 1.3 ? 'moderate' : 'low';
 
-    // Build reviews array (sorted high→low)
     const reviews = reviewEntries
       .filter(e => typeof e.Rating === 'number')
       .map(e => ({ name: e.Name, rating: e.Rating, comment: e.Comment ?? '' }))
       .sort((a, b) => b.rating - a.rating);
 
     flavorList.push({
-      id:          ++flavorId,
-      name:        flavorName,
+      id: ++flavorId,
+      name: flavorName,
       wafers,
       type,
       tags,
       image,
-      unrated:     isUnrated,
-      avgOnly:     isAvgOnly,
-      avgRating:   isUnrated ? null : +avgRating.toFixed(2),
-      stddev:      stddev !== null ? +stddev.toFixed(2) : null,
+      unrated: isUnrated,
+      avgOnly: isAvgOnly,
+      avgRating: isUnrated ? null : +avgRating.toFixed(2),
+      stddev: stddev !== null ? +stddev.toFixed(2) : null,
       controversy,
-      notes:       avgComment,
-      reviews,     // real per-reviewer data
+      notes: avgComment,
+      reviews
     });
 
-    // Accumulate per-reviewer stats
     for (const entry of reviewEntries) {
       if (typeof entry.Rating !== 'number') continue;
       const rname = entry.Name;
@@ -90,46 +77,40 @@ function parseData(raw) {
     }
   }
 
-  // ── Build REVIEWERS array from accumulated data ──────────────────
   const ratedList = flavorList.filter(f => !f.unrated);
   const globalAvg = ratedList.length ? ratedList.reduce((s, f) => s + f.avgRating, 0) / ratedList.length : 0;
   let reviewerId = 0;
 
   const reviewerList = Object.entries(reviewerMap).map(([rname, data]) => {
     const ratingValues = Object.values(data.ratings);
-    const rAvg    = ratingValues.reduce((s, v) => s + v, 0) / ratingValues.length;
+    const rAvg = ratingValues.reduce((s, v) => s + v, 0) / ratingValues.length;
     const rStddev = computeStddev(ratingValues, rAvg);
 
-    // Sort their flavors to find highest/lowest
+    // Sort flavors to find highest/lowest.
     const sorted = Object.entries(data.ratings).sort((a, b) => b[1] - a[1]);
     const highest = sorted[0]?.[0] ?? '—';
     const lowest  = sorted[sorted.length - 1]?.[0] ?? '—';
-
-    // Bias = reviewer avg minus global flavor avg
     const bias = +(rAvg - globalAvg).toFixed(2);
-
     const initials = rname.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('').slice(0, 2);
 
     return {
-      id:       ++reviewerId,
-      name:     rname,
+      id: ++reviewerId,
+      name: rname,
       initials,
-      color:    '#1d4ed8',
+      color: '#1d4ed8',
       avgRating: +rAvg.toFixed(2),
-      stddev:   +rStddev.toFixed(2),
+      stddev: +rStddev.toFixed(2),
       bias,
       coverage: ratingValues.length,
       highest,
       lowest,
-      ratings:  data.ratings,   // { flavorName: rating }
-      comments: data.comments,  // { flavorName: comment }
+      ratings: data.ratings,
+      comments: data.comments
     };
   }).sort((a, b) => a.name.localeCompare(b.name));
-
   return { flavorList, reviewerList };
 }
 
-// ─── HELPERS ───────────────────────────────────────────────────────
 function computeStddev(values, mean) {
   if (values.length < 2) return 0;
   const avg = mean ?? values.reduce((s, v) => s + v, 0) / values.length;
@@ -151,8 +132,8 @@ function initials2(name) {
 //  NAVIGATION
 // ═══════════════════════════════════════════════════════════════════
 const pageTitles = {
-  overview:  'Overview',
-  flavors:   'Flavor Analytics',
+  overview: 'Overview',
+  flavors: 'Flavor Analytics',
   reviewers: 'Reviewer Analytics'
 };
 let currentPage = 'overview';
@@ -171,7 +152,7 @@ function showPage(page) {
   currentPage = page;
   closeSidebar();
 
-  // If navigating to flavors with no flavor selected, re-render grid with current filters
+  // If navigating to flavors with no flavor selected, re-render grid with current filters.
   if (page === 'flavors' && !document.getElementById('flavor-select').value) {
     renderFlavorGrid(getFilteredFlavors());
   }
@@ -201,19 +182,19 @@ function updateOverviewStats() {
   const botFlavor  = [...ratedFlavors].sort((a, b) => a.avgRating - b.avgRating)[0];
   const mostDiv    = [...ratedFlavors].sort((a, b) => b.stddev - a.stddev)[0];
 
-  setStatCard('stat-total-flavors',   FLAVORS.length,             'across all types');
-  setStatCard('stat-total-reviewers', REVIEWERS.length,           'active contributors');
-  setStatCard('stat-global-avg',      globalAvg.toFixed(2),       'out of 10');
-  setStatCard('stat-most-loved',      topFlavor?.name + ` (${capitalize(topFlavor?.type)})` ?? '—',     `average of ${topFlavor?.avgRating.toFixed(2)} / 10`, true);
-  setStatCard('stat-most-hated',      botFlavor?.name + ` (${capitalize(botFlavor?.type)})` ?? '—',     `average of ${botFlavor?.avgRating.toFixed(2)} / 10`, true);
-  setStatCard('stat-most-divisive',   mostDiv?.name + ` (${capitalize(mostDiv?.type)})` ?? '—',     `standard deviation of ${mostDiv?.stddev.toFixed(2)}`, true);
+  setStatCard('stat-total-flavors', FLAVORS.length, 'across all types');
+  setStatCard('stat-total-reviewers', REVIEWERS.length, 'active contributors');
+  setStatCard('stat-global-avg', globalAvg.toFixed(2), 'out of 10');
+  setStatCard('stat-most-loved', topFlavor?.name + ` (${capitalize(topFlavor?.type)})` ?? '—',     `average of ${topFlavor?.avgRating.toFixed(2)} / 10`, true);
+  setStatCard('stat-most-hated', botFlavor?.name + ` (${capitalize(botFlavor?.type)})` ?? '—',     `average of ${botFlavor?.avgRating.toFixed(2)} / 10`, true);
+  setStatCard('stat-most-divisive', mostDiv?.name + ` (${capitalize(mostDiv?.type)})` ?? '—',     `standard deviation of ${mostDiv?.stddev.toFixed(2)}`, true);
 }
 
 function setStatCard(id, value, sub, small = false) {
   const el = document.getElementById(id);
   if (!el) return;
+
   el.querySelector('.stat-value').textContent = value;
-  //if (small) el.querySelector('.stat-value').style.fontSize = '18px';
   el.querySelector('.stat-sub').textContent   = sub;
 }
 
@@ -225,50 +206,47 @@ function populateReviewerSelect() {
   sel.innerHTML = '<option value="">— all reviewers —</option>';
   REVIEWERS.forEach(r => {
     const opt = document.createElement('option');
-    opt.value       = r.id;
+    opt.value = r.id;
     opt.textContent = r.name;
     sel.appendChild(opt);
   });
-  // Render the default grid view
+  
   renderReviewerGrid();
 }
 
-// Populate the wafer filter tags dynamically from actual data
 function populateWaferFilters() {
-  // flavors store `wafers` as an array; flatten before deduping
   const wafers = [...new Set(FLAVORS.flatMap(f => f.wafers))].filter(Boolean).sort();
   const container = document.getElementById('wafer-filters');
   container.innerHTML = `<div class="filter-tag active" data-wafer="all" onclick="toggleWaferFilter(this,'all')">All</div>`;
   wafers.forEach(t => {
     const tag = document.createElement('div');
-    tag.className    = 'filter-tag';
+    tag.className  = 'filter-tag';
     tag.dataset.wafer = t;
-    tag.textContent  = t.toLowerCase() == 'cocoa (default)' ? 'Cocoa (Default)' : capitalize(t);
-    tag.onclick      = () => toggleWaferFilter(tag, t);
+    tag.textContent = t.toLowerCase() == 'cocoa (default)' ? 'Cocoa (Default)' : capitalize(t);
+    tag.onclick = () => toggleWaferFilter(tag, t);
     container.appendChild(tag);
   });
 }
 
-// Populate the type filter tags dynamically from actual data
 function populateTypeFilters() {
   const types = [...new Set(FLAVORS.map(f => f.type))].sort();
   const container = document.getElementById('type-filters');
   container.innerHTML = `<div class="filter-tag active" data-type="all" onclick="toggleTypeFilter(this,'all')">All</div>`;
   types.forEach(t => {
     const tag = document.createElement('div');
-    tag.className  = 'filter-tag';
+    tag.className = 'filter-tag';
     tag.dataset.type = t;
     tag.textContent = capitalize(t);
-    tag.onclick    = () => toggleTypeFilter(tag, t);
+    tag.onclick = () => toggleTypeFilter(tag, t);
     container.appendChild(tag);
   });
 }
 
-// Populate ingredient/tag filter as multi-select pills
 function populateIngredientFilter() {
   const allTags = [...new Set(FLAVORS.flatMap(f => f.tags))].sort();
   const container = document.getElementById('tag-filters');
   if (!container) return;
+  
   container.innerHTML = '';
 
   const allPill = document.createElement('div');
@@ -301,25 +279,23 @@ function clearTagFilters() {
 function getChartColors() {
   const dark = document.body.classList.contains('dark');
   return {
-    primary:   dark ? '#3b82f6'                   : '#2563eb',
+    primary: dark ? '#3b82f6' : '#2563eb',
     secondary: '#93c5fd',
-    grid:      dark ? '#1e293b'                   : '#e8ebf0',
-    axis:      dark ? 'rgba(255,255,255,0.55)'    : '#8a9bb0',
-    text:      dark ? '#cbd5e1'                   : '#596677',
-    dotHigh:   dark ? 'rgba(0, 255, 255, 0.65)'   : 'rgba(0, 221, 255, 0.50)',
-    dotTop:    dark ? 'rgba(59, 130, 246, 0.70)'  : 'rgba(0, 98, 255, 0.50)',
-    dotBase:   dark ? 'rgba(99, 132, 255, 0.65)'  : 'rgba(8, 13, 173, 0.50)',
-    // Color used for the "Average" reference line on flavor details
-    avgLine:   dark ? '#e8ebf0'                   : '#1e293b',
+    grid: dark ? '#1e293b' : '#e8ebf0',
+    axis: dark ? 'rgba(255,255,255,0.55)' : '#8a9bb0',
+    text: dark ? '#cbd5e1' : '#596677',
+    dotHigh: dark ? 'rgba(0, 255, 255, 0.65)' : 'rgba(0, 221, 255, 0.50)',
+    dotTop: dark ? 'rgba(59, 130, 246, 0.70)' : 'rgba(0, 98, 255, 0.50)',
+    dotBase: dark ? 'rgba(99, 132, 255, 0.65)' : 'rgba(8, 13, 173, 0.50)',
+    avgLine: dark ? '#e8ebf0' : '#1e293b',
   };
 }
 
-// Convenience accessor for inline colour references (e.g. CHART_COLORS.text)
 const CHART_COLORS = {
-  get text()    { return getChartColors().text; },
-  get grid()    { return getChartColors().grid; },
+  get text() { return getChartColors().text; },
+  get grid() { return getChartColors().grid; },
   get avgLine() { return getChartColors().avgLine; },
-  get axis()    { return getChartColors().axis; },
+  get axis() { return getChartColors().axis; }
 };
 
 function getBaseChartOptions() {
@@ -332,15 +308,15 @@ function getBaseChartOptions() {
       tooltip: {
         backgroundColor: '#1a2f6b',
         titleFont: { family: 'DM Mono', size: 11 },
-        bodyFont:  { family: 'DM Mono', size: 11 },
-        padding:      10,
-        cornerRadius:  8,
+        bodyFont: { family: 'DM Mono', size: 11 },
+        padding: 10,
+        cornerRadius: 8,
       },
     },
     layout: { padding: { left: 12, right: 8, top: 8, bottom: 8 } },
     scales: {
       x: {
-        grid:   { display: false },
+        grid: { display: false },
         border: { color: CHART_COLORS.axis },
         ticks: {
           font: { family: 'DM Mono', size: 9 },
@@ -351,7 +327,7 @@ function getBaseChartOptions() {
         },
       },
       y: {
-        grid:   { display: false },
+        grid: { display: false },
         border: { color: CHART_COLORS.axis },
         ticks: { font: { family: 'DM Mono', size: 9 }, color: c.text },
       },
@@ -359,19 +335,15 @@ function getBaseChartOptions() {
   };
 }
 
-// Thin shim so the few spread sites that use ...baseChartOptions still work.
-// We make it a real object with the right shape each time it's first accessed
-// in a given synchronous task, by using a getter that returns a fresh snapshot.
 const baseChartOptions = {
-  get responsive()         { return getBaseChartOptions().responsive; },
-  get maintainAspectRatio(){ return getBaseChartOptions().maintainAspectRatio; },
-  get plugins()            { return getBaseChartOptions().plugins; },
-  get layout()             { return getBaseChartOptions().layout; },
-  get scales()             { return getBaseChartOptions().scales; },
+  get responsive() { return getBaseChartOptions().responsive; },
+  get maintainAspectRatio() { return getBaseChartOptions().maintainAspectRatio; },
+  get plugins() { return getBaseChartOptions().plugins; },
+  get layout() { return getBaseChartOptions().layout; },
+  get scales() { return getBaseChartOptions().scales; },
 };
 
 const charts = {};
-
 function destroyChart(id) {
   if (charts[id]) { charts[id].destroy(); delete charts[id]; }
 }
@@ -393,12 +365,12 @@ function buildTopFlavorsChart(flavors) {
   charts['topFlavors'] = new Chart(document.getElementById('topFlavorsChart'), {
     type: 'bar',
     data: {
-      labels:   top.map(f => f.name),
+      labels: top.map(f => f.name),
       datasets: [{
-        data:            top.map(f => f.avgRating),
+        data: top.map(f => f.avgRating),
         backgroundColor: top.map((_, i) => i === 0 ? '#1e40af' : i < 3 ? '#2563eb' : '#93c5fd'),
-        borderRadius:    6,
-        borderSkipped:   false,
+        borderRadius: 6,
+        borderSkipped: false,
       }],
     },
     options: {
@@ -422,12 +394,12 @@ function buildDistChart(flavors) {
   charts['dist'] = new Chart(document.getElementById('distChart'), {
     type: 'bar',
     data: {
-      labels:   ['0–1','1–2','2–3','3–4','4–5','5–6','6–7','7–8','8–9','9–10'],
+      labels: ['0–1','1–2','2–3','3–4','4–5','5–6','6–7','7–8','8–9','9–10'],
       datasets: [{
-        data:            bins,
+        data: bins,
         backgroundColor: bins.map((_, i) => i < 3 ? '#dbeafe' : i < 5 ? '#93c5fd' : i < 7 ? '#2563eb' : '#1e40af'),
-        borderRadius:    6,
-        borderSkipped:   false,
+        borderRadius: 6,
+        borderSkipped: false,
       }],
     },
     options: { 
@@ -449,7 +421,6 @@ function buildDistChart(flavors) {
 }
 
 function buildTypeChart(flavors) {
-  // Only include types that appear in the current set (rated only)
   const ratedFlavors = flavors.filter(f => !f.unrated);
   const typeSet  = [...new Set(ratedFlavors.map(f => f.type))].sort();
   const typeAvgs = typeSet.map(t => {
@@ -461,12 +432,12 @@ function buildTypeChart(flavors) {
   charts['type'] = new Chart(document.getElementById('typeChart'), {
     type: 'bar',
     data: {
-      labels:   typeSet.map(capitalize),
+      labels: typeSet.map(capitalize),
       datasets: [{
-        data:            typeAvgs,
+        data: typeAvgs,
         backgroundColor: typeSet.map((_, i) => blues[i % blues.length]),
-        borderRadius:    6,
-        borderSkipped:   false,
+        borderRadius: 6,
+        borderSkipped: false,
       }],
     },
     options: {
@@ -503,12 +474,12 @@ function buildWaferChart(flavors) {
   charts['wafer'] = new Chart(document.getElementById('waferChart'), {
     type: 'bar',
     data: {
-      labels:   waferSet.map(formatWaferLabel),
+      labels:  waferSet.map(formatWaferLabel),
       datasets: [{
-        data:            waferAvgs,
+        data: waferAvgs,
         backgroundColor: waferSet.map((_, i) => blues[i % blues.length]),
-        borderRadius:    6,
-        borderSkipped:   false,
+        borderRadius: 6,
+        borderSkipped: false,
       }],
     },
     options: {
@@ -543,13 +514,9 @@ function buildScatterChart(flavors) {
     type: 'scatter',
     data: {
       datasets: [{
-        data:            scatterData,
-        backgroundColor: scatterData.map(d =>
-          d.y > 2         ? c.dotHigh
-          : d.x > 8       ? c.dotTop
-          :                  c.dotBase
-        ),
-        pointRadius:      6,
+        data: scatterData,
+        backgroundColor: scatterData.map(d => d.y > 2 ? c.dotHigh : d.x > 8 ? c.dotTop : c.dotBase),
+        pointRadius: 6,
         pointHoverRadius: 9,
       }],
     },
@@ -584,7 +551,7 @@ function buildLeaderboards(flavors) {
   const top = [...rated].sort((a, b) => b.avgRating - a.avgRating).slice(0, 5);
   const bot = [...rated].sort((a, b) => a.avgRating - b.avgRating).slice(0, 5);
 
-  renderLeaderboard('leaderboard-top',    top, rated.length, true);
+  renderLeaderboard('leaderboard-top', top, rated.length, true);
   renderLeaderboard('leaderboard-bottom', bot, rated.length, false);
 }
 
@@ -610,12 +577,12 @@ function buildAllFlavorsChart(flavors) {
   charts['allFlavors'] = new Chart(document.getElementById('allFlavorsChart'), {
     type: 'bar',
     data: {
-      labels:   top.map(f => `${f.name} ${(f.type !== 'original' && f.type !== 'Loaded') ? '(' + capitalize(f.type) + ')': ''}`),
+      labels: top.map(f => `${f.name} ${(f.type !== 'original' && f.type !== 'Loaded') ? '(' + capitalize(f.type) + ')': ''}`),
       datasets: [{
-        data:            top.map(f => f.avgRating),
+        data: top.map(f => f.avgRating),
         backgroundColor: top.map(f => f.avgRating < 4.5 ? '#93c5fd' : f.avgRating < 8.0 ? '#2563eb' : '#1e40af'),
-        borderRadius:    6,
-        borderSkipped:   false,
+        borderRadius: 6,
+        borderSkipped: false,
       }],
     },
     options: {
@@ -633,10 +600,10 @@ function buildAllFlavorsChart(flavors) {
         x: {
           ...baseChartOptions.scales.x,
           ticks: {
-            font: { family: 'DM Mono', size: 8 },
+            font: { family: 'DM Mono', size: window.innerWidth < 600 ? 6 : 8 },
             color: CHART_COLORS.text,
             maxRotation: 90,
-            minRotation: 50,
+            minRotation: window.innerWidth < 600 ? 90 : 50,
             autoSkip: false,
           },
         },
@@ -661,14 +628,10 @@ function loadFlavorDetail() {
   const f = FLAVORS.find(x => x.id === id);
   if (!f) return;
  
-  // Show back button
   const backBtn = document.getElementById('flavor-back-btn');
   if (backBtn) backBtn.style.display = 'flex';
  
-  // Badges
   document.getElementById('flavor-type-badge').innerHTML = `<span class="flavor-tag type">${f.type.toUpperCase()}</span>`;
-
-  // ── Unrated flavors: simplified view ──────────────────────────────
   if (f.unrated) {
     document.getElementById('flavor-detail-panel').innerHTML = `
       <div class="card" style="margin-bottom:20px;">
@@ -693,18 +656,16 @@ function loadFlavorDetail() {
     return;
   }
 
-  // Stats derived from real reviews
   const percentile  = Math.round((FLAVORS.filter(x => !x.unrated && x.avgRating < f.avgRating).length / FLAVORS.filter(x => !x.unrated).length) * 100);
  
-  // Reviews list — REAL data from JSON (already sorted high→low)
   const reviewsHTML = f.reviews.map(rev => {
     if (rev.comment === '') return; // Skip reviews with no comment.
 
     const reviewer = REVIEWERS.find(r => r.name === rev.name);
-    const color    = reviewer?.color ?? '#2563eb';
-    const inits    = initials2(rev.name);
-    const cls      = rev.rating >= 8 ? 'high' : rev.rating < 5 ? 'low' : 'mid';
-    const comment  = rev.comment;
+    const color = reviewer?.color ?? '#2563eb';
+    const inits = initials2(rev.name);
+    const cls = rev.rating >= 8 ? 'high' : rev.rating < 5 ? 'low' : 'mid';
+    const comment = rev.comment;
 
     return `<div class="review-row" onclick="goToReviewerByName('${rev.name.replace(/'/g,"\\'")}')">
       <div class="reviewer-avatar" style="background:${color}">${inits}</div>
@@ -796,42 +757,37 @@ function loadFlavorDetail() {
       </div>`
     }`;
  
-  // Reviewer scatter chart — only for flavors with individual ratings
   if (f.avgOnly) return;
-
   const sortedReviews = [...f.reviews].sort((a, b) => a.name.localeCompare(b.name));
   const reviewerLabels = sortedReviews.map(r => r.name);
   const reviewerPoints = sortedReviews.map((r, i) => ({ x: i, y: r.rating, name: r.name }));
-  const avgLine        = sortedReviews.map((_, i) => ({ x: i, y: f.avgRating }));
+  const avgLine = sortedReviews.map((_, i) => ({ x: i, y: f.avgRating }));
 
   const c = getChartColors();
-
   destroyChart('flavorDist');
   charts['flavorDist'] = new Chart(document.getElementById('flavorReviewerScatter'), {
     type: 'scatter',
     data: {
       datasets: [
         {
-          label:           'Reviewer Rating',
-          data:            reviewerPoints,
-          backgroundColor: reviewerPoints.map(p =>
-            p.y >= 8 ? 'rgba(29,64,175,0.85)' : p.y < 5 ? 'rgba(147,197,253,0.85)' : 'rgba(37,99,235,0.85)'
-          ),
-          pointRadius:      7,
+          label: 'Reviewer Rating',
+          data: reviewerPoints,
+          backgroundColor: reviewerPoints.map(p => p.y >= 8 ? 'rgba(29,64,175,0.85)' : p.y < 5 ? 'rgba(147,197,253,0.85)' : 'rgba(37,99,235,0.85)'),
+          pointRadius: 7,
           pointHoverRadius: 10,
-          pointStyle:       'circle',
+          pointStyle: 'circle',
         },
         {
-          label:     'Average',
-          data:      avgLine,
-          type:      'line',
-          borderColor:     c.avgLine,
-          borderWidth:      2,
-          borderDash:       [5, 4],
-          pointRadius:      0,
+          label: 'Average',
+          data: avgLine,
+          type: 'line',
+          borderColor: c.avgLine,
+          borderWidth: 2,
+          borderDash: [5, 4],
+          pointRadius: 0,
           pointHoverRadius: 0,
-          fill:             false,
-          tension:          0,
+          fill: false,
+          tension: 0,
         },
       ],
     },
@@ -854,23 +810,23 @@ function loadFlavorDetail() {
       },
       scales: {
         x: {
-          type:   'linear',
-          min:    -0.5,
-          max:    sortedReviews.length - 0.5,
+          type: 'linear',
+          min: -0.5,
+          max: sortedReviews.length - 0.5,
           border: { color: CHART_COLORS.axis },
           ticks: {
-            font:        { family: 'DM Mono', size: 9 },
-            color:       CHART_COLORS.text,
-            stepSize:    1,
-            callback:    (val) => reviewerLabels[val] ?? '',
+            font: { family: 'DM Mono', size: 9 },
+            color: CHART_COLORS.text,
+            stepSize: 1,
+            callback: (val) => reviewerLabels[val] ?? '',
             maxRotation: 45,
             minRotation: 0,
           },
         },
         y: {
           ...baseChartOptions.scales.y,
-          min:    0,
-          max:    10,
+          min: 0,
+          max: 10,
           border: { color: CHART_COLORS.axis },
           ticks: { font: { family: 'DM Mono', size: 9 }, color: CHART_COLORS.text, stepSize: 2 },
         },
@@ -924,8 +880,8 @@ function renderFlavorGrid(flavors) {
       </div>`;
     }
     const barColor = f.avgRating >= 8 ? '#1e40af' : f.avgRating >= 6 ? '#2563eb' : '#93c5fd';
-    const barPct   = (f.avgRating / 10) * 100;
-    const avatar   = f.image
+    const barPct = (f.avgRating / 10) * 100;
+    const avatar = f.image
       ? `<img src="./assets/images/${f.image}" alt="${f.name}" style="width:72px;height:72px;object-fit:contain;border-radius:6px;flex-shrink:0;">`
       : `<div class="reviewer-card-avatar" style="background:#2563eb;font-size:22px;letter-spacing:0;"></div>`;
     return `<div class="reviewer-card" onclick="selectFlavorCard(${f.id})">
@@ -949,7 +905,7 @@ function renderFlavorGrid(flavors) {
     </div>`;
   }
 
-  const ratedSection  = rated.map(makeCard).join('');
+  const ratedSection = rated.map(makeCard).join('');
   const unratedSection = unrated.length ? `
     <div style="grid-column:1/-1;margin-top:24px;margin-bottom:8px;font-size:11px;font-family:'DM Mono',monospace;color:var(--off-white);letter-spacing:1px;text-transform:uppercase;border-top:1px solid var(--border);padding-top:16px;">
       Queued Flavors (${unrated.length})
@@ -983,7 +939,6 @@ function selectFlavorCard(id) {
 //  REVIEWER GRID (default view)
 // ═══════════════════════════════════════════════════════════════════
 function renderReviewerGrid() {
-  // Sort alphabetically by default
   const sorted = [...REVIEWERS].sort((a, b) => a.name.localeCompare(b.name));
  
   const cardsHTML = sorted.map(r => {
@@ -1015,11 +970,8 @@ function renderReviewerGrid() {
   document.getElementById('reviewer-detail-panel').innerHTML =
     `<div class="reviewer-grid">${cardsHTML}</div>`;
  
-  // Hide the back button when showing the grid
   const backBtn = document.getElementById('reviewer-back-btn');
   if (backBtn) backBtn.style.display = 'none';
- 
-  // Reset the select
   document.getElementById('reviewer-select').value = '';
 }
  
@@ -1044,28 +996,20 @@ function loadReviewerDetail() {
   const r = REVIEWERS.find(x => x.id === id);
   if (!r) return;
 
-  // Real per-flavor ratings for this reviewer
   const ratedFlavors = FLAVORS
     .filter(f => r.ratings[f.name] !== undefined && !f.unrated)
     .map(f => ({ ...f, myRating: r.ratings[f.name], myComment: r.comments[f.name] ?? '' }));
   const sortedRatedFlavors = [...ratedFlavors].sort((a, b) => b.myRating - a.myRating);
-
   const topFlavors = sortedRatedFlavors.slice(0, 5);
-  // Bottom 5 rules:
-  // - ≤5 reviewed: show nothing in bottom list
-  // - 6–9 reviewed: show only the difference (e.g. 6 reviewed → 1 bottom entry)
-  // - ≥10 reviewed: show full 5 bottom entries
-  const botCount   = sortedRatedFlavors.length <= 5 ? 0 : Math.min(5, sortedRatedFlavors.length - 5);
+  const botCount = sortedRatedFlavors.length <= 5 ? 0 : Math.min(5, sortedRatedFlavors.length - 5);
   const botFlavors = [...sortedRatedFlavors].sort((a, b) => a.myRating - b.myRating).slice(0, botCount);
-  const contrarian  = +(Math.abs(r.bias) + r.stddev / 4).toFixed(2);
+  const contrarian = +(Math.abs(r.bias) + r.stddev / 4).toFixed(2);
 
-  // Bias label
   const highestFlavor = FLAVORS.find(f => f.name === r.highest);
-  const highestLabel  = r.highest + ((highestFlavor?.type.toLowerCase() !== 'original' && highestFlavor?.type.toLowerCase() !== 'loaded') ? ` (${capitalize(highestFlavor.type)})` : '');
-  const lowestFlavor  = FLAVORS.find(f => f.name === r.lowest);
-  const lowestLabel   = r.lowest  + ((lowestFlavor?.type.toLowerCase() !== 'original' && lowestFlavor?.type.toLowerCase() !== 'loaded') ? ` (${capitalize(lowestFlavor.type)})` : '');
+  const highestLabel = r.highest + ((highestFlavor?.type.toLowerCase() !== 'original' && highestFlavor?.type.toLowerCase() !== 'loaded') ? ` (${capitalize(highestFlavor.type)})` : '');
+  const lowestFlavor = FLAVORS.find(f => f.name === r.lowest);
+  const lowestLabel = r.lowest  + ((lowestFlavor?.type.toLowerCase() !== 'original' && lowestFlavor?.type.toLowerCase() !== 'loaded') ? ` (${capitalize(lowestFlavor.type)})` : '');
 
-  // Top/bot flavor rows
   function lbRowHTML(f, i, worst = false) {
     const score = f.myRating;
     return `<div class="lb-row" onclick="goToFlavor(${f.id})">
@@ -1173,18 +1117,18 @@ const avatar = document.body.classList.contains('dark')
       labels: sample.map(f => `${f.name} ${(f.type !== 'original' && f.type !== 'loaded') ? '(' + capitalize(f.type) + ')': ''}`),
       datasets: [
         {
-          label:           'Reviewer',
-          data:            sample.map(f => f.myRating),
+          label: 'Reviewer',
+          data: sample.map(f => f.myRating),
           backgroundColor: r.color,
-          borderRadius:    4,
-          borderSkipped:   false,
+          borderRadius: 4,
+          borderSkipped: false,
         },
         {
-          label:           'Average',
-          data:            sample.map(f => f.avgRating),
+          label: 'Average',
+          data: sample.map(f => f.avgRating),
           backgroundColor: '#bfdbfe',
-          borderRadius:    4,
-          borderSkipped:   false,
+          borderRadius: 4,
+          borderSkipped: false,
         },
       ],
     },
@@ -1198,7 +1142,20 @@ const avatar = document.body.classList.contains('dark')
           labels: { font: { family: 'DM Mono', size: 11 }, color: CHART_COLORS.text },
         },
       },
-      scales: { ...baseChartOptions.scales, y: { ...baseChartOptions.scales.y, min: 0, max: 10 } },
+      scales: {
+        ...baseChartOptions.scales,
+        x: {
+          ...baseChartOptions.scales.x,
+          ticks: {
+            font: { family: 'DM Mono', size: window.innerWidth < 600 ? 6 : 8 },
+            color: CHART_COLORS.text,
+            maxRotation: 90,
+            minRotation: window.innerWidth < 600 ? 90 : 50,
+            autoSkip: false,
+          },
+        },
+        y: { ...baseChartOptions.scales.y, min: 0, max: 10 },
+      },
     },
   });
 
@@ -1230,12 +1187,12 @@ function toggleWaferFilter(el, wafer) {
       el.classList.add('active');
     }
  
-    // If nothing selected, revert to "All"
+    // If nothing selected, revert to "All".
     if (activeWaferFilters.size === 0) {
       activeWaferFilters = new Set(['all']);
       document.querySelector('#wafer-filters .filter-tag[data-wafer="all"]')?.classList.add('active');
     } else {
-      // If every individual wafer is now selected, collapse back to "All"
+      // If every individual wafer is now selected, collapse back to "All".
       const allWaferTags = [...document.querySelectorAll('#wafer-filters .filter-tag:not([data-wafer="all"])')];
       if (allWaferTags.length > 0 && allWaferTags.every(t => activeWaferFilters.has(t.dataset.wafer))) {
         activeWaferFilters = new Set(['all']);
@@ -1264,12 +1221,12 @@ function toggleTypeFilter(el, type) {
       el.classList.add('active');
     }
  
-    // If nothing selected, revert to "All"
+    // If nothing selected, revert to "All".
     if (activeTypeFilters.size === 0) {
       activeTypeFilters = new Set(['all']);
       document.querySelector('#type-filters .filter-tag[data-type="all"]')?.classList.add('active');
     } else {
-      // If every individual type is now selected, collapse back to "All"
+      // If every individual type is now selected, collapse back to "All".
       const allTypeTags = [...document.querySelectorAll('#type-filters .filter-tag:not([data-type="all"])')];
       if (allTypeTags.length > 0 && allTypeTags.every(t => activeTypeFilters.has(t.dataset.type))) {
         activeTypeFilters = new Set(['all']);
@@ -1291,12 +1248,12 @@ function toggleTagFilter(tag) {
     el?.classList.add('active');
   }
 
-  // If every individual tag pill is now selected, collapse back to "All"
+  // If every individual tag pill is now selected, collapse back to "All".
   const allTagPills = [...document.querySelectorAll('.tag-filter-pill:not(.tag-filter-all)')];
   if (allTagPills.length > 0 && allTagPills.every(t => activeTagFilters.has(t.dataset.tag))) {
     clearTagFilters();
   } else {
-    // Keep All pill active only when nothing is selected
+    // Keep All pill active only when nothing is selected.
     const allPill = document.querySelector('.tag-filter-all');
     if (allPill) allPill.classList.toggle('active', activeTagFilters.size === 0);
   }
@@ -1305,11 +1262,11 @@ function toggleTagFilter(tag) {
 }
  
 function getFilteredFlavors() {
-  const minRating  = parseFloat(document.getElementById('rating-filter').value);
+  const minRating = parseFloat(document.getElementById('rating-filter').value);
   return FLAVORS.filter(f => {
     if (!activeWaferFilters.has('all') && !f.wafers.some(w => activeWaferFilters.has(w))) return false;
     if (!activeTypeFilters.has('all') && !activeTypeFilters.has(f.type)) return false;
-    // Unrated flavors are excluded by a nonzero min-rating filter, otherwise always shown
+    
     if (!f.unrated && f.avgRating < minRating) return false;
     if (f.unrated && minRating > 0) return false;
     if (activeTagFilters.size > 0 && !f.tags.some(t => activeTagFilters.has(t))) return false;
@@ -1320,13 +1277,13 @@ function getFilteredFlavors() {
 function applyFilters() {
   const filtered = getFilteredFlavors();
  
-  // 1. Rebuild flavor dropdown
-  const flavorSel  = document.getElementById('flavor-select');
+  // 1. Rebuild flavor dropdown.
+  const flavorSel = document.getElementById('flavor-select');
   const currentVal = flavorSel.value;
   flavorSel.innerHTML = '<option value="">— all oreos —</option>';
   [...filtered].sort((a, b) => a.name.localeCompare(b.name)).forEach(f => {
     const opt = document.createElement('option');
-    opt.value       = f.id;
+    opt.value = f.id;
     
     opt.textContent = f.name + `${f.type.toLowerCase() !== 'original' && f.type.toLowerCase() !== 'loaded' 
         ? ` (${capitalize(f.type)})` : ''}`;
@@ -1340,19 +1297,19 @@ function applyFilters() {
         <div class="empty-icon">🔍</div>
         <div class="empty-text">selected flavor filtered out — pick another</div>
       </div>`;
-    document.getElementById('flavor-type-badge').innerHTML        = '';
+    document.getElementById('flavor-type-badge').innerHTML = '';
   }
  
-  // 2. Overview leaderboards
+  // 2. Overview leaderboards.
   buildLeaderboards(filtered);
  
-  // 3. Overview charts
+  // 3. Overview charts.
   if (charts['type']) {
     const ratedFiltered = filtered.filter(f => !f.unrated);
-    const typeSet  = [...new Set(ratedFiltered.map(f => f.type))].sort();
-    const blues    = ['#1d4ed8','#2563eb','#3b82f6','#60a5fa','#93c5fd','#bfdbfe','#e0f2fe','#0284c7'];
-    charts['type'].data.labels            = typeSet.map(capitalize);
-    charts['type'].data.datasets[0].data  = typeSet.map(t => {
+    const typeSet = [...new Set(ratedFiltered.map(f => f.type))].sort();
+    const blues = ['#1d4ed8','#2563eb','#3b82f6','#60a5fa','#93c5fd','#bfdbfe','#e0f2fe','#0284c7'];
+    charts['type'].data.labels = typeSet.map(capitalize);
+    charts['type'].data.datasets[0].data = typeSet.map(t => {
       const tf = ratedFiltered.filter(f => f.type === t);
       return tf.length ? +(tf.reduce((s, f) => s + f.avgRating, 0) / tf.length).toFixed(2) : 0;
     });
@@ -1360,6 +1317,7 @@ function applyFilters() {
     charts['type'].options.plugins.tooltip.callbacks.label = ctx => `  ${ctx.parsed.y.toFixed(2)} / 10`;
     charts['type'].update();
   }
+
   if (charts['wafer']) {
     const ratedFiltered = filtered.filter(f => !f.unrated);
     const blues = ['#002280', '#002381', '#002998', '#0835b0', '#1140c0', '#1d4ed8','#2563eb','#3b82f6','#60a5fa','#93c5fd','#bfdbfe','#e0f2fe'];
@@ -1370,25 +1328,23 @@ function applyFilters() {
       const contributing = ratedFiltered.filter(f => f.wafers.includes(w));
       return contributing.length ? +(contributing.reduce((s, f) => s + f.avgRating, 0) / contributing.length).toFixed(2) : 0;
     });
-    charts['wafer'].data.labels           = waferSet.map(formatWaferLabel);
+    charts['wafer'].data.labels = waferSet.map(formatWaferLabel);
     charts['wafer'].data.datasets[0].data = waferAvgs;
     charts['wafer'].data.datasets[0].backgroundColor = waferSet.map((_, i) => blues[i % blues.length]);
     charts['wafer'].options.plugins.tooltip.callbacks.label = ctx => `  ${ctx.parsed.y.toFixed(2)} / 10`;
     charts['wafer'].update();
   }
+
   if (charts['scatter']) {
     const c = getChartColors();
     const sd = filtered.filter(f => !f.unrated && !f.avgOnly).map(f => ({ x: f.avgRating, y: f.stddev, label: f.name }));
-    charts['scatter'].data.datasets[0].data            = sd;
-    charts['scatter'].data.datasets[0].backgroundColor = sd.map(d =>
-      d.y > 2   ? c.dotHigh
-      : d.x > 8 ? c.dotTop
-      :            c.dotBase
+    charts['scatter'].data.datasets[0].data  = sd;
+    charts['scatter'].data.datasets[0].backgroundColor = sd.map(d => d.y > 2   ? c.dotHigh : d.x > 8 ? c.dotTop : c.dotBase
     );
     charts['scatter'].update();
   }
  
-  // 4. Count label
+  // 4. Count label.
   const countEl = document.getElementById('filter-count');
   if (countEl) {
     const ratedCount = filtered.filter(f => !f.unrated).length;
@@ -1396,7 +1352,7 @@ function applyFilters() {
     countEl.textContent = `${ratedCount} rated` + (unratedCount ? ` + ${unratedCount} unrated` : '') + ` of ${FLAVORS.length} total`;
   }
 
-  // 5. Re-render flavor grid if it's currently visible (no detail open)
+  // 5. Re-render flavor grid if it's currently visible (no detail open).
   if (currentPage === 'flavors' && !document.getElementById('flavor-select').value) {
     renderFlavorGrid(filtered);
   }
@@ -1413,7 +1369,7 @@ function clearFilters() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  THEME-AWARE CHART UPDATE
+//  THEME-AWARE CHART UPDATE (DARK/LIGHT)
 // ═══════════════════════════════════════════════════════════════════
 function updateChartsForTheme() {
   const c = getChartColors();
@@ -1421,32 +1377,28 @@ function updateChartsForTheme() {
   Object.entries(charts).forEach(([key, chart]) => {
     if (!chart) return;
 
-    // Update tick / title colors and axis line color
+    // Update tick / title colors and axis line color.
     Object.values(chart.options.scales ?? {}).forEach(scale => {
       if (scale.ticks) scale.ticks.color = c.text;
       if (scale.title) scale.title.color = c.text;
 
-      // Update axis line color
+      // Update axis line color.
       if (scale.grid) {
         scale.grid.borderColor = c.isDarkMode ? '#ffffff' : c.gridBorderDefault;
       }
     });
 
-    // Update legend label color
+    // Update legend label color.
     if (chart.options.plugins?.legend?.labels) {
       chart.options.plugins.legend.labels.color = c.text;
     }
 
-    // Re-color scatter dots
+    // Re-color scatter dots.
     if (key === 'scatter') {
-      chart.data.datasets[0].backgroundColor = chart.data.datasets[0].data.map(d =>
-        d.y > 2 ? c.dotHigh
-        : d.x > 8 ? c.dotTop
-        : c.dotBase
-      );
+      chart.data.datasets[0].backgroundColor = chart.data.datasets[0].data.map(d => d.y > 2 ? c.dotHigh : d.x > 8 ? c.dotTop : c.dotBase);
     }
 
-    // Re-color flavor detail "Average" reference line
+    // Re-color flavor detail "Average" reference line.
     if (key === 'flavorDist') {
       chart.data.datasets.forEach(ds => {
         if (ds.type === 'line' || ds.label === 'Average') ds.borderColor = c.avgLine;
@@ -1457,11 +1409,8 @@ function updateChartsForTheme() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════
-//  BOOT
-// ═══════════════════════════════════════════════════════════════════
 async function boot() {
-  // Show loading state
+  // Show loading state.
   document.getElementById('page-title').textContent = 'Loading…';
 
   let raw;
@@ -1480,12 +1429,10 @@ async function boot() {
     return;
   }
 
-  // Parse → populate globals
   const parsed  = parseData(raw);
   FLAVORS       = parsed.flavorList;
   REVIEWERS     = parsed.reviewerList;
 
-  // Wire up UI
   populateWaferFilters();
   populateTypeFilters();
   populateIngredientFilter();
@@ -1493,20 +1440,19 @@ async function boot() {
   renderFlavorGrid();
   updateOverviewStats();
   initOverviewCharts();
-  applyFilters(); // populates flavor dropdown
+  applyFilters();
  
   document.getElementById('page-title').textContent = 'OVERVIEW';
 }
  
 document.addEventListener('DOMContentLoaded', () => {
-  // Wait for fonts before rendering charts so label measurements are accurate
+  // Wait for fonts before rendering charts so label measurements are accurate.
   if (document.fonts?.ready) {
     document.fonts.ready.then(boot);
   } else {
     boot();
   }
 
-  // Swap #oreo-link image when dark mode is toggled
   function syncOreoLink() {
     const img = document.getElementById('oreo-link');
     if (!img) return;
@@ -1524,10 +1470,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ? './assets/images/golden-oreo.webp'
       : './assets/images/oreo.webp';
   }
-  // Run once on load (in case dark mode is already active)
+  
   syncOreoLink();
   syncOreoAvatar();
-  // Watch for class changes on <body>
+  
   new MutationObserver(() => { 
     syncOreoLink(); 
     syncOreoAvatar();
@@ -1537,13 +1483,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Resize all active charts when the window resizes
 let _resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(_resizeTimer);
   _resizeTimer = setTimeout(() => {
+    buildAllFlavorsChart(FLAVORS);
     Object.values(charts).forEach(c => c?.resize());
-    // Close mobile sidebar overlay if viewport is now wide enough for the fixed sidebar
     if (window.innerWidth > 900) {
       closeSidebar();
     }

@@ -1,10 +1,10 @@
----
+—-
 layout: blog
 parent-title: devlogs
 title: nintendo games
 page-title: nintendo games devlog
 tags: devlog, game
----
+—-
 
 <div id="main">
     <div class="post-content">
@@ -47,7 +47,7 @@ tags: devlog, game
                 </ul>
             </p>
 
-            <p><i>></i> creating the base carousel was fairly simple -- there are a lot of tutorials online. the Switch UI relies on 
+            <p><i>></i> creating the base carousel was fairly simple — there are a lot of tutorials online. the Switch UI relies on 
                 the joycon and/or touch & drag controls. for more clarity, i chose to add arrows to the left and right ends to serve as a 
                 visual cue for the user. i loaded the games into a list from a JSON of the titles and cover arts.
                 to match the 12 game maximum, all i had to do was splice this list.</p>
@@ -59,7 +59,7 @@ tags: devlog, game
                 display the title of the selected game, and updated it on selection as well. the Switch has the title appear directly above
                 the selected game, so i changed the position of this element based on the index of the selected game to match.</p>
 
-            <p><i>></i> this partially worked -- the visual was correct -- but the game was not brought into focus when it was selected. 
+            <p><i>></i> this partially worked — the visual was correct — but the game was not brought into focus when it was selected. 
                 i added a transform to the carousel that would shift the games left and right based on the index of the selected game. there 
                 were a lot of quirks here actually and i spent a lot of my time on it. for example, the components (e.g. border, title) of 
                 the first and last game selected kept getting cut off by the edges of the carousel due to the way i nested the elements.
@@ -98,21 +98,21 @@ tags: devlog, game
                 some small tweaks after. the content overlap, however, required more attention. i also ended up spending a lot of time here...</p>
 
             <p><i>></i> but by scaling the content with the screen, disabling screen scroll (note: not the carousel or grid scroll), and making the position of the 
-                header and static elements stickier, i was able to resolve these issues -- it obviously looks best on desktop, but at the least, it doesn't look
+                header and static elements stickier, i was able to resolve these issues — it obviously looks best on desktop, but at the least, it doesn't look
                 terrible on narrower screens.</p>
 
-            <p><i>></i> i did one final comparison of my page against the screenshots i had taken -- everything looked pretty solid, but i realized that on the full 
+            <p><i>></i> i did one final comparison of my page against the screenshots i had taken — everything looked pretty solid, but i realized that on the full 
                 game library page, i had missed the detail of displaying the title of the selected game. to match the UI, i added a transparent tooltip 
                 that appears either below or above the selected game based on the space available in the outer container.</p>
 
         <h3><i>final thoughts:</i></h3>
-            <p><i>></i> not a lot to say here -- in retrospect, a lot of my time went to seemingly small visual adjustments. 
+            <p><i>></i> not a lot to say here — in retrospect, a lot of my time went to seemingly small visual adjustments. 
                 i definitely had a hard time with getting the elements to line up the way i wanted. but i still had a really great time making this! 
                 i think it looks pretty darn close to the actual Switch UI. (≧▽≦ﾉﾉﾞ☆</p>
             
             <p><i>></i> key takeaways:
                 <ul>
-                    <li>look into mobile-first development</li>
+                    <li>consider mobile-first development</li>
                 </ul> 
             </p>
 
