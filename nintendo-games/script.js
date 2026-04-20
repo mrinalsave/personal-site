@@ -120,9 +120,8 @@ if (track) {
         if (selectedTitle) selectedTitle.textContent = isAllSoftware ? 'All Software' : games[i].title;
         positionTitle(i);
         if (okBtn) {
-            if (isAllSoftware) okBtn.childNodes[2].nodeValue = " OK";
-            else okBtn.childNodes[2].nodeValue = " Start";
-
+            const btnText = okBtn.querySelector('.btn-text');
+            if (btnText) btnText.textContent = isAllSoftware ? ' OK' : ' Start';
             okBtn.classList.remove('inactive');
             okBtn.disabled = false;
         }
@@ -167,7 +166,7 @@ if (track) {
 
     if (okBtn) okBtn.addEventListener('click', confirmSelection);
     if (backBtn) backBtn.addEventListener('click', () => { 
-        fadeTo('../explore/index');
+        fadeTo('../explore/');
     } );
 
     // ── Scroll (view only) ─────────────────────────
@@ -250,13 +249,21 @@ if (track) {
             confirmSelection();
         }
         if (e.key === 'b' || e.key === 'B') {
-            fadeTo('../explore/index');
+            fadeTo('../explore/');
         }
     });
 
     // ── Arrow buttons ──────────────────────────────
-    arrowLeft?.addEventListener('click',  () => scrollTo(scrollOffset - STEP(), true));
-    arrowRight?.addEventListener('click', () => scrollTo(scrollOffset + STEP(), true));
+    arrowLeft?.addEventListener('click', () => {
+        const n = Math.max(0, selectedIndex - 1);
+        selectGame(n);
+        scrollToShowIndex(n);
+    });
+    arrowRight?.addEventListener('click', () => {
+        const n = Math.min(games.length, selectedIndex + 1);
+        selectGame(n);
+        scrollToShowIndex(n);
+    });
 
     // ── Mouse drag (scoped to trackOuter only) ─────
     let dragStartX = 0;
@@ -454,7 +461,7 @@ if (softwareGrid) {
 
     function navigateBackToHome() {
         sessionStorage.setItem('homeSelectedIndex', String(games.length));
-        fadeTo('./index');
+        fadeTo('./');
     }
     window.navigateBackToHome = navigateBackToHome;
 
