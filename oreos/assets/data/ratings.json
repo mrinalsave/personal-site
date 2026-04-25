@@ -694,7 +694,7 @@
 
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
-            "Tags": ["fruit", "blueberry", "raspberry", "mix"],
+            "Tags": ["fruit", "blueberry", "raspberry", "mix", "international"],
             "Image": "blueberry-raspberry.webp"
         }
     ],
@@ -761,7 +761,7 @@
 
             "Wafers": ["cocoa (Default)"],
             "Type": "Thins",
-            "Tags": ["fruit", "matcha", "fig", "fruit", "mix"],
+            "Tags": ["fruit", "matcha", "fig", "fruit", "mix", "international"],
             "Image": "matcha-fig.webp"
         }
     ],
@@ -885,7 +885,7 @@
 
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
-            "Tags": ["fruit", "grape", "peach", "mix"],
+            "Tags": ["fruit", "grape", "peach", "mix", "international"],
             "Image": "grape-peach.webp"
         }
     ],
@@ -967,7 +967,7 @@
             
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
-            "Tags": ["savory", "cheese"],
+            "Tags": ["savory", "cheese", "international"],
             "Image": "cheese.webp"
         }
     ],
@@ -1170,7 +1170,7 @@
             
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
-            "Tags": ["matcha", "ice cream", "dessert", "cooling"],
+            "Tags": ["matcha", "ice cream", "dessert", "cooling", "international"],
             "Image": "ice-cream-matcha.webp"
         }
     ],
@@ -1443,7 +1443,7 @@
             
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
-            "Tags": ["fruit", "raspberry", "vanilla", "mix"],
+            "Tags": ["fruit", "raspberry", "vanilla", "mix", "international"],
             "Image": "raspberry-vanilla.webp"
         }
     ],
@@ -2021,7 +2021,7 @@
             
             "Wafers": ["cocoa (Default)"],
             "Type": "Thins",
-            "Tags": ["vanilla"],
+            "Tags": ["vanilla", "international"],
             "Image": "crushed-vanilla-thins.webp"
         }
     ],
@@ -2249,7 +2249,7 @@
             
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
-            "Tags": ["chocolate", "fudge", "covered"],
+            "Tags": ["chocolate", "fudge", "covered", "international"],
             "Image": "milk-chocolate-covered.webp"
         }
     ],
@@ -2579,7 +2579,7 @@
             
             "Wafers": ["cocoa (Default)"],
             "Type": "Minis",
-            "Tags": ["hazelnut"],
+            "Tags": ["hazelnut", "international"],
             "Image": "hazelnut-minis.webp"
         }
     ],
