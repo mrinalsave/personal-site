@@ -35,7 +35,7 @@
             "Comment": "this is gross and tastes too artificial"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 4.5,
             "Comment": "smells really strong, but it's not actually that bad"
         },
@@ -107,7 +107,7 @@
             "Comment": "solid 6, it's just coffee"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.0,
             "Comment": "I wouldn't like, NOT eat it. also very mild"
         },
@@ -209,7 +209,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 3.0,
             "Comment": ""
         },
@@ -246,7 +246,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -323,7 +323,7 @@
             "Comment": "was a 9 but the aftertaste brought it down. honestly, with a single sip of milk I'd be sold."
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 5.5,
             "Comment": ""
         },
@@ -352,9 +352,9 @@
             "Rating": 6.2875000000000005,
             "Comment": "",
 
-            "Wafers": ["cocoa (Default)"],
+            "Wafers": ["cocoa (Default)", "colored"],
             "Type": "original",
-            "Tags": ["drink", "popping candy", "collaboration"],
+            "Tags": ["cola", "drink", "popping candy", "collaboration"],
             "Image": "coca-cola.webp"
         }
     ],
@@ -395,7 +395,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.6,
             "Comment": ""
         },
@@ -477,7 +477,7 @@
             "Comment": "I don't like marshmallow"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.8,
             "Comment": ""
         },
@@ -544,7 +544,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 1.5,
             "Comment": "nasty"
         },
@@ -576,7 +576,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.0,
             "Comment": "fine but should've been stronger"
         },
@@ -673,7 +673,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 4,
             "Comment": "feels like I'm chewing gum"
         },
@@ -690,7 +690,7 @@
         {
             "Name": "Average",
             "Rating": 4.1,
-            "Comment": "arman clearly has some dental PTSD",
+            "Comment": "",
 
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
@@ -715,7 +715,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.5,
             "Comment": ""
         },
@@ -772,7 +772,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.7,
             "Comment": ""
         },
@@ -844,7 +844,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 3.85,
             "Comment": "it was surprisingly tart"
         },
@@ -896,7 +896,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.5,
             "Comment": ""
         },
@@ -983,7 +983,7 @@
             "Comment": "rather have a normal Oreo"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.9,
             "Comment": "tastes like those square orange peanut butter crackers"
         },
@@ -1055,7 +1055,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.55,
             "Comment": ""
         },
@@ -1139,7 +1139,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.3,
             "Comment": ""
         },
@@ -1186,7 +1186,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -1228,7 +1228,7 @@
     ],
     "Selena Gomez": [
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.9,
             "Comment": "smells like a graham cracker"
         },
@@ -1315,7 +1315,7 @@
             "Comment": "nice floral aftertaste, cookie taste was too strong"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.75,
             "Comment": ""
         },
@@ -1392,7 +1392,7 @@
             "Comment": "not a fan of the blueberry aftertaste"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.5,
             "Comment": ""
         },
@@ -1469,7 +1469,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.5,
             "Comment": "misleading to call it orange spice due to lack of orange flavor"
         },
@@ -1526,7 +1526,7 @@
             "Comment": "not too sweet"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.6,
             "Comment": ""
         },
@@ -1623,7 +1623,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -1670,7 +1670,7 @@
             "Comment": "pretty good!"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 5.5,
             "Comment": ""
         },
@@ -1702,7 +1702,7 @@
         {
             "Name": "Average",
             "Rating": 6.57,
-            "Comment": "very strong smell, tastes like toffee, mixed feelings about the \"crunch\". we have learned lane judges extremely incorrectly. the protection of the sanctity of the ranking system is tearing this group apart.",
+            "Comment": "very strong smell, tastes like toffee, mixed feelings about the \"crunch\". we have learned lola judges extremely incorrectly. the protection of the sanctity of the ranking system is tearing this group apart.",
             
             "Wafers": ["cocoa (Default)"],
             "Type": "original",
@@ -1727,7 +1727,7 @@
             "Comment": "want a little more oomph but dang is it good"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -1779,7 +1779,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 5.9,
             "Comment": ""
         },
@@ -1851,7 +1851,7 @@
             "Comment": "can taste the Nutter Butter (I like Nutter Butter) but wish it was more Reese's-ish"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 8.25,
             "Comment": ""
         },
@@ -1913,7 +1913,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.5,
             "Comment": ""
         },
@@ -1970,7 +1970,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.8,
             "Comment": ""
         },
@@ -2037,7 +2037,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 10.0,
             "Comment": ""
         },
@@ -2129,7 +2129,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 9.5,
             "Comment": ""
         },
@@ -2186,7 +2186,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 9.2,
             "Comment": ""
         },
@@ -2228,7 +2228,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.3,
             "Comment": "not enough Oreo flavor"
         },
@@ -2255,7 +2255,7 @@
     ],
     "Cookie Dough": [
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.7,
             "Comment": ""
         },
@@ -2357,7 +2357,7 @@
             "Comment": "can dunk"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 8.2,
             "Comment": ""
         },
@@ -2399,7 +2399,7 @@
             "Comment": "extra point for the packaging"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 7.8,
             "Comment": ""
         },
@@ -2496,7 +2496,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 8.0,
             "Comment": ""
         },
@@ -2538,7 +2538,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 5.5,
             "Comment": "cookie is too hard, can't taste the creme"
         },
@@ -2590,7 +2590,7 @@
             "Comment": ""
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 6.25,
             "Comment": ""
         },
@@ -2637,7 +2637,7 @@
             "Comment": "too much creme for this flavor"
         },
         {
-            "Name": "mina",
+            "Name": "atsu",
             "Rating": 8.2,
             "Comment": ""
         },
@@ -2678,6 +2678,8 @@
         }
     ],
 
+
+
     "BABYMONSTER": [
         {
             "Name": "Average",
@@ -2690,6 +2692,18 @@
             "Image": "babymonster.webp"
         }
     ],
+    "Black Sesame": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Thins",
+            "Tags": ["black sesame", "sesame", "international"],
+            "Image": "black-sesame.webp"
+        }
+    ],
     "Dark Chocolate Mudcake": [
         {
             "Name": "Average",
@@ -2700,30 +2714,6 @@
             "Type": "Double Stuff",
             "Tags": ["chocolate", "dessert", "cake", "international"],
             "Image": "dark-choc-mudcake.webp"
-        }
-    ],
-    "Mocha Frappe": [
-        {
-            "Name": "Average",
-            "Rating": "N/A",
-            "Comment": "",
-
-            "Wafers": ["cocoa (Default)"],
-            "Type": "Double Stuff",
-            "Tags": ["chocolate", "coffee", "mocha", "international"],
-            "Image": "mocha-frappe.webp"
-        }
-    ],
-    "Pascall Marshmallow": [
-        {
-            "Name": "Average",
-            "Rating": "N/A",
-            "Comment": "",
-
-            "Wafers": ["colored"],
-            "Type": "Double Stuff",
-            "Tags": ["marshmallow", "candy", "collaboration", "international"],
-            "Image": "pascall.webp"
         }
     ],
     "Dill Pickle Flavored Fudge": [
@@ -2748,6 +2738,54 @@
             "Type": "original",
             "Tags": ["marshmallow", "toasted marshmallow", "color changing", "collaboration"],
             "Image": "dr-doom.webp"
+        }
+    ],
+    "Mocha Frappe": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "Double Stuff",
+            "Tags": ["chocolate", "coffee", "mocha", "international"],
+            "Image": "mocha-frappe.webp"
+        }
+    ],
+    "Mushroom": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)", "colored"],
+            "Type": "original",
+            "Tags": ["mushroom", "savory", "international"],
+            "Image": "mushroom.webp"
+        }
+    ],
+    "Pascall Marshmallow": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)", "colored"],
+            "Type": "Double Stuff",
+            "Tags": ["marshmallow", "candy", "collaboration", "international"],
+            "Image": "pascall.webp"
+        }
+    ],
+    "Red Bean": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)", "colored"],
+            "Type": "original",
+            "Tags": ["red bean", "international"],
+            "Image": "red-bean.webp"
         }
     ]
 }
