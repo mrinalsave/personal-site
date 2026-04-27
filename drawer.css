@@ -46,7 +46,7 @@ header .hamburger span {
 .mobile-drawer a {
     font-family: 'Figtree', sans-serif;
     font-size: 1.2rem;
-    color: var(--muted);
+    color: var(--ink);
     text-decoration: none;
 }
 .mobile-drawer a:hover {

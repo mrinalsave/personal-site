@@ -29,13 +29,23 @@ window._onThemeChange = [];
 function applyTheme(dark) {
     document.documentElement.classList.toggle('dark', dark);
     document.body.classList.toggle('dark', dark);
-    
+
     getDarkToggles().forEach(a => {
         const isDrawer = a.closest('.mobile-drawer');
         a.textContent = dark
             ? (isDrawer ? '🌑 toggle dark mode'  : '🌑')
             : (isDrawer ? '☀️ toggle light mode' : '☀️');
     });
+
+    // Swap background gif
+    const bgSource = document.querySelector('.bg-gif source');
+    const bgImg    = document.querySelector('.bg-gif img');
+    if (bgSource) bgSource.srcset = dark
+        ? './assets/images/mobile-bg-dark.gif'
+        : './assets/images/mobile-bg.gif';
+    if (bgImg) bgImg.src = dark
+        ? './assets/images/desktop-bg-dark.gif'
+        : './assets/images/desktop-bg.gif';
 
     window._onThemeChange.forEach(fn => fn(dark));
 }

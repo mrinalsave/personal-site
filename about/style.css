@@ -209,3 +209,7 @@ body.dark .image-figure figcaption {
 body.dark .image-figure figcaption a {
     color: var(--white);
 }
+
+body.dark .subtitle a {
+    color: var(--white);
+}

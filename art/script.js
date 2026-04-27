@@ -24,18 +24,43 @@ const imageList = [
   "0108.webp"
 ];
 
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) lightbox.classList.remove('active');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') lightbox.classList.remove('active');
+});
+
 window.addEventListener('load', () => {
   const grid = document.querySelector('.grid');
 
   imageList.forEach(file => {
     const item = document.createElement('div');
     item.className = 'grid-item';
- 
+
     const img = document.createElement('img');
     img.src = `./assets/images/${file}`;
- 
+
     item.appendChild(img);
     grid.appendChild(item);
+
+    item.addEventListener('click', () => {
+      const src = `./assets/images/${file}`;
+
+      lightboxImg.style.opacity = '0';
+
+      const tempImg = new Image();
+      tempImg.src = src;
+      tempImg.onload = () => {
+        lightboxImg.src = src;
+        void lightboxImg.offsetWidth;
+        lightboxImg.style.opacity = '1';
+        lightbox.classList.add('active');
+      };
+    });
   });
 
   imagesLoaded(grid, () => {
@@ -46,4 +71,3 @@ window.addEventListener('load', () => {
     });
   });
 });
- 
