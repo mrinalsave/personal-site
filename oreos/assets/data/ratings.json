@@ -35,7 +35,7 @@
             "Comment": "this is gross and tastes too artificial"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 4.5,
             "Comment": "smells really strong, but it's not actually that bad"
         },
@@ -107,7 +107,7 @@
             "Comment": "solid 6, it's just coffee"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.0,
             "Comment": "I wouldn't like, NOT eat it. also very mild"
         },
@@ -163,7 +163,7 @@
 
             "Wafers": ["cocoa (Default)"],
             "Type": "Thins",
-            "Tags": ["coffee", "dessert"],
+            "Tags": ["coffee", "tiramisu", "dessert"],
             "Image": "tiramisu-thins.webp"
         }
     ],
@@ -209,7 +209,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 3.0,
             "Comment": ""
         },
@@ -246,7 +246,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -323,7 +323,7 @@
             "Comment": "was a 9 but the aftertaste brought it down. honestly, with a single sip of milk I'd be sold."
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 5.5,
             "Comment": ""
         },
@@ -395,7 +395,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.6,
             "Comment": ""
         },
@@ -477,7 +477,7 @@
             "Comment": "I don't like marshmallow"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.8,
             "Comment": ""
         },
@@ -544,7 +544,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 1.5,
             "Comment": "nasty"
         },
@@ -576,7 +576,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.0,
             "Comment": "fine but should've been stronger"
         },
@@ -673,7 +673,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 4,
             "Comment": "feels like I'm chewing gum"
         },
@@ -715,7 +715,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.5,
             "Comment": ""
         },
@@ -772,7 +772,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.7,
             "Comment": ""
         },
@@ -844,7 +844,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 3.85,
             "Comment": "it was surprisingly tart"
         },
@@ -896,7 +896,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.5,
             "Comment": ""
         },
@@ -983,7 +983,7 @@
             "Comment": "rather have a normal Oreo"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.9,
             "Comment": "tastes like those square orange peanut butter crackers"
         },
@@ -1055,7 +1055,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.55,
             "Comment": ""
         },
@@ -1139,7 +1139,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.3,
             "Comment": ""
         },
@@ -1186,7 +1186,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -1228,7 +1228,7 @@
     ],
     "Selena Gomez": [
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.9,
             "Comment": "smells like a graham cracker"
         },
@@ -1315,7 +1315,7 @@
             "Comment": "nice floral aftertaste, cookie taste was too strong"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.75,
             "Comment": ""
         },
@@ -1392,7 +1392,7 @@
             "Comment": "not a fan of the blueberry aftertaste"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.5,
             "Comment": ""
         },
@@ -1469,7 +1469,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.5,
             "Comment": "misleading to call it orange spice due to lack of orange flavor"
         },
@@ -1508,7 +1508,7 @@
         {
             "Name": "nattle",
             "Rating": 10.0,
-            "Comment": "10/10, would recommend to a friend"
+            "Comment": "10/10, would recommend to a friend (editor's note: they brought these in)"
         },
         {
             "Name": "aram",
@@ -1526,7 +1526,7 @@
             "Comment": "not too sweet"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.6,
             "Comment": ""
         },
@@ -1623,7 +1623,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -1670,7 +1670,7 @@
             "Comment": "pretty good!"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 5.5,
             "Comment": ""
         },
@@ -1727,7 +1727,7 @@
             "Comment": "want a little more oomph but dang is it good"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.0,
             "Comment": ""
         },
@@ -1779,7 +1779,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 5.9,
             "Comment": ""
         },
@@ -1851,7 +1851,7 @@
             "Comment": "can taste the Nutter Butter (I like Nutter Butter) but wish it was more Reese's-ish"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 8.25,
             "Comment": ""
         },
@@ -1913,7 +1913,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.5,
             "Comment": ""
         },
@@ -1970,7 +1970,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.8,
             "Comment": ""
         },
@@ -2037,7 +2037,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 10.0,
             "Comment": ""
         },
@@ -2129,7 +2129,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 9.5,
             "Comment": ""
         },
@@ -2186,7 +2186,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 9.2,
             "Comment": ""
         },
@@ -2228,7 +2228,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.3,
             "Comment": "not enough Oreo flavor"
         },
@@ -2255,7 +2255,7 @@
     ],
     "Cookie Dough": [
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.7,
             "Comment": ""
         },
@@ -2357,7 +2357,7 @@
             "Comment": "can dunk"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 8.2,
             "Comment": ""
         },
@@ -2399,7 +2399,7 @@
             "Comment": "extra point for the packaging"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 7.8,
             "Comment": ""
         },
@@ -2496,7 +2496,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 8.0,
             "Comment": ""
         },
@@ -2538,7 +2538,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 5.5,
             "Comment": "cookie is too hard, can't taste the creme"
         },
@@ -2590,7 +2590,7 @@
             "Comment": ""
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 6.25,
             "Comment": ""
         },
@@ -2637,7 +2637,7 @@
             "Comment": "too much creme for this flavor"
         },
         {
-            "Name": "atsu",
+            "Name": "mrinal",
             "Rating": 8.2,
             "Comment": ""
         },
@@ -2677,14 +2677,125 @@
             "Image": "creme-egg.webp"
         }
     ],
-
-
-
-    "BABYMONSTER": [
+    "MARVEL™ Stuf of Doom": [
+        {
+            "Name": "lola",
+            "Rating": 7.8,
+            "Comment": ""
+        },
+        {
+            "Name": "mrinal",
+            "Rating": 7.95,
+            "Comment": "the creme is a bit denser and the flavor reminds me of something... I just don't know what"
+        },
+        {
+            "Name": "oli",
+            "Rating": 8.2,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 8.2,
+            "Comment": "adding 0.05 for the color-changing effect"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.01,
+            "Comment": "the creme is pretty good, i can't lie"
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.5,
+            "Comment": "it tastes like a brownie. actually, it takes like chooclate cake"
+        },
+        {
+            "Name": "nattle",
+            "Rating": 7.5,
+            "Comment": "solid chocolate Oreo"
+        },
         {
             "Name": "Average",
             "Rating": "N/A",
             "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["marshmallow", "toasted marshmallow", "color changing", "collaboration"],
+            "Image": "dr-doom.webp"
+        }
+    ],
+    "MARVEL™ Stuf of Legends": [
+        {
+            "Name": "teddy",
+            "Rating": 8.2,
+            "Comment": "the blue color and the art are helping"
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.9,
+            "Comment": "disappointed by the low intensity of color-changing"
+        },
+        {
+            "Name": "lola",
+            "Rating": 8.1,
+            "Comment": "giving it \"more pizzazz\""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.0,
+            "Comment": "same, but blue"
+        },
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["color changing", "collaboration"],
+            "Image": "stuf-of-legends.webp"
+        }
+    ],
+    "BABYMONSTER": [
+        {
+            "Name": "calo",
+            "Rating": 6.2,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 8.0,
+            "Comment": ""
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 8.0,
+            "Comment": "the surprise fruity flavor was nice. raspberry?"
+        },
+        {
+            "Name": "oli",
+            "Rating": 6.0,
+            "Comment": "definitely worse than a normal Oreo"
+        },
+        {
+            "Name": "nari",
+            "Rating": 6.3,
+            "Comment": "*still ate another, but wasn't a fan*"
+        },
+        {
+            "Name": "lola",
+            "Rating": 7.0,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "reminds a lot of people of not-so-good marshmallows",
 
             "Wafers": ["cocoa (Default)", "colored"],
             "Type": "original",
@@ -2692,6 +2803,146 @@
             "Image": "babymonster.webp"
         }
     ],
+    "Firecracker Pop": [
+        {
+            "Name": "drae",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "lola",
+            "Rating": 6.5,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 7.6,
+            "Comment": "a little sweet"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 5.0,
+            "Comment": "it started tasting like DayQuil. the aftertaste was better though"
+        },
+        {
+            "Name": "aram",
+            "Rating": 6.7,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 6.5,
+            "Comment": "the coloring reminds me of toothpaste"
+        },
+        {
+            "Name": "nari",
+            "Rating": 8.5,
+            "Comment": ""
+        },
+        {
+            "Name": "teddy",
+            "Rating": 8.2,
+            "Comment": "tastes exactly like the popsicle pictured. maybe a little like Sour Patch Kids"
+        },
+        {
+            "Name": "oli",
+            "Rating": 5.0,
+            "Comment": ""
+        },
+        {
+            "Name": "didi",
+            "Rating": 4.0,
+            "Comment": ""
+        },
+        {
+            "Name": "calo",
+            "Rating": 5.8,
+            "Comment": "good rendition of the flavor, but I don't like the original popsicle and it's a poorly suited flavor for the Oreo form factor"
+        },
+        {
+            "Name": "juk",
+            "Rating": 6.0,
+            "Comment": ""
+        },
+        {
+            "Name": "mrinal",
+            "Rating": 6.8,
+            "Comment": ""
+        },
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "pretty sweet, medicinal smell, aftertaste was not very welcome. but hey... it looks like toothpaste! and tastes better than it smells at least",
+
+            "Wafers": ["golden"],
+            "Type": "original",
+            "Tags": ["blue raspberry", "lemon", "cherry", "fruit", "limited"],
+            "Image": "firecracker-pop.webp"
+        }
+    ],
+    "Dill Pickle Flavored Fudge": [
+        {
+            "Name": "mrinal",
+            "Rating": 2.0,
+            "Comment": "*ate one bite* i feel nauseous"
+        },
+        {
+            "Name": "oli",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "juk",
+            "Rating": 2.5,
+            "Comment": ""
+        },
+        {
+            "Name": "nattle",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "drae",
+            "Rating": 3.0,
+            "Comment": ""
+        },
+        {
+            "Name": "tron",
+            "Rating": 2.4,
+            "Comment": "was higher, but i lowered it after realizing i only ate half"
+        },
+        {
+            "Name": "aram",
+            "Rating": 3.1,
+            "Comment": "it's not bad, it just makes me mad"
+        },
+        {
+            "Name": "jayjay",
+            "Rating": 5.2,
+            "Comment": "scored intentionally funny. I am so confused I'd have more"
+        },
+        {
+            "Name": "calo",
+            "Rating": 2.8,
+            "Comment": ""
+        },
+        {
+            "Name": "teddy",
+            "Rating": 6.0,
+            "Comment": "sweet + salty is a combo"
+        },
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "very lingering flavor. many people were unwilling to have a full one",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["pickle", "fudge", "covered"],
+            "Image": "dill-pickle.webp"
+        }
+    ],
+
     "Black Sesame": [
         {
             "Name": "Average",
@@ -2704,6 +2955,18 @@
             "Image": "black-sesame.webp"
         }
     ],
+    "Choco Brownie": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["chocolate", "brownie", "dessert", "international"],
+            "Image": "choco-brownie.webp"
+        }
+    ],
     "Dark Chocolate Mudcake": [
         {
             "Name": "Average",
@@ -2714,30 +2977,6 @@
             "Type": "Double Stuff",
             "Tags": ["chocolate", "dessert", "cake", "international"],
             "Image": "dark-choc-mudcake.webp"
-        }
-    ],
-    "Dill Pickle Flavored Fudge": [
-        {
-            "Name": "Average",
-            "Rating": "N/A",
-            "Comment": "",
-
-            "Wafers": ["cocoa (Default)"],
-            "Type": "original",
-            "Tags": ["pickle", "fudge", "covered"],
-            "Image": "dill-pickle.webp"
-        }
-    ],
-    "MARVEL™ Stuf of Doom": [
-        {
-            "Name": "Average",
-            "Rating": "N/A",
-            "Comment": "",
-
-            "Wafers": ["cocoa (Default)"],
-            "Type": "original",
-            "Tags": ["marshmallow", "toasted marshmallow", "color changing", "collaboration"],
-            "Image": "dr-doom.webp"
         }
     ],
     "Mocha Frappe": [
@@ -2786,6 +3025,30 @@
             "Type": "original",
             "Tags": ["red bean", "international"],
             "Image": "red-bean.webp"
+        }
+    ],
+    "Strawberry Cheesecake": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["strawberry", "cheesecake", "dessert", "international"],
+            "Image": "strawberry-cheesecake.webp"
+        }
+    ],
+    "Tiramisu & Vanilla": [
+        {
+            "Name": "Average",
+            "Rating": "N/A",
+            "Comment": "",
+
+            "Wafers": ["cocoa (Default)"],
+            "Type": "original",
+            "Tags": ["coffee", "tiramisu", "vanilla", "dessert", "mix", "international"],
+            "Image": "tiramisu-vanilla.webp"
         }
     ]
 }

@@ -1063,7 +1063,7 @@ const avatar = document.body.classList.contains('dark')
         <div class="card-badge">CHRONOLOGICAL (DATE TRIED)</div>
       </div>
       <div class="card-body">
-        <div class="chart-container" style="height:260px;">
+        <div class="chart-container" style="height:290px;">
           <canvas id="reviewerCompChart"></canvas>
         </div>
       </div>
