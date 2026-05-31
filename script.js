@@ -106,11 +106,12 @@ document.addEventListener('mouseout', e => {
 
 // Source: https://stackoverflow.com/a/69643526
 const backToTopLink = document.getElementById('back-to-top');
-
-backToTopLink.addEventListener('click', e => {
-    e.preventDefault();
-    window.scrollTo(0, 0);
-    setRandomGif();
-});
+if (backToTopLink) {
+    backToTopLink.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        setRandomGif();
+    });
+}
 
 /* #endregion Back to top */

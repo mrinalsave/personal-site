@@ -135,4 +135,11 @@ function setRandomGif() {
     randomGif.alt   = selected.replace('.gif', '');
 }
 
+const backToTopLinkCustom = document.getElementById('back-to-top');
+if (backToTopLinkCustom) {
+    backToTopLinkCustom.addEventListener('click', e => {
+        setRandomGif();
+    });
+}
+
 /* #endregion Random GIF */
