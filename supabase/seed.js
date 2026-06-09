@@ -50,10 +50,7 @@ async function seedNintendoGames() {
     store_url: g.url,
   }));
 
-  const { error } = await supabase.from('nintendo_games').upsert(rows, {
-    onConflict: 'title',
-    ignoreDuplicates: true,
-  });
+  const { error } = await supabase.from('nintendo_games').insert(rows);
   if (error) throw new Error(`nintendo_games: ${error.message}`);
   console.log(`✓ nintendo_games — ${rows.length} rows`);
 }
@@ -69,10 +66,7 @@ async function seedPokemonCards() {
     ...gifs.map(filename  => ({ filename, type: 'gif'  })),
   ];
 
-  const { error } = await supabase.from('pokemon_cards').upsert(rows, {
-    onConflict: 'filename',
-    ignoreDuplicates: true,
-  });
+  const { error } = await supabase.from('pokemon_cards').insert(rows);
   if (error) throw new Error(`pokemon_cards: ${error.message}`);
   console.log(`✓ pokemon_cards — ${rows.length} rows (${cards.length} cards, ${gifs.length} gifs)`);
 }
@@ -87,10 +81,7 @@ async function seedOreoReviewers() {
     .filter(l => l && l !== 'Number of Reviewers: 31');
 
   const rows = names.map(name => ({ name }));
-  const { error } = await supabase.from('oreo_reviewers').upsert(rows, {
-    onConflict: 'name',
-    ignoreDuplicates: true,
-  });
+  const { error } = await supabase.from('oreo_reviewers').insert(rows);
   if (error) throw new Error(`oreo_reviewers: ${error.message}`);
   console.log(`✓ oreo_reviewers — ${rows.length} rows`);
 }
@@ -108,33 +99,37 @@ async function seedOreoData() {
       continue;
     }
 
-    // Upsert the flavor
+    // Insert the flavor
     const { data: flavor, error: flavorErr } = await supabase
       .from('oreo_flavors')
-      .upsert({
+      .insert({
         name:       flavorName,
         image_path: avgEntry.Image   ?? null,
         wafers:     avgEntry.Wafers  ?? null,
         type:       avgEntry.Type    ?? null,
         tags:       avgEntry.Tags    ?? null,
-      }, { onConflict: 'name' })
+      })
       .select('id')
       .single();
 
     if (flavorErr) throw new Error(`oreo_flavors "${flavorName}": ${flavorErr.message}`);
 
-    // Upsert all reviews for this flavor
-    const reviewRows = entries.map(e => ({
-      flavor_id:     flavor.id,
-      reviewer_name: e.Name,
-      rating:        e.Rating,
-      comment:       e.Comment ?? null,
-      is_average:    e.Name === 'Average',
-    }));
+    // Insert reviews with valid numeric ratings (skip "N/A" and missing values)
+    const reviewRows = entries
+      .filter(e => !isNaN(parseFloat(e.Rating)))
+      .map(e => ({
+        flavor_id:     flavor.id,
+        reviewer_name: e.Name,
+        rating:        parseFloat(e.Rating),
+        comment:       e.Comment ?? null,
+        is_average:    e.Name === 'Average',
+      }));
+
+    if (reviewRows.length === 0) continue;
 
     const { error: reviewErr } = await supabase
       .from('oreo_reviews')
-      .upsert(reviewRows, { onConflict: 'flavor_id,reviewer_name', ignoreDuplicates: true });
+      .insert(reviewRows);
 
     if (reviewErr) throw new Error(`oreo_reviews "${flavorName}": ${reviewErr.message}`);
   }
