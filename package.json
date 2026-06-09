@@ -7,13 +7,17 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.0",
+    "imagesloaded": "^5.0.0",
     "lil-gui": "^0.21.0",
+    "masonry-layout": "^4.2.2",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "^0.183.2"
   },
   "devDependencies": {
+    "@types/imagesloaded": "^4.1.7",
+    "@types/masonry-layout": "^4.2.8",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
