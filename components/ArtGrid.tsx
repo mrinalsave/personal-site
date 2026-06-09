@@ -78,7 +78,7 @@ export default function ArtGrid() {
     <>
       <div ref={gridRef} className="grid" />
       <div ref={lightboxRef} id="lightbox">
-        <img ref={lightboxImgRef} id="lightbox-img" src="" alt="full size artwork" />
+        <img ref={lightboxImgRef} id="lightbox-img" src={undefined} alt="full size artwork" />
       </div>
     </>
   )

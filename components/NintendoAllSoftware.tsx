@@ -18,7 +18,7 @@ export default function NintendoAllSoftware({ games }: Props) {
 
     const allGames = games.map(g => ({
       title: g.title,
-      cover: (g.cover_path ?? '').replace('./', '/nintendo-games/'),
+      cover: g.cover_path ? `/nintendo-games/assets/images/games/${g.cover_path}` : '',
       url: g.store_url ?? '',
     }))
 
@@ -217,7 +217,13 @@ export default function NintendoAllSoftware({ games }: Props) {
       if (e.key === 'b' || e.key === 'B') navigateBackToHome()
     }
 
-    return () => { document.removeEventListener('keydown', onKeyDown) }
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      const grid = document.getElementById('software-grid')
+      if (grid) grid.innerHTML = ''
+      tooltip.remove()
+      initRef.current = false
+    }
   }, [games])
 
   return (

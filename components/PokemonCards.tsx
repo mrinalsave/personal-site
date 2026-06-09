@@ -122,7 +122,12 @@ export default function PokemonCards({ cards, gifs }: Props) {
 
     backToTopLink?.addEventListener('click', () => setRandomGif())
 
-    return () => { document.removeEventListener('keydown', onKeyDown) }
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      const g = document.getElementById('grid')
+      if (g) g.innerHTML = ''
+      initRef.current = false
+    }
   }, [cards, gifs])
 
   return (
@@ -131,7 +136,7 @@ export default function PokemonCards({ cards, gifs }: Props) {
         <div className="grid" id="grid"></div>
         <div className="end-of-page">
           <a href="#" id="back-to-top">
-            <img id="random-gif" alt="random pokemon gif" /> ↑
+            <img id="random-gif" alt="random pokemon gif" src={undefined} /> ↑
           </a>
         </div>
       </main>

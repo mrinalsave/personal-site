@@ -767,6 +767,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         delete (window as any).__oreo
         delete (window as any).__oreo_nav
         Object.values(charts).forEach(c => c?.destroy())
+        initRef.current = false
       }
     })
   }, [rawFlavors, rawReviewers])

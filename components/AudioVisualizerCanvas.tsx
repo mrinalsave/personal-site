@@ -297,6 +297,7 @@ export default function AudioVisualizerCanvas() {
       geo.dispose()
       mat.dispose()
       document.body.classList.remove('audio-page')
+      initRef.current = false
     }
   }, [])
 
