@@ -2,9 +2,9 @@ export const dynamic = 'force-dynamic'
 
 import { getNintendoGames } from '@/lib/queries'
 import type { NintendoGame } from '@/lib/types'
-import NintendoHomeScreen from '@/components/NintendoHomeScreen'
+import NintendoAllSoftware from '@/components/NintendoAllSoftware'
 
-export default async function NintendoGamesPage() {
+export default async function NintendoAllSoftwarePage() {
   const games: NintendoGame[] = await getNintendoGames()
-  return <NintendoHomeScreen games={games} />
+  return <NintendoAllSoftware games={games} />
 }

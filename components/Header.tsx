@@ -11,7 +11,15 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
   const pathname = usePathname()
   const { isDark, toggle } = useTheme()
 
-  const pageTitle = pathname === '/art' ? 'art gallery' : null
+  const pageTitles: Record<string, string> = {
+    '/art': 'art gallery',
+    '/nintendo-games': 'nintendo switch games',
+    '/nintendo-games/all-software': 'nintendo games',
+    '/pokemon-cards': 'favorite pokémon cards',
+    '/oreos': 'oreo dashboard',
+    '/audio-visualizer': 'audio visualizer',
+  }
+  const pageTitle = pageTitles[pathname] ?? null
 
   return (
     <header>

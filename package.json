@@ -7,13 +7,15 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.0",
+    "chart.js": "^4.5.1",
     "imagesloaded": "^5.0.0",
     "lil-gui": "^0.21.0",
     "masonry-layout": "^4.2.2",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "three": "^0.183.2"
+    "three": "^0.183.2",
+    "vanilla-tilt": "^1.8.1"
   },
   "devDependencies": {
     "@types/imagesloaded": "^4.1.7",
@@ -21,6 +23,8 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.184.1",
+    "@types/vanilla-tilt": "^1.4.1",
     "typescript": "^5.0.0"
   }
 }

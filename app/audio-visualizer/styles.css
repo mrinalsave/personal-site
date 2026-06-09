@@ -1,0 +1,120 @@
+/* ── Visualizer canvas ───────────────────────────────────────────────── */
+#visualizer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* ── Page chrome (header, footer, main) ─────────────────────────────── */
+main.audio-main {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+body.audio-page a { color: white; }
+
+body.audio-page a:hover,
+body.audio-page a:active,
+body.audio-page span:hover {
+    color: white;
+    text-decoration: none;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px #fff;
+}
+
+/* ── Sidenav z-index & text-shadow overrides ────────────────────────── */
+/*
+ * Root sidenav sits at z-index 1; the visualizer canvas is z-index 0
+ * but the fixed header is z-index 10, so bump sidenav above both.
+ * text-shadow is inherited from the glow rule above — suppress it inside
+ * the nav so links don't glow.
+ */
+
+.sidenav {
+    z-index: 11;
+    overflow-y: auto;
+    text-shadow: none;
+}
+
+body.nav-open .sidenav { overflow-y: auto; }
+
+.sidenav h2,
+.sidenav a { text-shadow: none; }
+
+/* Close button must clear the nav-overlay (z-index 5 in root) */
+.sidenav .closebtn {
+    position: absolute;
+    z-index: 12;
+}
+
+/* ── lil-gui ─────────────────────────────────────────────────────────── */
+.lil-gui {
+    --input-font-size: 7px;
+    --label-font-size: 4px;
+    z-index: 8;
+}
+
+.lil-gui.lil-root > .lil-title {
+    background: none;
+}
+
+#gui-container {
+    position: fixed;
+    top: 68px;
+    right: 10px;
+    z-index: 8;
+    transform-origin: top right;  /* scale shrinks toward top-right corner */
+}
+
+@media (max-width: 768px) {
+    #gui-container .lil-gui {
+        --font-size: 10px;
+        --title-font-size: 10px;
+        --number-font-size: 10px;
+        --input-font-size: 10px;
+        --widget-height: 16px;
+        --name-width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    #gui-container .lil-gui {
+        --font-size: 8px;
+        --title-font-size: 8px;
+        --number-font-size: 8px;
+        --input-font-size: 8px;
+        --widget-height: 14px;
+        --name-width: 45%;
+    }
+}
+
+/* Landscape on phones/small tablets — caught by height, not width */
+@media (max-height: 500px) {
+    #gui-container .lil-gui {
+        --font-size: 8px;
+        --title-font-size: 8px;
+        --number-font-size: 8px;
+        --input-font-size: 8px;
+        --widget-height: 12px;
+        --name-width: 45%;
+    }
+}
+
+/* ── Font ────────────────────────────────────────────────────────────── */
+@font-face {
+    font-family: 'audio';
+    src: url('/audio-visualizer/assets/fonts/AudioNugget.ttf') format('truetype');
+}
+
+.audio-text,
+.lil-gui,
+.lil-gui *,
+.lil-gui .title { font-family: 'audio' !important; }
