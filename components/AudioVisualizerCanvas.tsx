@@ -117,10 +117,11 @@ export default function AudioVisualizerCanvas() {
     // ── Scene + Background ────────────────────────────────────────────
     const scene = new THREE.Scene()
     const textureLoader = new THREE.TextureLoader()
-    const bgTexture = textureLoader.load('/audio-visualizer/assets/images/bg-texture.webp', (texture) => {
+    textureLoader.load('/audio-visualizer/assets/images/bg-texture.webp', (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace
+      texture.needsUpdate = true
+      scene.background = texture
     })
-    scene.background = bgTexture
 
     // ── Camera + Controls ─────────────────────────────────────────────
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
