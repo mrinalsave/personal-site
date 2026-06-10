@@ -9,11 +9,11 @@ interface DrawerProps {
 }
 
 const BUILD_NOTES: Record<string, string> = {
-  '/audio-visualizer':             '/devlog/2026-03-07-audio-visualizer',
-  '/nintendo-games':               '/devlog/2026-03-21-nintendo-games',
-  '/nintendo-games/all-software':  '/devlog/2026-03-21-nintendo-games',
-  '/pokemon-cards':                '/devlog/2026-02-25-pokemon-cards',
-  '/oreos':                        '/devlog/2026-04-15-oreos-dashboard',
+  '/audio-visualizer':             '/blog/audio-visualizer',
+  '/nintendo-games':               '/blog/nintendo-games',
+  '/nintendo-games/all-software':  '/blog/nintendo-games',
+  '/pokemon-cards':                '/blog/pokemon-cards',
+  '/oreos':                        '/blog/oreos-dashboard',
 }
 
 export default function Drawer({ isOpen, onClose }: DrawerProps) {
@@ -35,7 +35,7 @@ export default function Drawer({ isOpen, onClose }: DrawerProps) {
       <div className={`mobile-drawer${isOpen ? ' open' : ''}`}>
         <Link href="/" onClick={onClose}>home</Link>
         <Link href="/explore" onClick={onClose}>explore</Link>
-        <Link href="/devlog" onClick={onClose}>blog</Link>
+        <Link href="/blog" onClick={onClose}>blog</Link>
         <Link href="/about" onClick={onClose}>about</Link>
         {buildNotesHref && (
           <Link href={buildNotesHref} onClick={onClose}>📑 see build notes</Link>

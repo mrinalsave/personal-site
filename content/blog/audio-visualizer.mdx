@@ -1,0 +1,52 @@
+---
+title: audio visualizer
+date: 2026-03-07
+category: devlog
+tags: [devlog, music, three.js, webgl, shaders]
+summary: recreating Windows Media Player visuals
+---
+
+*[─=≡E((( つ•̀ω•́)つ take me to the page !](/audio-visualizer/)*
+
+### *introduction:*
+
+i've always thought fondly of the windows media player (WMP) animations and thought it would be fun to recreate that. i looked into it a bit more and found out that those animations were generated using a plugin called 'milkdrop', which uses a combination of audio analysis and procedural generation to create the visuals. as i researched this, i also realized that i was seeing it with rose-tinted glasses -- the actual visuals were actually kind of ugly... (i am so sorry, windows)
+
+clearly i am not the only one who wanted to do this though, as my youtubing eventually led me to this [tutorial by Wael Yasmina](https://youtu.be/qDIF2z_VtHs?si=RuEbLQofZw6SSMZR) (and this [prerequisite video](https://youtu.be/KEMZR3unWTE?si=a193B__xwtDO9eF-)). i had a hard time following it, but the [written tutorial](https://waelyasmina.net/articles/how-to-create-a-3d-audio-visualizer-using-three-js/) was much easier! for the most part, all i needed to do was follow the tutorial, but since i don't have a lot (any) experience with Three.js or WebGL, i chose to treat this as an introduction to these concepts.
+
+here's what i determined:
+
+- sphere mesh topology
+- audio analysis
+- post-processing
+
+### *day 1:*
+
+*>* i started off by browsing through the resources on Wael's page, focusing on Three.js (and getting distracted by all the examples) and trying to understand the GLSL code provided. getting the isodecahedron to render was pretty straightforward -- it was only a few lines of code. the post-processing was definitely the bigger piece here, not necessarily due to complexity, but just because a lot was getting applied.
+
+*>* the next piece was getting the blob to animate with audio frequencies. i used ['Resonance' by Home](https://open.spotify.com/track/1TuopWDIuDi1553081zvuU) for local testing (i'm not basic i swear). the code uses Perlin noise, which i learned that in game development, *"can be used for any sort of wave-like, undulating material or texture."* makes sense. the math in [webgl-noise/src/classicnoise3D.glsl](https://github.com/ashima/webgl-noise/blob/master/src/classicnoise3D.glsl) was admittedly a little beyond me (that, and i didn't really bother looking into it too closely), but it's abstracted enough that this actually didn't matter.
+
+*>* at this point, i was technically already done. [Wael's repo](https://github.com/WaelYasmina/audiovisualizer/tree/main) links to a fork by [kuhung](https://github.com/kuhung/audiovisualizer), who lets the user upload an audio. i liked this concept, so i implemented a similar feature in the GUI controls. i wanted the visualizer to work without user input though, so i left the default audio as an option too. during my repeated testing though, i was starting to get a little tired of hearing the song at full blast, so i implemented a volume slider and a play/pause toggle. all this required was utilizing the audio and audio listener's settings (literally, 'volume', 'stop', and 'start').
+
+*>* i also wasn't keen on the RGB sliders that resulted in one base color for the isodecahedron. what i really liked was the gradient / multi-color effect in Wael's youtube video, which i don't believe was present in the written tutorial or his repo. unfortunately, the code provided in the video for that effect didn't work for me, so i ended up implementing my own gradient utilizing [WebGL's mix() function](https://registry.khronos.org/OpenGL-Refpages/gl4/html/mix.xhtml). again, i used hardcoded colors for testing and once that worked, i changed them to user inputs. go crazy.
+
+### *day 2:*
+
+*>* some more minor adjustments came in the form of updating to a [font](https://www.dafont.com/audio-nugget.font) that was more thematic and y2k-esque. i also attempted to introduce a [halftone effect](https://threejs.org/docs/#HalftonePass) on the shape, but found the original wireframe look to be more appealing.
+
+*>* now for deployment -- i did what i usually do and pushed all relevant files to my repo, but alas, my audio visualizer page did not work. honestly, i had a feeling this would happen, just based off the way i was building the page and testing locally: i used `npx vite` and port 5713, but when i tested other pages, i used `bundle exec jekyll serve` and port 4000. clearly, i have a pretty sizeable knowledge gap when it comes to website deployment tools. i took a detour to go learn about that; i won't share everything here, but it was essentially that Vite compiles Three.js pages into static files, while Jekyll assembles the full site. in other words, i needed to separate the build processes to enable this flow.
+
+*>* anyway, with the correct setup understood, i was able to deploy (and locally test) my full site much easier.
+
+*>* a lesson learned from my previous development was to keep mobile in mind. ngl, the site was already pretty normal on mobile, but the isodecahedron was a little large and got cut off on the edges of the screen. a simple fix here was to use a smaller geometry depending on what screen size was used (e.g. `const geo = new THREE.IcosahedronGeometry(isMobile ? 3 : 5, isMobile ? 20 : 32);`). much better!
+
+### *final thoughts:*
+
+*>* overall, this was a really fun project ! again, it was pretty easy because i was following a tutorial, but generally speaking, the concepts and features were really interesting and open up a lot of possibilities for interactive web pages. i really like the intersection between art and code, so this was a really fun way to explore that. ( ദ്ദി ˙ᗜ˙ )
+
+*>* as a small note, during testing, my battery seemed to be draining much faster than i was used to -- a quick google search told me that Three.js can be a little expensive because it renders so many pixels. while i don't imagine anyone is going to spend that long on this page, it's a good thing to keep in mind for next time.
+
+*>* key takeaways:
+
+- Three.js and WebGL can do SO much ?!
+- on-demand rendering, lower pixel rations, and reduced post-processing can ease battery usage

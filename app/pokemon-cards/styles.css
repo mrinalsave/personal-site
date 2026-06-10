@@ -84,7 +84,6 @@ body.pokemon-page .grid > *, /* ensure grid children can't expand past their cel
     aspect-ratio: 5 / 7;
     border-radius: 12px;
     overflow: hidden;
-    background: #111;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
     position: relative;

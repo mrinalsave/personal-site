@@ -317,10 +317,6 @@ export default function AudioVisualizerCanvas() {
       <main id="main" className="audio-main">
         <div id="visualizer"></div>
         <input type="file" id="audio-file" accept="audio/*" style={{ display: 'none' }} />
-
-        <footer className="footer-strip">
-          &copy; 2026 &bull; all rights reserved. &bull; &ldquo;繋 (つな) ぐ&rdquo;ということ
-        </footer>
       </main>
 
       <div id="mobile-popup" className="mobile-popup">
