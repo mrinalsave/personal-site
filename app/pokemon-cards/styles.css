@@ -5,10 +5,10 @@
 
 html { scroll-behavior: smooth; }
 
-a              { text-decoration: none; color: var(--off-off-white); }
-a:hover,
-a:active       { text-decoration: none; color: var(--white); }
-span:hover     { text-decoration: none; color: var(--white); }
+body.pokemon-page a:not(nav a)              { text-decoration: none; color: var(--off-off-white); }
+body.pokemon-page a:not(nav a):hover,
+body.pokemon-page a:not(nav a):active  { text-decoration: none; color: var(--white); }
+body.pokemon-page span:hover { text-decoration: none; color: var(--white); }
 
 .caption-text { color: var(--off-off-white); }
 
@@ -55,7 +55,7 @@ main.pokemon-main {
     animation: fadeUp 0.6s ease 0.15s forwards;
 }
 
-.grid {
+body.pokemon-page .grid {
     display: grid;
     gap: 7px;
     padding: 35px 100px 30px;
@@ -66,13 +66,13 @@ main.pokemon-main {
     animation: fadeUp 0.7s ease 0.3s forwards;
 }
 
-.grid > *, /* ensure grid children can't expand past their cell */
+body.pokemon-page .grid > *, /* ensure grid children can't expand past their cell */
 .card {
     min-width: 0;
 }
 
 @media (max-width: 768px) {
-    .grid {
+    body.pokemon-page .grid {
         padding-inline: clamp(12px, 6vw, 40px);
         grid-template-columns: repeat(auto-fit, minmax(min(100px, 100vw), 1fr));
         gap: 12px;
@@ -157,6 +157,8 @@ main.pokemon-main {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* prevent caption from sitting flush against the footer */
+    padding-bottom: 48px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;

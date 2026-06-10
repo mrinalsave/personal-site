@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import type { NintendoGame } from '@/lib/types'
 
 interface Props { games: NintendoGame[] }
@@ -7,8 +7,9 @@ interface Props { games: NintendoGame[] }
 export default function NintendoAllSoftware({ games }: Props) {
   const initRef = useRef(false)
 
-  useEffect(() => {
-    document.body.classList.add('nintendo-page')
+  useLayoutEffect(() => {
+    document.body.classList.add('nintendo-page', 'page-loading')
+    requestAnimationFrame(() => document.body.classList.remove('page-loading'))
     return () => document.body.classList.remove('nintendo-page')
   }, [])
 

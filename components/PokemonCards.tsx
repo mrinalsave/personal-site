@@ -11,6 +11,11 @@ export default function PokemonCards({ cards, gifs }: Props) {
   const initRef = useRef(false)
 
   useEffect(() => {
+    document.body.classList.add('pokemon-page')
+    return () => document.body.classList.remove('pokemon-page')
+  }, [])
+
+  useEffect(() => {
     if (initRef.current) return
     initRef.current = true
 

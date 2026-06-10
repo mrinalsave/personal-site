@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 
+// TODO: Hardcoded for now, but need to dynamically populate.
 const imageList = [
   '0410.webp', '0510.webp', '0729.webp', '0823.webp',
   '0424.webp', '0810.webp', '0620.webp', '0325.webp',

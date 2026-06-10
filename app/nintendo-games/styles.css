@@ -3,10 +3,10 @@ html.dark { --screen-bg: var(--dark-background); }
 
 /* ── Color overrides ─────────────────────────────────────────────────── */
 
-a:hover, 
-a:active,
-span:hover:not(#current-time):not(#current-battery) { 
-    color: rgb(86, 174, 183); 
+body.nintendo-page a:hover,
+body.nintendo-page a:active,
+body.nintendo-page span:hover:not(#current-time):not(#current-battery) {
+    color: rgb(86, 174, 183);
 }
 
 html:not(.dark), #main, main { background: var(--screen-bg); }
@@ -265,7 +265,7 @@ body.nav-open .sidenav { overflow-y: auto; }
 
 /* #region loading */
 
-a:hover { text-decoration: none; color: rgb(86, 174, 183) }
+body.nintendo-page a:hover { text-decoration: none; color: rgb(86, 174, 183) }
 
 /* ── Page transitions ───────────────────────────────────────────────── */
 

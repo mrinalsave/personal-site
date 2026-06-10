@@ -24,7 +24,6 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
-    scrollbar-gutter: stable;
     background: var(--off-white);
     color: var(--ink);
     font-family: 'Figtree', sans-serif;
@@ -835,19 +834,25 @@ main.art-layout {
 }
 
 #lightbox {
-    display: none;
+    display: flex;
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     align-items: center;
     justify-content: center;
     cursor: zoom-out;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
 }
 
-#lightbox.active { display: flex; }
+#lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
 
 #lightbox-img {
     max-width: min(90vw, 1000px);

@@ -12,7 +12,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isDark, setIsDark] = useState(false)
 
   useLayoutEffect(() => {
-    setIsDark(document.body.classList.contains('dark'))
+    const saved = localStorage.getItem('theme')
+    const dark = saved === 'dark' || (!saved && document.body.classList.contains('dark'))
+    if (dark) {
+      document.documentElement.classList.add('dark')
+      document.body.classList.add('dark')
+    }
+    setIsDark(dark)
   }, [])
 
   const toggle = () => {

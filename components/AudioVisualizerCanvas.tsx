@@ -108,17 +108,22 @@ export default function AudioVisualizerCanvas() {
     document.documentElement.classList.add('dark')
 
     // ── Renderer ──────────────────────────────────────────────────────
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.outputColorSpace = THREE.SRGBColorSpace
-    renderer.setClearColor(0x000000, 0)
     const visualizerEl = document.getElementById('visualizer')
     if (!visualizerEl) return
     visualizerEl.appendChild(renderer.domElement)
+    renderer.domElement.style.pointerEvents = 'auto'
 
     // ── Scene ─────────────────────────────────────────────────────────
-    // Background is provided via CSS on #visualizer; renderer uses alpha: true
-    const scene = new THREE.Scene()
+    const scene = new THREE.Scene();
+
+    const textureLoader = new THREE.TextureLoader();
+    const bgTexture = textureLoader.load('/audio-visualizer/assets/images/bg-texture.webp', (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+    });
+    scene.background = bgTexture;
 
     // ── Camera + Controls ─────────────────────────────────────────────
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
@@ -290,7 +295,9 @@ export default function AudioVisualizerCanvas() {
       window.removeEventListener('click', onFirstClick)
       window.removeEventListener('resize', onResize)
       fileInput?.removeEventListener('change', onFileChange)
+      controls.dispose()
       gui.destroy()
+      renderer.domElement.remove()
       renderer.dispose()
       geo.dispose()
       mat.dispose()

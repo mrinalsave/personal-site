@@ -3,7 +3,6 @@
  *
  * Prerequisites:
  *   npm install @supabase/supabase-js
- *   cp .env.local.example .env.local  (fill in SUPABASE_SERVICE_ROLE_KEY)
  *
  * Run from repo root:
  *   node supabase/seed.js

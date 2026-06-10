@@ -19,17 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Monsieur+La+Doulaise&family=Figtree:wght@300;400&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap"
           rel="stylesheet"
         />
-        {/* Runs before React hydrates — prevents flash of wrong theme */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          try {
-            if (localStorage.getItem('theme') === 'dark') {
-              document.documentElement.classList.add('dark');
-              document.body.classList.add('dark');
-            }
-          } catch(e) {}
-        `}} />
       </head>
       <body suppressHydrationWarning>
+        {/* Inline script runs synchronously before first paint — body exists here */}
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');document.body.classList.add('dark');}}catch(e){}` }} />
         <ThemeProvider>
           <LayoutShell>
             {children}

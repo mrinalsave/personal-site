@@ -29,7 +29,7 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
   }
   const pageTitle = pageTitles[pathname] ?? null
   const buildNotesHref = BUILD_NOTES[pathname] ?? null
-  // Audio visualizer forces dark — theme toggle is replaced by build notes
+  // Audio visualizer forces dark — don't show theme toggle.
   const showThemeToggle = pathname !== '/audio-visualizer'
 
   return (
@@ -46,7 +46,7 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
         <Link href="/devlog">blog</Link>
         <Link href="/about">about</Link>
         {buildNotesHref && (
-          <Link href={buildNotesHref}>build notes</Link>
+          <Link href={buildNotesHref}>📑</Link>
         )}
         {showThemeToggle && (
           <a href="#" onClick={(e) => { e.preventDefault(); toggle() }}>
