@@ -7,6 +7,14 @@ interface HeaderProps {
   onHamburgerClick: () => void
 }
 
+const BUILD_NOTES: Record<string, string> = {
+  '/audio-visualizer':          '/devlog/2026-03-07-audio-visualizer',
+  '/nintendo-games':            '/devlog/2026-03-21-nintendo-games',
+  '/nintendo-games/all-software': '/devlog/2026-03-21-nintendo-games',
+  '/pokemon-cards':             '/devlog/2026-02-25-pokemon-cards',
+  '/oreos':                     '/devlog/2026-04-15-oreos-dashboard',
+}
+
 export default function Header({ onHamburgerClick }: HeaderProps) {
   const pathname = usePathname()
   const { isDark, toggle } = useTheme()
@@ -20,6 +28,9 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
     '/audio-visualizer': 'audio visualizer',
   }
   const pageTitle = pageTitles[pathname] ?? null
+  const buildNotesHref = BUILD_NOTES[pathname] ?? null
+  // Audio visualizer forces dark — theme toggle is replaced by build notes
+  const showThemeToggle = pathname !== '/audio-visualizer'
 
   return (
     <header>
@@ -34,9 +45,14 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
         <Link href="/explore">explore</Link>
         <Link href="/devlog">blog</Link>
         <Link href="/about">about</Link>
-        <a href="#" onClick={(e) => { e.preventDefault(); toggle() }}>
-          {isDark ? '🌑' : '☀️'}
-        </a>
+        {buildNotesHref && (
+          <Link href={buildNotesHref}>build notes</Link>
+        )}
+        {showThemeToggle && (
+          <a href="#" onClick={(e) => { e.preventDefault(); toggle() }}>
+            {isDark ? '🌑' : '☀️'}
+          </a>
+        )}
       </nav>
 
       <button

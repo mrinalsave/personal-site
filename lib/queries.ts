@@ -28,7 +28,7 @@ export async function getOreoFlavors(): Promise<OreoFlavorWithReviews[]> {
   const { data, error } = await supabase
     .from('oreo_flavors')
     .select('*, oreo_reviews(*)')
-    .order('name')
+    .order('created_at', { ascending: true })
   if (error) { console.error('getOreoFlavors:', error.message); return [] }
   return data
 }

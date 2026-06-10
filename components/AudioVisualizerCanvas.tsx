@@ -102,26 +102,23 @@ export default function AudioVisualizerCanvas() {
     if (initRef.current) return
     initRef.current = true
 
-    // Force dark mode
+    // Force dark mode, tracking whether user already had it so cleanup can restore correctly
+    const wasDark = document.body.classList.contains('dark')
     document.body.classList.add('dark', 'audio-page')
     document.documentElement.classList.add('dark')
 
     // ── Renderer ──────────────────────────────────────────────────────
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.outputColorSpace = THREE.SRGBColorSpace
+    renderer.setClearColor(0x000000, 0)
     const visualizerEl = document.getElementById('visualizer')
     if (!visualizerEl) return
     visualizerEl.appendChild(renderer.domElement)
 
-    // ── Scene + Background ────────────────────────────────────────────
+    // ── Scene ─────────────────────────────────────────────────────────
+    // Background is provided via CSS on #visualizer; renderer uses alpha: true
     const scene = new THREE.Scene()
-    const textureLoader = new THREE.TextureLoader()
-    textureLoader.load('/audio-visualizer/assets/images/bg-texture.webp', (texture) => {
-      texture.colorSpace = THREE.SRGBColorSpace
-      texture.needsUpdate = true
-      scene.background = texture
-    })
 
     // ── Camera + Controls ─────────────────────────────────────────────
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
@@ -297,6 +294,10 @@ export default function AudioVisualizerCanvas() {
       renderer.dispose()
       geo.dispose()
       mat.dispose()
+      if (!wasDark) {
+        document.body.classList.remove('dark')
+        document.documentElement.classList.remove('dark')
+      }
       document.body.classList.remove('audio-page')
       initRef.current = false
     }

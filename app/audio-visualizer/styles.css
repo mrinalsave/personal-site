@@ -7,6 +7,10 @@
     height: 100%;
     z-index: 0;
     overflow: hidden;
+    background-image: url('/audio-visualizer/assets/images/bg-texture.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* ── Page chrome (header, footer, main) ─────────────────────────────── */
@@ -28,6 +32,15 @@ body.audio-page span:hover {
         0 0 20px #fff,
         0 0 30px #fff,
         0 0 40px #fff;
+}
+
+/* Suppress glow on header/nav links — only apply to visualizer content */
+body.audio-page header a:hover,
+body.audio-page header a:active,
+body.audio-page header span:hover,
+body.audio-page header nav a:hover {
+    color: inherit;
+    text-shadow: none;
 }
 
 /* ── Sidenav z-index & text-shadow overrides ────────────────────────── */

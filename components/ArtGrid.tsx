@@ -14,12 +14,15 @@ export default function ArtGrid() {
   const gridRef = useRef<HTMLDivElement>(null)
   const lightboxRef = useRef<HTMLDivElement>(null)
   const lightboxImgRef = useRef<HTMLImageElement>(null)
+  const initRef = useRef(false)
 
   useEffect(() => {
     const grid = gridRef.current
     const lightbox = lightboxRef.current
     const lightboxImg = lightboxImgRef.current
     if (!grid || !lightbox || !lightboxImg) return
+    if (initRef.current) return
+    initRef.current = true
 
     const closeLightbox = () => lightbox.classList.remove('active')
 
@@ -71,6 +74,8 @@ export default function ArtGrid() {
     return () => {
       lightbox.removeEventListener('click', handleScrimClick)
       document.removeEventListener('keydown', handleKeydown)
+      grid.innerHTML = ''
+      initRef.current = false
     }
   }, [])
 

@@ -160,7 +160,7 @@ main.pokemon-main {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;
-    z-index: 999;
+    z-index: 1001;
 }
 
 .lightbox.active {

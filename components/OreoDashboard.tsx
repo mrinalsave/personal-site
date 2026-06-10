@@ -171,21 +171,22 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       function showPage(page: string) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
         document.getElementById('page-' + page)?.classList.add('active')
+        const pageName = page.replace(/-/g, ' ')
         document.querySelectorAll('.nav-item').forEach(n => {
-          n.classList.toggle('active', (n.textContent ?? '').trim().toLowerCase().includes(page))
+          n.classList.toggle('active', (n.textContent ?? '').trim().toLowerCase() === pageName)
         })
         document.querySelectorAll('.view-tab').forEach(t => {
           t.classList.toggle('active', (t.textContent ?? '').toLowerCase().trim() === page)
         })
         const titleEl = document.getElementById('page-title')
-        if (titleEl) titleEl.textContent = { overview: 'OVERVIEW', flavors: 'FLAVOR ANALYTICS', reviewers: 'REVIEWER ANALYTICS' }[page]?.toUpperCase() ?? page.toUpperCase()
+        const titles: Record<string, string> = { overview: 'OVERVIEW', flavors: 'FLAVOR ANALYTICS', reviewers: 'REVIEWER ANALYTICS', 'build-notes': 'BUILD NOTES' }
+        if (titleEl) titleEl.textContent = titles[page] ?? page.toUpperCase()
         currentPage = page
         closeSidebar()
         if (page === 'flavors' && !(document.getElementById('flavor-select') as HTMLSelectElement)?.value) {
           renderFlavorGrid(getFilteredFlavors())
         }
-        document.querySelector('.content')?.scrollTo({ top: 0, behavior: 'smooth' })
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo(0, 0)
       }
 
       function openSidebar() {
@@ -384,6 +385,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         const sel = document.getElementById('flavor-select') as HTMLSelectElement
         if (sel) sel.value = String(id)
         loadFlavorDetail()
+        window.scrollTo(0, 0)
       }
 
       function goToReviewer(id: number) {
@@ -391,6 +393,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         const sel = document.getElementById('reviewer-select') as HTMLSelectElement
         if (sel) sel.value = String(id)
         loadReviewerDetail()
+        window.scrollTo(0, 0)
       }
 
       function goToReviewerByName(name: string) {
@@ -493,7 +496,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       function selectFlavorCard(id: number) {
         ;(document.getElementById('flavor-select') as HTMLSelectElement).value = String(id)
         loadFlavorDetail()
-        document.querySelector('.content')?.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo(0, 0)
       }
 
       function renderReviewerGrid() {
@@ -512,7 +515,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       function selectReviewerCard(id: number) {
         ;(document.getElementById('reviewer-select') as HTMLSelectElement).value = String(id)
         loadReviewerDetail()
-        document.querySelector('.content')?.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo(0, 0)
       }
 
       function loadReviewerDetail() {
@@ -718,9 +721,9 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       })
       document.getElementById('flavor-select')?.addEventListener('change', loadFlavorDetail)
       document.getElementById('reviewer-select')?.addEventListener('change', loadReviewerDetail)
-      document.getElementById('flavor-back-btn')?.addEventListener('click', () => { renderFlavorGrid(getFilteredFlavors()); document.querySelector('.content')?.scrollTo({ top: 0, behavior: 'smooth' }) })
-      document.getElementById('reviewer-back-btn')?.addEventListener('click', () => { renderReviewerGrid(); document.querySelector('.content')?.scrollTo({ top: 0, behavior: 'smooth' }) })
-      document.getElementById('back-to-top')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('page-overview')?.scrollIntoView({ behavior: 'smooth' }) })
+      document.getElementById('flavor-back-btn')?.addEventListener('click', () => { renderFlavorGrid(getFilteredFlavors()); window.scrollTo(0, 0) })
+      document.getElementById('reviewer-back-btn')?.addEventListener('click', () => { renderReviewerGrid(); window.scrollTo(0, 0) })
+      document.getElementById('back-to-top')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) })
 
       // Sync oreo image
       function syncOreoImages() {
@@ -788,6 +791,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
           <div className="nav-item active" onClick={() => (window as any).__oreo_nav?.showPage('overview')}>Overview</div>
           <div className="nav-item" onClick={() => (window as any).__oreo_nav?.showPage('flavors')}>Flavors</div>
           <div className="nav-item" onClick={() => (window as any).__oreo_nav?.showPage('reviewers')}>Reviewers</div>
+          <div className="nav-item" onClick={() => (window as any).__oreo_nav?.showPage('build-notes')}>Build Notes</div>
         </div>
 
         <div className="filter-section">
@@ -874,6 +878,21 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
               <div id="flavor-type-badge"></div>
             </div>
             <div id="flavor-detail-panel"></div>
+          </div>
+
+          <div className="page" id="page-build-notes">
+            <div className="card" style={{ marginBottom: '20px' }}>
+              <div className="card-header"><div className="card-title">Build Notes</div><div className="card-badge">OREO DASHBOARD v1.1</div></div>
+              <div className="card-body" style={{ padding: '20px' }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '20px' }}>
+                  This dashboard was built to track our ongoing group oreo tastings — from flavor discovery to blind rankings.
+                  The review system, data schema, and chart design all evolved over several sessions of eating too many oreos.
+                </p>
+                <a href="/devlog/2026-04-15-oreos-dashboard" style={{ display: 'inline-block', fontFamily: "'DM Mono', monospace", fontSize: '12px', color: 'var(--blue-500)', textDecoration: 'none', letterSpacing: '0.5px', padding: '8px 14px', border: '1px solid var(--blue-300)', borderRadius: '6px' }}>
+                  → read the devlog
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="page" id="page-reviewers">

@@ -24,6 +24,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
     background: var(--off-white);
     color: var(--ink);
     font-family: 'Figtree', sans-serif;
