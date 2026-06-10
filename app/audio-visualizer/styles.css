@@ -22,10 +22,10 @@ main.audio-main {
     pointer-events: none; /* pass events through to the canvas below */
 }
 
-body.audio-page a { color: white; }
+body.audio-page a:not(.mobile-drawer a) { color: white; }
 
-body.audio-page a:hover,
-body.audio-page a:active,
+body.audio-page a:not(.mobile-drawer a):hover,
+body.audio-page a:not(.mobile-drawer a):active,
 body.audio-page span:hover {
     color: white;
     text-decoration: none;
@@ -36,11 +36,13 @@ body.audio-page span:hover {
         0 0 40px #fff;
 }
 
-/* Suppress glow on header/nav links — only apply to visualizer content */
+/* Suppress glow on header/nav links and drawer links — only apply to visualizer content */
 body.audio-page header a:hover,
 body.audio-page header a:active,
 body.audio-page header span:hover,
-body.audio-page header nav a:hover {
+body.audio-page header nav a:hover,
+body.audio-page .mobile-drawer a:hover,
+body.audio-page .mobile-drawer a:active {
     color: var(--white);
     text-shadow: none;
 }

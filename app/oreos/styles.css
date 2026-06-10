@@ -1,4 +1,4 @@
-:root {
+.oreos-app {
   --bg: #f0f2f5;
   --surface: #ffffff;
   --surface2: #e8ebf0;
@@ -1056,7 +1056,7 @@ nav.sidebar .nav-item.active, .sidebar .nav-item.active {
 
 
 /* ── DARK MODE ─────────────────────────────────────────────────── */
-body.dark {
+body.dark .oreos-app {
   --bg:              #1a1b1d;
   --surface:         #222426;
   --surface-raised:  #27292b;
@@ -1197,7 +1197,7 @@ body.dark .end-of-page a:hover { color: #e4e5e7; }
 }
 
 @media (max-width: 900px) {
-  :root { --sidebar-w: 0px; }
+  .oreos-app { --sidebar-w: 0px; }
   nav.sidebar, .sidebar { transform: translateX(-260px) !important; width: 260px !important; }
   nav.sidebar.open, .sidebar.open { transform: translateX(0) !important; display: flex !important; }
   .main { margin-left: 0; }

@@ -5,9 +5,9 @@
 
 html { scroll-behavior: smooth; }
 
-body.pokemon-page a:not(nav a)              { text-decoration: none; color: var(--off-off-white); }
-body.pokemon-page a:not(nav a):hover,
-body.pokemon-page a:not(nav a):active  { text-decoration: none; color: var(--white); }
+body.pokemon-page a:not(nav a):not(.mobile-drawer a)              { text-decoration: none; color: var(--off-off-white); }
+body.pokemon-page a:not(nav a):not(.mobile-drawer a):hover,
+body.pokemon-page a:not(nav a):not(.mobile-drawer a):active  { text-decoration: none; color: var(--white); }
 body.pokemon-page span:hover { text-decoration: none; color: var(--white); }
 
 .caption-text { color: var(--off-off-white); }

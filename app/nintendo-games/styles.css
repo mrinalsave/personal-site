@@ -1,15 +1,15 @@
-:root { --screen-bg: rgb(235, 235, 235); }
-html.dark { --screen-bg: var(--dark-background); }
+body.nintendo-page { --screen-bg: rgb(235, 235, 235); }
+html.dark body.nintendo-page { --screen-bg: var(--dark-background); }
 
 /* ── Color overrides ─────────────────────────────────────────────────── */
 
-body.nintendo-page a:hover,
-body.nintendo-page a:active,
+body.nintendo-page a:not(nav a):not(.mobile-drawer a):hover,
+body.nintendo-page a:not(nav a):not(.mobile-drawer a):active,
 body.nintendo-page span:hover:not(#current-time):not(#current-battery) {
     color: rgb(86, 174, 183);
 }
 
-html:not(.dark), #main, main { background: var(--screen-bg); }
+body.nintendo-page main, body.nintendo-page #main { background: var(--screen-bg); }
 
 button h3 { color: var(--dark-grey); }
 
@@ -265,7 +265,7 @@ body.nav-open .sidenav { overflow-y: auto; }
 
 /* #region loading */
 
-body.nintendo-page a:hover { text-decoration: none; color: rgb(86, 174, 183) }
+body.nintendo-page a:not(nav a):not(.mobile-drawer a):hover { text-decoration: none; color: rgb(86, 174, 183) }
 
 /* ── Page transitions ───────────────────────────────────────────────── */
 
@@ -1006,20 +1006,20 @@ body.page-loading #main > * {
     }
 
     /* Scale down footer */
-    footer p {
+    body.nintendo-page footer p {
         font-size: 10px !important;
     }
 }
 
 /* Landscape / short viewports (≤500px tall) */
 @media (max-height: 500px) {
-    footer {
+    body.nintendo-page footer {
         z-index: 20 !important;
         display: block !important;
     }
 
     /* Shrink footer */
-    footer p {
+    body.nintendo-page footer p {
         font-size: 9px !important;
     }
 
@@ -1158,15 +1158,11 @@ body.page-loading #main > * {
 }
 
 /* ── DARK MODE ───────────────────────────────────────── */
-html.dark, body.dark {
+body.dark.nintendo-page main, body.dark.nintendo-page #main {
     background-color: var(--dark-background);
 }
 
-body.dark main, body.dark #main {
-    background-color:var(--dark-background);
-}
-
-body.dark a, body.dark span, body.dark button {
+body.dark.nintendo-page a, body.dark.nintendo-page span, body.dark.nintendo-page button {
     color: var(--off-white);
 }
 
