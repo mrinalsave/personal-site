@@ -148,7 +148,9 @@ export default function PokemonCards({ cards, gifs }: Props) {
 
       <div className="lightbox" id="lightbox">
         <div className="lightbox-content">
-          <img id="lightbox-img" alt="" />
+          <div className="lightbox-img-wrap">
+            <img id="lightbox-img" alt="" />
+          </div>
           <p id="lightbox-caption"></p>
         </div>
       </div>

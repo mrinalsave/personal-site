@@ -3,9 +3,9 @@ html.dark body.nintendo-page { --screen-bg: var(--dark-background); }
 
 /* ── Color overrides ─────────────────────────────────────────────────── */
 
-body.nintendo-page a:not(nav a):not(.mobile-drawer a):hover,
-body.nintendo-page a:not(nav a):not(.mobile-drawer a):active,
-body.nintendo-page span:hover:not(#current-time):not(#current-battery) {
+body.nintendo-page a:not(header a):not(.mobile-drawer a):hover,
+body.nintendo-page a:not(header a):not(.mobile-drawer a):active,
+body.nintendo-page span:hover:not(header span):not(#current-time):not(#current-battery) {
     color: rgb(86, 174, 183);
 }
 
@@ -265,7 +265,7 @@ body.nav-open .sidenav { overflow-y: auto; }
 
 /* #region loading */
 
-body.nintendo-page a:not(nav a):not(.mobile-drawer a):hover { text-decoration: none; color: rgb(86, 174, 183) }
+body.nintendo-page a:not(header a):not(.mobile-drawer a):hover { text-decoration: none; color: rgb(86, 174, 183) }
 
 /* ── Page transitions ───────────────────────────────────────────────── */
 
@@ -1158,11 +1158,15 @@ body.page-loading #main > * {
 }
 
 /* ── DARK MODE ───────────────────────────────────────── */
-body.dark.nintendo-page main, body.dark.nintendo-page #main {
+html.dark, body.dark {
     background-color: var(--dark-background);
 }
 
-body.dark.nintendo-page a, body.dark.nintendo-page span, body.dark.nintendo-page button {
+body.dark main, body.dark #main {
+    background-color:var(--dark-background);
+}
+
+body.dark a, body.dark span, body.dark button {
     color: var(--off-white);
 }
 

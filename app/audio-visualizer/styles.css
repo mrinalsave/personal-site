@@ -22,11 +22,14 @@ main.audio-main {
     pointer-events: none; /* pass events through to the canvas below */
 }
 
-body.audio-page a:not(.mobile-drawer a) { color: white; }
+/* Glow applies ONLY to the visualizer content (.audio-main). The global
+   header, footer, and drawer keep their global (dark-mode) styling and are
+   never touched by this page. */
+.audio-main a { color: white; }
 
-body.audio-page a:not(.mobile-drawer a):hover,
-body.audio-page a:not(.mobile-drawer a):active,
-body.audio-page span:hover {
+.audio-main a:hover,
+.audio-main a:active,
+.audio-main span:hover {
     color: white;
     text-decoration: none;
     text-shadow:
@@ -34,17 +37,6 @@ body.audio-page span:hover {
         0 0 20px #fff,
         0 0 30px #fff,
         0 0 40px #fff;
-}
-
-/* Suppress glow on header/nav links and drawer links — only apply to visualizer content */
-body.audio-page header a:hover,
-body.audio-page header a:active,
-body.audio-page header span:hover,
-body.audio-page header nav a:hover,
-body.audio-page .mobile-drawer a:hover,
-body.audio-page .mobile-drawer a:active {
-    color: var(--white);
-    text-shadow: none;
 }
 
 /* ── Sidenav z-index & text-shadow overrides ────────────────────────── */

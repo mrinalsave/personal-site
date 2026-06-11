@@ -38,7 +38,8 @@
     outline: none;
     transition: border-color 0.2s, background 0.2s;
 }
-.blog-search-input:focus { border-color: var(--ink); background: var(--white); }
+.blog-search-input:hover { border-color: var(--muted); }
+.blog-search-input:focus { border-color: var(--ink); }
 .blog-search-input::placeholder { color: var(--muted); }
 /* hide the browser's native search clear button — we render our own */
 .blog-search-input::-webkit-search-cancel-button,
@@ -62,6 +63,27 @@
 }
 .blog-search-clear:hover { color: var(--ink); }
 
+.blog-quick-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: -1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.65s ease 0.3s forwards;
+}
+
+.card-tag--active {
+    background: var(--ink) !important;
+    color: var(--white) !important;
+    border-color: var(--ink) !important;
+}
+
+body.dark .card-tag--active {
+    background: var(--off-white) !important;
+    color: var(--dark-background) !important;
+    border-color: var(--off-white) !important;
+}
+
 .blog-list {
     list-style: none;
     display: flex;
@@ -82,7 +104,7 @@
     transition: border-color 0.2s;
 }
 
-.blog-card:hover { border-color: var(--off-off-white); }
+.blog-card:hover { border-color: var(--muted); }
 .blog-card:focus-within { border-color: var(--ink); }
 
 .blog-card-meta {
@@ -236,7 +258,7 @@ main.blog-post {
 .blog-post .post-content p {
     line-height: 1.75;
     margin-bottom: 1rem;
-    color: var(--ink);
+    color: #636363;
 }
 
 .blog-post .post-content ul,
@@ -244,15 +266,17 @@ main.blog-post {
     padding-left: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.75;
-    color: var(--ink);
+    color: #636363;
 }
 
 .blog-post .post-content li { margin-bottom: 0.25rem; }
 
 .blog-post .post-content a {
-    color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: black;
+
+    text-decoration: none;
+    /* text-decoration: underline;
+    text-underline-offset: 3px; */
 }
 .blog-post .post-content a:hover { opacity: 0.65; }
 
@@ -264,6 +288,15 @@ main.blog-post {
     height: auto;
     border-radius: 8px;
     margin: 1.5rem 0;
+}
+
+/* inline sprite / gif override — higher specificity beats the rule above */
+.blog-post .post-content img.blog-center-img {
+    display: block;
+    height: 40px;
+    width: auto;
+    margin: 0.75rem auto;
+    border-radius: 0;
 }
 
 .blog-img-row {
@@ -334,7 +367,6 @@ body.dark .blog-card {
     border-color: var(--light-border);
 }
 body.dark .blog-card:hover {
-    background: var(--ink);
     border-color: var(--off-off-white);
 }
 body.dark .blog-card-title { color: var(--off-white); }
@@ -372,7 +404,8 @@ body.dark .blog-search-input {
     border-color: var(--light-border);
     color: var(--off-white);
 }
-body.dark .blog-search-input:focus { border-color: var(--off-off-white); background: var(--ink); }
+body.dark .blog-search-input:hover { border-color: var(--off-off-white); }
+body.dark .blog-search-input:focus { border-color: var(--off-off-white); }
 body.dark .card-tag--button:hover { color: var(--white); background: var(--dark-grey); }
 
 /* ── Post modal (intercepted route) ──────────────────────────────────── */
@@ -401,7 +434,7 @@ body.dark .card-tag--button:hover { color: var(--white); background: var(--dark-
     display: flex;
     flex-direction: column;
     overflow: hidden;             /* clip content to the rounded box */
-    background: var(--white);
+    background: var(--off-white);
     border: 1px solid var(--border);
     border-radius: 12px;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);

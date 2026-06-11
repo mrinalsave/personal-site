@@ -5,10 +5,17 @@
 
 html { scroll-behavior: smooth; }
 
-body.pokemon-page a:not(nav a):not(.mobile-drawer a)              { text-decoration: none; color: var(--off-off-white); }
-body.pokemon-page a:not(nav a):not(.mobile-drawer a):hover,
-body.pokemon-page a:not(nav a):not(.mobile-drawer a):active  { text-decoration: none; color: var(--white); }
-body.pokemon-page span:hover { text-decoration: none; color: var(--white); }
+
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a) { 
+    text-decoration: none; 
+}
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a) {
+    color: var(--off-off-white); 
+}
+
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a)  :hover,
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a)  :active  { text-decoration: none; color: var(--white); }
+body.pokemon-page span:hover:not(header span) { text-decoration: none; color: var(--white); }
 
 .caption-text { color: var(--off-off-white); }
 
@@ -36,6 +43,7 @@ body.pokemon-page span:hover { text-decoration: none; color: var(--white); }
 }
 
 .end-of-page a {
+    text-decoration: none; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -179,11 +187,18 @@ body.pokemon-page .grid > *, /* ensure grid children can't expand past their cel
 
 .lightbox.active .lightbox-content { transform: scale(1); }
 
+.lightbox-img-wrap {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    line-height: 0;
+}
+
 .lightbox img {
     max-width: 100%;
     max-height: 80vh;
-    border-radius: 14px;
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+    display: block;
     transition: opacity 0.2s ease;
 }
 

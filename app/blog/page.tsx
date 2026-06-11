@@ -3,7 +3,7 @@ import BlogIndex from '@/components/BlogIndex'
 import { getAllPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
-  title: 'blog — mrinal save',
+  title: 'mrinal\'s blog',
   description: 'what\'s on my mind',
 }
 

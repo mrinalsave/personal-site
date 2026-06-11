@@ -49,7 +49,7 @@ export default function BlogIndex({ posts }: { posts: PostMeta[] }) {
           <input
             type="search"
             className="blog-search-input"
-            placeholder="search posts, tags…"
+            placeholder="search posts…"
             value={query}
             onChange={e => setQuery(e.target.value)}
             aria-label="search posts"
@@ -60,6 +60,16 @@ export default function BlogIndex({ posts }: { posts: PostMeta[] }) {
             </button>
           )}
         </div>
+
+        {/* <div className="blog-quick-filters">
+          <button
+            type="button"
+            className={`card-tag card-tag--button${query === 'devlog' ? ' card-tag--active' : ''}`}
+            onClick={() => setQuery(q => q === 'devlog' ? '' : 'devlog')}
+          >
+            devlogs
+          </button>
+        </div> */}
 
         <ul className="blog-list">
           {pageItems.map(post => (
@@ -80,7 +90,11 @@ export default function BlogIndex({ posts }: { posts: PostMeta[] }) {
                       key={t}
                       type="button"
                       className="card-tag card-tag--button"
-                      onClick={() => setQuery(t)}
+                      onClick={e => {
+                        // blur so the card doesn't stay :focus-within (dark border)
+                        e.currentTarget.blur()
+                        setQuery(t)
+                      }}
                     >
                       {t}
                     </button>

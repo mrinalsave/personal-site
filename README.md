@@ -12,7 +12,7 @@ this is a repo for my personal / portfolio site.
 - interests
 
 ### 🗺️ explore
-- pokemon cards
+- pokémon cards
 - audio visualizer
 - nintendo games
 - oreo review dashboard
