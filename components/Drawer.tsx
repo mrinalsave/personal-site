@@ -24,6 +24,7 @@ export default function Drawer({ isOpen, onClose }: DrawerProps) {
   const handleThemeToggle = (e: React.MouseEvent) => {
     e.preventDefault()
     toggle()
+    ;(e.currentTarget as HTMLElement).blur()
   }
 
   return (

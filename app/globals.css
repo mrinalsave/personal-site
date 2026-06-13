@@ -111,6 +111,22 @@ nav a:nth-child(3) { animation-delay: 0.29s; }
 nav a:nth-child(4) { animation-delay: 0.36s; }
 nav a:hover { color: var(--ink); }
 
+nav button.theme-toggle {
+    font-family: 'Figtree', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--dark-grey);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: 0.43s;
+}
+nav button.theme-toggle:focus { outline: none; }
+
 /* ── Main (base) ─────────────────────────────── */
 
 main {
@@ -907,9 +923,11 @@ body.dark header {
     border-bottom-color: rgba(255,255,255,0.08) !important;
 }
 body.dark header .header-logo,
-body.dark header nav a { color: var(--muted); }
+body.dark header nav a,
+body.dark header nav button.theme-toggle { color: var(--muted); }
 body.dark header .header-logo:hover,
-body.dark header nav a:hover { color: var(--white); }
+body.dark header nav a:hover,
+body.dark header nav button.theme-toggle:hover { color: var(--white); }
 
 body.dark .hamburger span { background: rgba(200,200,205,0.75); }
 

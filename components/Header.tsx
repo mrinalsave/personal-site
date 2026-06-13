@@ -49,9 +49,13 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
           <Link href={buildNotesHref}>📑</Link>
         )}
         {showThemeToggle && (
-          <a href="#" onClick={(e) => { e.preventDefault(); toggle() }}>
+          <button
+            onClick={(e) => { toggle(); e.currentTarget.blur() }}
+            aria-label="toggle theme"
+            className="theme-toggle"
+          >
             {isDark ? '🌑' : '☀️'}
-          </a>
+          </button>
         )}
       </nav>
 
