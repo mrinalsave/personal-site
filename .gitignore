@@ -6,3 +6,4 @@ node_modules/
 next-env.d.ts
 *.tsbuildinfo
 debug/
+content/blog/sample-post.mdx
