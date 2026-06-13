@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'about me',
+  description: "about mrinal, a senior software engineer and digital artist.",
+  alternates: { canonical: 'https://www.mrinalsave.com/about' },
 }
 
 export default function AboutPage() {

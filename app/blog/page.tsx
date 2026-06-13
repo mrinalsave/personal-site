@@ -3,8 +3,9 @@ import BlogIndex from '@/components/BlogIndex'
 import { getAllPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
-  title: 'mrinal\'s blog',
-  description: 'what\'s on my mind',
+  title: 'blog',
+  description: "mrinal's blog. includes development logs, travel posts, etc.",
+  alternates: { canonical: 'https://www.mrinalsave.com/blog' },
 }
 
 export default function BlogIndexPage() {
