@@ -3,7 +3,7 @@ import './styles.css'
 
 export const metadata: Metadata = {
   title: 'favorite pokémon cards',
-  description: "a curated list of mrinal's all-time favorite pokémon cards.",
+  description: "mrinal\'s favorite pokémon cards.",
   icons: { icon: '/pokemon-cards/assets/images/favicon.ico' },
   alternates: { canonical: 'https://www.mrinalsave.com/pokemon-cards' },
 }

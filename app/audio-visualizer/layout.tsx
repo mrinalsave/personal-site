@@ -3,7 +3,7 @@ import './styles.css'
 
 export const metadata: Metadata = {
   title: 'audio visualizer',
-  description: 'a real-time audio visualizer built with web audio api.',
+  description: 'a real-time audio visualizer.',
   icons: { icon: '/audio-visualizer/assets/images/favicon.ico' },
   alternates: { canonical: 'https://www.mrinalsave.com/audio-visualizer' },
 }

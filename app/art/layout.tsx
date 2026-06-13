@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'art gallery',
-  description: 'digital and traditional art by mrinal save.',
+  description: 'mrinal\'s digital art.',
   icons: { icon: '/art/assets/images/favicon.ico' },
   alternates: { canonical: 'https://www.mrinalsave.com/art' },
 }

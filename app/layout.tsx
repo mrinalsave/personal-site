@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: 'mrinal save',
     template: '%s | mrinal save',
   },
-  description: 'my digital archive — art, projects, and thoughts by mrinal save.',
+  description: 'mrinal\'s digital archive.',
   icons: { icon: '/assets/images/favicon.ico' },
   alternates: { canonical: siteUrl },
   openGraph: {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: 'mrinal save',
     title: 'mrinal save',
-    description: 'my digital archive — art, projects, and thoughts by mrinal save.',
+    description: 'mrinal\'s digital archive.',
   },
 }
 
@@ -28,7 +28,7 @@ const websiteJsonLd = {
   '@type': 'WebSite',
   name: 'mrinal save',
   url: siteUrl,
-  description: 'my digital archive — art, projects, and thoughts by mrinal save.',
+  description: 'mrinal\'s digital archive.',
   potentialAction: {
     '@type': 'SearchAction',
     target: { '@type': 'EntryPoint', urlTemplate: `${siteUrl}/blog?q={search_term_string}` },

@@ -4,7 +4,7 @@ import { getAllPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
   title: 'blog',
-  description: "devlogs, travel diaries, and thoughts — mrinal's blog.",
+  description: "mrinal's blog. includes development logs, travel posts, etc.",
   alternates: { canonical: 'https://www.mrinalsave.com/blog' },
 }
 
