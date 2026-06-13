@@ -877,7 +877,7 @@ body.dark main, body.dark #main {
 }
 
 body.dark main a { color: var(--off-white); }
-body.dark h1, body.dark h3 { color: var(--white); }
+body.dark h1, body.dark h3, body.dark h4 { color: var(--white); }
 body.dark h1 { color: var(--white); }
 body.dark .subtitle { color: var(--off-off-white); }
 body.dark .eyebrow { color: var(--off-off-white); }

@@ -1,13 +1,8 @@
 import Link from 'next/link'
-import type { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react'
-
-/* Markdown images route through here so posts get consistent, responsive,
-   dark-aware styling without per-image legwork. Inline styles/classNames
-   passed from MDX still win (e.g. the inline pikachu gif). */
-function BlogImage({ className, alt = '', ...rest }: ImgHTMLAttributes<HTMLImageElement>) {
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img className={['blog-img', className].filter(Boolean).join(' ')} alt={alt} {...rest} />
-}
+import type { AnchorHTMLAttributes } from 'react'
+import PhotoSlider from './PhotoSlider'
+import BlogImage from './BlogImage'
+export type { SlideItem } from './PhotoSlider'
 
 /* Internal links use next/link for client navigation; external links open
    in a new tab. */
@@ -30,4 +25,11 @@ function BlogLink({ href = '', children, ...rest }: AnchorHTMLAttributes<HTMLAnc
 export const mdxComponents = {
   img: BlogImage,
   a: BlogLink,
+  PhotoSlider,
+}
+
+// Custom JSX components (non-HTML) must be injected via `scope` in
+// next-mdx-remote/rsc so they're available as variables in the MDX module.
+export const mdxScope = {
+  PhotoSlider,
 }

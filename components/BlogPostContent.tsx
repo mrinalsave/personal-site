@@ -5,6 +5,7 @@ import rehypeSlug from 'rehype-slug'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { getPost } from '@/lib/blog'
 import { mdxComponents } from '@/components/MDXComponents'
+import BlogBackToTop from '@/components/BlogBackToTop'
 
 function formatDate(iso: string) {
   const d = new Date(iso + 'T00:00:00')
@@ -22,6 +23,7 @@ export default async function BlogPostContent({ slug }: { slug: string }) {
     source: post.content,
     components: mdxComponents,
     options: {
+      blockJS: false,
       mdxOptions: {
         remarkPlugins: [remarkGfm],
         rehypePlugins: [
@@ -55,6 +57,7 @@ export default async function BlogPostContent({ slug }: { slug: string }) {
         )}
       </div>
       <article className="post-content">{content}</article>
+      <BlogBackToTop />
     </>
   )
 }

@@ -255,6 +255,10 @@ main.blog-post {
     margin-bottom: 0.5rem;
 }
 
+.blog-post .post-content h4 {
+    font-family: 'Syne', sans-serif;
+}
+
 .blog-post .post-content p {
     line-height: 1.75;
     margin-bottom: 1rem;
@@ -288,6 +292,13 @@ main.blog-post {
     height: auto;
     border-radius: 8px;
     margin: 1.5rem 0;
+}
+
+/* portrait photos scale to 50% width, centered */
+.blog-post .post-content img.blog-img--portrait {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* inline sprite / gif override — higher specificity beats the rule above */
@@ -345,6 +356,134 @@ main.blog-post {
 
 /* rehype-pretty-code dual themes — light by default, dark under body.dark */
 .blog-post .post-content pre code span { color: var(--shiki-light); }
+
+/* ── Photo Slider ────────────────────────────────────────────────────── */
+
+.photo-slider {
+    margin: 1.5rem 0;
+    user-select: none;
+}
+
+.photo-slider-viewport {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* override the global post img rule so slides don't get border-radius/margin */
+.blog-post .post-content .photo-slider-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    margin: 0;
+    max-width: none;
+}
+
+.blog-post .post-content .photo-slider-img--portrait {
+    width: 50%;
+}
+
+.photo-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    transition: background 0.15s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.photo-slider-btn:hover { background: rgba(255, 255, 255, 0.97); }
+.photo-slider-btn--prev { left: 0.5rem; }
+.photo-slider-btn--next { right: 0.5rem; }
+
+.photo-slider-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding-top: 0.55rem;
+}
+
+.photo-slider-caption {
+    font-family: 'Figtree', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.photo-slider-dots {
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.photo-slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+.photo-slider-dot.active {
+    background: var(--ink);
+    transform: scale(1.35);
+}
+
+body.dark .photo-slider-btn {
+    background: rgba(18, 18, 18, 0.8);
+    border-color: var(--light-border);
+    color: var(--off-white);
+}
+body.dark .photo-slider-btn:hover { background: rgba(40, 40, 40, 0.97); }
+body.dark .photo-slider-dot { background: var(--light-border); }
+body.dark .photo-slider-dot.active { background: var(--off-white); }
+
+/* ── Back to top ─────────────────────────────────────────────────────── */
+
+.blog-end-of-page {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.blog-end-of-page a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 1.1rem;
+    transition: color 0.15s;
+}
+
+.blog-end-of-page a:hover {
+    color: var(--ink);
+}
+
+body.dark .blog-end-of-page a       { color: #9b9da1; }
+body.dark .blog-end-of-page a:hover { color: #e4e5e7; }
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
 
