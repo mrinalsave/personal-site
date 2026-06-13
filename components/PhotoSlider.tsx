@@ -100,6 +100,7 @@ export default function PhotoSlider({ slides = [] }: { slides?: SlideItem[] }) {
               <img
                 src={slide.src}
                 alt={slide.alt}
+                loading="lazy"
                 className={`photo-slider-img${portraits.has(slide.src) ? ' photo-slider-img--portrait' : ''}`}
                 onLoad={e => markPortrait(slide.src, e.currentTarget)}
               />
