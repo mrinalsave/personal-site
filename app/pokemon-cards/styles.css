@@ -1,0 +1,236 @@
+/* pokemon-cards/style.css */
+
+
+/* ── General ─────────────────────────────────────────────────────────── */
+
+html { scroll-behavior: smooth; }
+
+
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a) { 
+    text-decoration: none; 
+}
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a) {
+    color: var(--off-off-white); 
+}
+
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a)  :hover,
+body.pokemon-page a:not(header a):not(.mobile-drawer a):not(.end-of-page a)  :active  { text-decoration: none; color: var(--white); }
+body.pokemon-page span:hover:not(header span) { text-decoration: none; color: var(--white); }
+
+.caption-text { color: var(--off-off-white); }
+
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.header h2,
+.header a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#random-gif { height: 25px; }
+
+/* ── End of page / back-to-top ───────────────────────────────────────── */
+
+.end-of-page { 
+    text-align: center; 
+    margin-top: 0px;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.45s forwards;
+}
+
+.end-of-page a {
+    text-decoration: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--muted);
+}
+
+.end-of-page a:hover {
+    color: var(--ink);
+}
+
+/* ── Card grid ───────────────────────────────────────────────────────── */
+main.pokemon-main {
+    grid-template-columns: 1fr;
+    padding-bottom: calc(32px + 12px);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.15s forwards;
+}
+
+body.pokemon-page .grid {
+    display: grid;
+    gap: 7px;
+    padding: 35px 100px 30px;
+    max-width: 100vw;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(min(175px, 100vw), 1fr));
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+}
+
+body.pokemon-page .grid > *, /* ensure grid children can't expand past their cell */
+.card {
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    body.pokemon-page .grid {
+        padding-inline: clamp(12px, 6vw, 40px);
+        grid-template-columns: repeat(auto-fit, minmax(min(100px, 100vw), 1fr));
+        gap: 12px;
+    }
+}
+
+/* Reference: https://github.com/simeydotme/pokemon-cards-css/blob/main/public/css/cards/regular-holo.css */
+.card {
+    aspect-ratio: 5 / 7;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    position: relative;
+
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+    --background-x: 50%;
+    --background-y: 50%;
+    --card-opacity: 0;
+}
+
+.card:hover { z-index: 10; } /* bring card to front when active */
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.shine,
+.glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.card .shine {
+    background:
+        radial-gradient(
+            circle at var(--pointer-x) var(--pointer-y),
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.08) 10%,
+            rgba(0, 255, 255, 0.25)   25%,
+            rgba(255, 0, 150, 0.25)   45%,
+            rgba(0, 255, 100, 0.2)    65%,
+            transparent 70%
+        ),
+        repeating-linear-gradient(
+            110deg,
+            violet, blue, green, yellow, red,
+            violet, blue, green, yellow, red
+        );
+    background-size: 100% 100%, 300% 300%;
+    background-position: center center, center center;
+    mix-blend-mode: overlay;
+    opacity: var(--card-opacity);
+    filter: brightness(1.2) contrast(1.2) saturate(1.4);
+}
+
+.card .glare {
+    background-image: radial-gradient(
+        circle at var(--pointer-x) var(--pointer-y),
+        rgba(255, 255, 255, 0.7)  0%,
+        rgba(255, 255, 255, 0.15) 30%,
+        rgba(0, 0, 0, 0.4)        100%
+    );
+    mix-blend-mode: overlay;
+    opacity: calc(var(--card-opacity) * 0.8);
+}
+
+
+/* ── Lightbox ────────────────────────────────────────────────────────── */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* prevent caption from sitting flush against the footer */
+    padding-bottom: 48px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 1001;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    text-align: center;
+    transform: scale(0.95);
+    transition: transform 0.25s ease;
+}
+
+.lightbox.active .lightbox-content { transform: scale(1); }
+
+.lightbox-img-wrap {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    line-height: 0;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.lightbox p {
+    color: var(--off-off-white);
+    letter-spacing: 0.19em;
+    margin-top: 16px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+
+/* ── Font ────────────────────────────────────────────────────────────── */
+@font-face {
+    font-family: 'pokemon';
+    src: url('/pokemon-cards/assets/fonts/Pokemon-Hollow.ttf') format('truetype');
+}
+.pokemon-text { font-family: 'pokemon'; }
+
+/* ── DARK MODE ────────────────────────────────────────── */
+body.dark .card {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .lightbox {
+    background: rgba(5, 5, 5, 0.85);
+}
+
+body.dark .lightbox p {
+    color: var(--off-off-white);
+}
+
+body.dark #back-to-top:hover {
+    color: var(--white);
+}

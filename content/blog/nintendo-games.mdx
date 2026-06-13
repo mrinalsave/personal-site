@@ -1,0 +1,67 @@
+---
+title: nintendo games
+date: 2026-03-21
+category: devlog
+tags: [devlog, games, catalog]
+summary: cataloging my games through a recreation of the Nintendo Switch UI
+---
+
+*[─=≡Σ((( つ•̀ω•́)つ take me to the page !](/nintendo-games/)*
+
+### INTRODUCTION
+
+if there's one thing about me, it's that i love cataloging. as i lament not owning a Nintendo Switch 2 to play *Pokopia*, i find myself looking through all the Nintendo Switch games i have bought and not yet played (spoiler: it's a lot). sooo i decided to make a page that catalogs all my Switch games, and what would be more fun than to make it look like the Switch UI ?!
+
+looking at the UI, here's what i determined:
+
+- image carousel
+- keyboard navigation
+- page linking
+
+### DAY 1
+
+while i've been using my 3DS much more recently (shoutout to *Majora's Mask*), i use my Switch much more often, so i decided that would be more fun to work on first. my goal wasn't to create a perfect recreation of the Switch down to each icon's function, but rather to attempt to recreate the UI. as a result, i didn't need to make most of the icons on the screen (e.g. profile, shop, news, etc.) functional. instead, the focus was going to be purely on visual representation.
+
+i started off by gathering some screenshots of the UI for reference (and subsequently wrangling with Nintendo's image sharing feature). the screens i was interested in modeling were the "home" screen with the shortened library and the "all software" screen with the full library. the main behaviors i captured were the following:
+
+- (home) maximum of 12 games displayed
+- (home, all software) first game is auto-selected
+- (home, all software) on game selection:
+  - title listed above
+  - white and blue border
+  - icon brought into focus
+- (all software) navigating back to "home" persists last icon selection
+
+creating the base carousel was fairly simple — there are a lot of tutorials online. the Switch UI relies on the joycon and/or touch & drag controls. for more clarity, i chose to add arrows to the left and right ends to serve as a visual cue for the user. i loaded the games into a list from a JSON of the titles and cover arts. to match the 12 game maximum, all i had to do was splice this list.
+
+after dynamically creating the objects for the games, i appended two children to each: an image and a border. in the CSS, i set the border to be white and blue, utilizing the "border" and "outline" properties. the next thing to do was to enable this on selection, which was easily done using an event listener, and to auto-select the first game on page load. with this, clicking on a game would indicate that it was selected. i also created a separate static positioned element to display the title of the selected game, and updated it on selection as well. the Switch has the title appear directly above the selected game, so i changed the position of this element based on the index of the selected game to match.
+
+this partially worked — the visual was correct — but the game was not brought into focus when it was selected. i added a transform to the carousel that would shift the games left and right based on the index of the selected game. there were a lot of quirks here actually and i spent a lot of my time on it. for example, the components (e.g. border, title) of the first and last game selected kept getting cut off by the edges of the carousel due to the way i nested the elements. i had to do a LOT of finagling with the elements and the CSS ദ്ദി ༎ຶ‿༎ຶ).
+
+at this point, i now had a fully functional carousel that could be navigated with the arrows, keyboard, and mouse. while you obviously can't play the games in the browser, i wanted to add some functionality to the icons. i updated the JSON to include links to the Nintendo eShop pages for each game, and added an event listener to open the link in a new tab on click, "starting" the game.
+
+### DAY 2
+
+the Switch UI has a tile titled "all software" that leads to the full game library, so i added an object for that and made it link to a new page. this object ALSO proved to be very annoying, since it's not technically part of the game list. with a lot more finagling, i got it to work with the carousel. i created a placeholder page for the full library, and added a link back to "home". however, when navigating back to the main screen from the full library, the last selection (e.g. "all software" tile) was not being persisted and the first game was still being auto-selected, unlike the Switch UI. to persist the last selection when navigating back to "home", i stored the index of the last selected game in local storage and called the event listener on that index when navigating back to the main screen.
+
+the full game library was definitely easier than the carousel. after getting the grid set up, i reused as much of the CSS and JS selection logic as i could. there were, of course, similar focus issues, which were mediated by some offsets and translations. similar to the carousel, the full game library should be navigable using the keyboard and mouse. the latter was easy to implement, but for the former, i had to do some additional [simple] math to make sure the down and up keys would move the selection by the correct number of entries.
+
+now that the core functionality was done, i added some additional UI elements to make the page look more like the Switch. these included [Nintendo lookalike fonts](https://font.download/font/nintendo-switch-ui), non-functional L/R buttons, navigation icons, the user profile icon, and Wi-Fi and battery icons (the last three in the list being sourced from my own Switch). i wanted to add the user's current time and current battery percentage as well, so i followed some tutorials online, added some JS to get that info, and got them both to update in real time.
+
+with all the new content, i had to rework the containers and positioning once again to make sure everything fit as expected. i also realized i had a lot of hardcoded px values in the CSS, so i tried to clean that up as best as possible too.
+
+### DAY 3
+
+after building the page, i realized that there were a LOT of aesthetic issues on smaller screens, both vertical and horizontal. some of the issues were overlap between the header and carousel, overlap between the header and grid, and the sidebar shifting content unnaturally. changing the sidebar to be just an overlay instead of an overlay and shift was quick, as i just had to remove the latter functionality and make some small tweaks after. the content overlap, however, required more attention. i also ended up spending a lot of time here...
+
+but by scaling the content with the screen, disabling screen scroll (note: not the carousel or grid scroll), and making the position of the header and static elements stickier, i was able to resolve these issues — it obviously looks best on desktop, but at the least, it doesn't look terrible on narrower screens.
+
+i did one final comparison of my page against the screenshots i had taken — everything looked pretty solid, but i realized that on the full game library page, i had missed the detail of displaying the title of the selected game. to match the UI, i added a transparent tooltip that appears either below or above the selected game based on the space available in the outer container.
+
+### FINAL THOUGHTS
+
+not a lot to say here — in retrospect, a lot of my time went to seemingly small visual adjustments. i definitely had a hard time with getting the elements to line up the way i wanted. but i still had a really great time making this! i think it looks pretty darn close to the actual Switch UI. (≧▽≦ﾉﾉﾞ☆
+
+key takeaways:
+
+- consider mobile-first development

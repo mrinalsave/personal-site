@@ -1,0 +1,82 @@
+---
+title: pokemon cards
+date: 2026-02-25
+category: devlog
+tags: [devlog, games, catalog, vanilla-tilt.js]
+summary: recreating a holographic Pokémon card gallery from scratch
+---
+
+*[─=≡Σ((( つ•̀ω•́)つ take me to the page !](/pokemon-cards/)*
+
+### INTRODUCTION
+
+a few months ago, i came across a [page titled 'Ryan's Pokemon Cards' by Ryan Yan](https://pokemon.ryanyan.ca/). it's a page that shows all his Pokémon cards and when hovering over a card, they tilt with a holographic effect, much like some of the real cards. after a lot of idle fiddling with the cards, i bookmarked the site and soon found myself wanting to make it too.
+
+to me, making something isn't just copying it and matching it as close as possible, whether it's code or art (though one could argue these are not mutually exclusive). while ripping the HTML/CSS/JS code might've gotten me 90% of the way there, i don't personally see that as conducive to a good learning experience. the approach i took was using purely observation and research, which meant first identifying the core features of the page and then figuring out how to implement those myself, much like how i would approach most other projects.
+
+here's what i determined:
+
+- grid layout to display the cards
+- hover effect to enlarge and tilt the cards
+- holographic overlay on the cards
+
+### DAY 1
+
+i started off by browsing [TCG Collector](https://www.tcgcollector.com/) and downloading a few cards just to get started. as usual, i set up a basic html page with no fancy styling. visually, i knew a grid layout was needed to display the cards. i created a container for the grid and some basic CSS classes for the cards (size, shadow, border radius, etc.).
+
+manually hardcoding each card into the grid is not good practice (and also tedious, even to start with), so i invested some time into creating a script to generate a JSON file for all the images in the folder. this way, all i had to do was add new images to the folder and re-run the script to regenerate the JSON file. this, in turn, would then be read by the page to dynamically populate the grid. now that the cards were showing up on the screen, i was able to move on to the next step.
+
+on Ryan's page, the cards become slightly larger on hover to give them a "selected" feel, so i added a simple transform effect to achieve the same. as i was doing this, i also decided to implement a feature not present on Ryan's page. any gallery format usually suggests to me as a user that clicking an image will bring it into focus by means of a modal overlay, e.g. a lightbox.
+
+W3Schools had some helpful [information](https://www.w3schools.com/howto/howto_js_lightbox.asp) on this. i made some changes to their CSS to get the effect i wanted. i also added the filename as the caption, just as a default. eventually, i wanted to replace this with a link to the actual [TCG Collector page](https://www.tcgcollector.com/).
+
+with that done, i went ahead with the tedious process of downloading all the cards i cared about. once i realized how many cards i actually had on the page, i added a "back to top" link at the bottom for easier navigation. after a few rounds of adding cards and re-running my JSON generation script again, i now had a fully populated grid, hover focus functionality, and a lightbox!
+
+after pushing my changes and checking my deployed site, i realized the images were loading quite slow, even though locally, they loaded near instantaneously. a quick google search told me this was due to the file types i picked: PNG/JPG/JPEG are relatively large, impacting performance. WEBP on the other hand, loads faster and is significantly smaller.
+
+since i had a lightbox, i knew i'd still needed a higher quality/better rendered card image though. once again, i utilized a script that:
+
+- saved the original images for reference
+- converted all the original images to use the WEBP extension
+- created a folder for both the grid cards (thumbnail) and the lightbox cards (fullsize)
+
+this resulted in an immediate performance upgrade. hooray!
+
+### DAY 2
+
+at this point, the next step would've been to proceed with the tilt and holographic effect, but i continued to put it off because it seemed complicated. teehee. instead i focused on some aesthetic changes to give the page a more unified look.
+
+i found a [Pokémon font](https://www.dafont.com/pokemon.font) online that i applied to all the texts (title, subtitle, navigation). the links without any styling was also bothering me, so i took a little detour and implemented a sidebar. again, W3Schools was my friend here and i followed the tutorial on [creating a sidebar that pushes the content with opacity](https://www.w3schools.com/howto/howto_js_sidenav.asp). and again, i did change it, this time to disable the content events, since i noticed i could still interact with the cards (a greyed out screen suggests otherwise).
+
+after pushing my changes, i also realized that i hadn't setup Jekyll completely (oops), so i took another quick break to install all the dependencies. i should've done this as step 0, but i'm glad i did it at this point — using this to test locally (as opposed to a Python server) proved to be much more consistent and accurate !
+
+ok… time to tackle the holographic tilt. i finally checked out [Vanilla-Tilt.js](https://micku7zu.github.io/vanilla-tilt.js/) — lo and behold, they have a tilt and scale option ! i replaced my card scaling CSS to use this one instead and basically had most of the functionality down.
+
+but i still wasn't too keen on the glare effect in [Vanilla-Tilt.js](https://micku7zu.github.io/vanilla-tilt.js/) — it was a little too opaque for my liking, which made it difficult to see the card. i modified the transparency, which helped a little, but i knew that i'd need to do something a little more custom, so i ended up scrapping it. i looked up 'holographic card' and found a [demo](https://codepen.io/emilandersson/details/jEbermZ), which was very close to what i wanted (it has a much better effect than what i ended up with). after some research into radial and linear gradients, a few adjustments to the colors, strength, and blend modes, i managed to end up with a decent effect.
+
+at this point, the last core feature to change was the caption for the cards, which i had set as a default of the filename, as mentioned earlier. i had intentionally saved the filenames as "&lt;pokemon name&gt;-&lt;card number&gt;", so all i had to do was pull out the card number and append it to the [base URL](https://www.tcgcollector.com/cards/). easy peasy.
+
+the final touches were to make some minor aesthetic changes. i'm a big fan of video game sprites and i know Pokémon has some cool ones, so i wanted to find some way to put them on the page. i downloaded some GIFs from an [online database of animated Pokémon sprites](https://play.pokemonshowdown.com/sprites/ani/?view=icons). my favorite was:
+
+<img src="/pokemon-cards/assets/images/gifs/pikachu-phd.gif" alt="phd pikachu" className="blog-center-img" />
+
+who originally went in the header. but then i thought it would be fun if the header image changed every time the site was loaded (i loved dr. pikachu too much to see even occasionally though, so i moved him to the text at the bottom so he could stay forever). i created a similar JSON generation script, but for the GIFs. then i wrote simple JS code to randomly select a file on page load (and on "back to top" — surprise for anyone who thought they saw something change).
+
+the last change was to add a favicon and i went with ho-oh because it just felt right — classic and nostalgic ! ✧ദ്ദി( ˶^ᗜ^˶ ) (that sounded like AI, i swear it wasn't)
+
+### DAY 3
+
+i belatedly remembered that phones exist and that i should probably check how the page looks on mobile. as expected, the grid size didn't dynamically scale because of the way i hardcoded the card sizes, and the hover effect didn't work (there's no hover on mobile !). this last part was sad, but also not terrible, since the page is primarily meant to be a desktop experience.
+
+that being said, i did want to let mobile users know that they can get the full experience on desktop, so i added a pop-up at the bottom of the screen to let them know they'll see impacted functionality.
+
+### FINAL THOUGHTS
+overall, this was a really fun project ! being a primarily backend developer, i had to brush up on JS/CSS syntax (i think the last time i did frontend was high school...), so i learned a LOT throughout the development process. in retrospect, it was actually much much easier than i expected.
+
+key takeaways:
+
+- start small
+  - and relatedly, take process screenshots for the devlog... (ノ_&lt;。)
+- keep mobile in mind !
+
+huge thanks to Ryan for the OK to post this on my page - check out [his work](https://ryanyan.ca/)! and happy 30th anniversary to Pokémon !!
