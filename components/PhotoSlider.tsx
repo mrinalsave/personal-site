@@ -7,7 +7,7 @@ export type SlideItem = {
   caption?: string
 }
 
-export default function PhotoSlider({ slides = [] }: { slides?: SlideItem[] }) {
+export default function PhotoSlider({ slides = [], defaultPortrait = false }: { slides?: SlideItem[], defaultPortrait?: boolean }) {
   const n = slides.length
   // Extended: [last-clone, ...originals, first-clone]
   const ext = n > 0 ? [slides[n - 1], ...slides, slides[0]] : []
@@ -101,7 +101,7 @@ export default function PhotoSlider({ slides = [] }: { slides?: SlideItem[] }) {
                 src={slide.src}
                 alt={slide.alt}
                 loading="lazy"
-                className={`photo-slider-img${portraits.has(slide.src) ? ' photo-slider-img--portrait' : ''}`}
+                className={`photo-slider-img${(defaultPortrait || portraits.has(slide.src)) ? ' photo-slider-img--portrait' : ''}`}
                 onLoad={e => markPortrait(slide.src, e.currentTarget)}
               />
             </div>
