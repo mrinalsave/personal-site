@@ -13,8 +13,9 @@ export async function generateMetadata(
   const post = getPost(slug)
   if (!post) return { title: 'blog' }
   return {
-    title: `${post.meta.title} — blog`,
+    title: post.meta.title,
     description: post.meta.summary || undefined,
+    alternates: { canonical: `https://www.mrinalsave.com/blog/${slug}` },
     openGraph: {
       title: post.meta.title,
       description: post.meta.summary || undefined,
