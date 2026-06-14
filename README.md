@@ -20,8 +20,9 @@ this is a repo for my personal / portfolio site.
 
 ### 📑 blog
 - build notes / devlog for projects
-- *future: general (travel, recaps, etc.)*
+- travel
 
 ### 🔆 misc.
 - light/dark mode
-- interaction (animation, sounds, etc.)
+- interaction
+- *future: animation, sounds, etc.*
