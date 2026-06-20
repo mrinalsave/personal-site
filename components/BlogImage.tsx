@@ -1,8 +1,10 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import type { ImgHTMLAttributes } from 'react'
+import { resolveSrc } from '@/lib/blobUrl'
 
-export default function BlogImage({ className, alt = '', ...rest }: ImgHTMLAttributes<HTMLImageElement>) {
+export default function BlogImage({ className, alt = '', src }: ImgHTMLAttributes<HTMLImageElement>) {
   const [portrait, setPortrait] = useState(false)
   const imgRef = useRef<HTMLImageElement>(null)
 
@@ -16,15 +18,22 @@ export default function BlogImage({ className, alt = '', ...rest }: ImgHTMLAttri
     .filter(Boolean)
     .join(' ')
 
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img
-    ref={imgRef}
-    className={classes}
-    alt={alt}
-    onLoad={e => {
-      const img = e.currentTarget
-      if (img.naturalHeight > img.naturalWidth) setPortrait(true)
-    }}
-    {...rest}
-  />
+  if (!src) return null
+
+  return (
+    <Image
+      ref={imgRef}
+      src={resolveSrc(src as string)}
+      className={classes}
+      alt={alt}
+      width={0}
+      height={0}
+      sizes="(max-width: 768px) 100vw, 800px"
+      style={{ width: '100%', height: 'auto' }}
+      onLoad={e => {
+        const img = e.currentTarget
+        if (img.naturalHeight > img.naturalWidth) setPortrait(true)
+      }}
+    />
+  )
 }
