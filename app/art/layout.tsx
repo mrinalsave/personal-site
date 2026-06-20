@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'art gallery',
   description: 'mrinal\'s digital art.',
-  icons: { icon: '/art/assets/images/favicon.ico' },
+  icons: { icon: `${process.env.NEXT_PUBLIC_MEDIA_URL ?? ''}/art/assets/images/favicon.ico` },
   alternates: { canonical: 'https://www.mrinalsave.com/art' },
 }
 

@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import { resolveSrc } from '@/lib/blobUrl'
 
 // TODO: Hardcoded for now, but need to dynamically populate.
 const imageList = [
@@ -41,12 +42,12 @@ export default function ArtGrid() {
       const item = document.createElement('div')
       item.className = 'grid-item'
       const img = document.createElement('img')
-      img.src = `/art/assets/images/${file}`
+      img.src = resolveSrc(`/art/assets/images/${file}`)
       item.appendChild(img)
       grid.appendChild(item)
 
       item.addEventListener('click', () => {
-        const src = `/art/assets/images/${file}`
+        const src = resolveSrc(`/art/assets/images/${file}`)
         lightboxImg.style.opacity = '0'
         const tempImg = new Image()
         tempImg.src = src

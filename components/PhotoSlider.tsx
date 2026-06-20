@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { resolveSrc } from '@/lib/blobUrl'
 
 export type SlideItem = {
   src: string
@@ -98,7 +99,7 @@ export default function PhotoSlider({ slides = [], defaultPortrait = false }: { 
             <div key={i} style={slideStyle}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={slide.src}
+                src={resolveSrc(slide.src)}
                 alt={slide.alt}
                 loading="lazy"
                 className={`photo-slider-img${(defaultPortrait || portraits.has(slide.src)) ? ' photo-slider-img--portrait' : ''}`}
