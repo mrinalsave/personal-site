@@ -970,3 +970,12 @@ body.dark .popup-body p { color: var(--muted); }
 body.dark .image-figure figcaption { color: var(--muted); }
 body.dark .image-figure figcaption a { color: var(--white); }
 body.dark .subtitle a { color: var(--white); }
+
+/* custom cursor */
+html, html * {
+    cursor: url('/assets/images/cursor.png') 16 16, auto !important;
+}
+
+html.dark, html.dark * {
+    cursor: url('/assets/images/cursor-dark.png') 16 16, auto !important;
+}
