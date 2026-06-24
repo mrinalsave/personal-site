@@ -13,6 +13,7 @@ const PROJECTS = [
   { name: 'nintendo switch games',  href: '/nintendo-games/',   tags: ['games', 'catalog'] },
   { name: 'oreo dashboard',         href: '/oreos/',            tags: ['chart.js', 'data visualization', 'catalog', 'food'] },
   { name: 'art gallery',            href: '/art/',              tags: ['masonry.js', 'art', 'catalog'] },
+  { name: 'music carousel',         href: '/music/',            tags: ['music', 'catalog'] },
 ]
 
 const COMING_SOON = [
