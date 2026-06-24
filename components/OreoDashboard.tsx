@@ -22,6 +22,7 @@ function processOreoData(
   let flavorId = 0
 
   const flavorList = supabaseFlavors.map(sf => {
+    const fid = ++flavorId
     const allRevs = sf.oreo_reviews ?? []
     const avgEntry = allRevs.find(r => r.is_average)
     const indivRevs = allRevs.filter(r => !r.is_average)
@@ -59,12 +60,12 @@ function processOreoData(
       if (typeof rev.rating !== 'number') continue
       const rname = rev.reviewer_name
       if (!reviewerMap[rname]) reviewerMap[rname] = { ratings: {}, comments: {} }
-      reviewerMap[rname].ratings[sf.name] = rev.rating
-      reviewerMap[rname].comments[sf.name] = rev.comment ?? ''
+      reviewerMap[rname].ratings[fid] = rev.rating
+      reviewerMap[rname].comments[fid] = rev.comment ?? ''
     }
 
     return {
-      id: ++flavorId,
+      id: fid,
       name: sf.name,
       wafers, type, tags, image,
       unrated: isUnrated,
@@ -524,17 +525,17 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         const r = REVIEWERS.find(x => x.id === id) as any
         if (!r) return
 
-        const ratedFlavors = FLAVORS.filter(f => r.ratings[f.name] !== undefined && !f.unrated)
-          .map(f => ({ ...f, myRating: r.ratings[f.name], myComment: r.comments[f.name] ?? '' }))
+        const ratedFlavors = FLAVORS.filter(f => r.ratings[f.id] !== undefined && !f.unrated)
+          .map(f => ({ ...f, myRating: r.ratings[f.id], myComment: r.comments[f.id] ?? '' }))
         const sortedRated = [...ratedFlavors].sort((a, b) => b.myRating - a.myRating)
         const topF = sortedRated.slice(0, 5)
         const botCount = sortedRated.length <= 5 ? 0 : Math.min(5, sortedRated.length - 5)
         const botF = [...sortedRated].sort((a, b) => a.myRating - b.myRating).slice(0, botCount)
         const contrarian = +(Math.abs(r.bias) + r.stddev / 4).toFixed(2)
-        const highestFlavor = FLAVORS.find(f => f.name === r.highest)
-        const highestLabel = r.highest + ((highestFlavor?.type?.toLowerCase() !== 'original' && highestFlavor?.type?.toLowerCase() !== 'loaded') ? ` (${capitalize(highestFlavor?.type ?? '')})` : '')
-        const lowestFlavor = FLAVORS.find(f => f.name === r.lowest)
-        const lowestLabel = r.lowest + ((lowestFlavor?.type?.toLowerCase() !== 'original' && lowestFlavor?.type?.toLowerCase() !== 'loaded') ? ` (${capitalize(lowestFlavor?.type ?? '')})` : '')
+        const highestFlavor = FLAVORS.find(f => f.id === Number(r.highest))
+        const highestLabel = (highestFlavor?.name ?? '—') + ((highestFlavor?.type?.toLowerCase() !== 'original' && highestFlavor?.type?.toLowerCase() !== 'loaded') ? ` (${capitalize(highestFlavor?.type ?? '')})` : '')
+        const lowestFlavor = FLAVORS.find(f => f.id === Number(r.lowest))
+        const lowestLabel = (lowestFlavor?.name ?? '—') + ((lowestFlavor?.type?.toLowerCase() !== 'original' && lowestFlavor?.type?.toLowerCase() !== 'loaded') ? ` (${capitalize(lowestFlavor?.type ?? '')})` : '')
         const isDark = document.body.classList.contains('dark')
         const avatar = isDark ? '/oreos/assets/images/golden-oreo.webp' : '/oreos/assets/images/oreo.webp'
 

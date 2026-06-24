@@ -20,12 +20,13 @@ CREATE TABLE IF NOT EXISTS pokemon_cards (
 -- Oreo flavor catalog.
 CREATE TABLE IF NOT EXISTS oreo_flavors (
   id         uuid     DEFAULT gen_random_uuid() PRIMARY KEY,
-  name       text     NOT NULL UNIQUE,
+  name       text     NOT NULL,
   image_path text,
   wafers     text[],
-  type       text,
+  type       text     NOT NULL DEFAULT 'original',
   tags       text[],
-  created_at timestamptz DEFAULT now()
+  created_at timestamptz DEFAULT now(),
+  CONSTRAINT oreo_flavors_name_type_key UNIQUE (name, type)
 );
 
 -- Individual Oreo reviews (+ computed averages).
