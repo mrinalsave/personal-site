@@ -134,6 +134,15 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('').slice(0, 2)
       }
 
+      function slugify(name: string) {
+        return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+      }
+
+      function flavorSlug(f: { name: string; type: string }) {
+        const typeSuffix = (f.type !== 'original' && f.type !== 'loaded') ? `-${slugify(f.type)}` : ''
+        return slugify(f.name) + typeSuffix
+      }
+
       function getChartColors() {
         const dark = document.body.classList.contains('dark')
         return {
@@ -169,7 +178,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         if (charts[id]) { charts[id].destroy(); delete charts[id] }
       }
 
-      function showPage(page: string) {
+      function showPage(page: string, push = true) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
         document.getElementById('page-' + page)?.classList.add('active')
         const pageName = page.replace(/-/g, ' ')
@@ -184,8 +193,20 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         if (titleEl) titleEl.textContent = titles[page] ?? page.toUpperCase()
         currentPage = page
         closeSidebar()
-        if (page === 'flavors' && !(document.getElementById('flavor-select') as HTMLSelectElement)?.value) {
-          renderFlavorGrid(getFilteredFlavors())
+        if (page === 'flavors') {
+          if (push) {
+            ;(document.getElementById('flavor-select') as HTMLSelectElement).value = ''
+            renderFlavorGrid(getFilteredFlavors())
+          } else if (!(document.getElementById('flavor-select') as HTMLSelectElement)?.value) {
+            renderFlavorGrid(getFilteredFlavors())
+          }
+        }
+        if (page === 'reviewers' && push) {
+          renderReviewerGrid()
+        }
+        if (push) {
+          const url = page === 'overview' ? '/oreos' : `/oreos/${page}`
+          history.pushState({ page }, '', url)
         }
         window.scrollTo(0, 0)
       }
@@ -377,23 +398,26 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
             labels: rated.map(x => `${x.name}${x.type !== 'original' && x.type !== 'Loaded' ? ` (${capitalize(x.type)})` : ''}`),
             datasets: [{ data: rated.map(x => x.avgRating!), backgroundColor: rated.map(x => x.avgRating! < 4.5 ? '#93c5fd' : x.avgRating! < 8.0 ? '#2563eb' : '#1e40af'), borderRadius: 6, borderSkipped: false as const }],
           },
-          options: { ...o, layout: { padding: { left: 45, right: 8, top: 8, bottom: 2 } }, scales: { ...o.scales, x: { ...o.scales.x, ticks: { font: { family: 'DM Mono', size: window.innerWidth < 600 ? 6 : 8 }, color: c.text, maxRotation: 90, minRotation: window.innerWidth < 600 ? 90 : 50, autoSkip: false } }, y: { ...o.scales.y, min: 0, max: 10 } }, plugins: { ...o.plugins, legend: { display: false } } },
+          options: { ...o, layout: { padding: { left: 45, right: 8, top: 8, bottom: 2 } }, scales: { ...o.scales, x: { ...o.scales.x, ticks: { font: { family: 'DM Mono', size: window.innerWidth < 600 ? 6 : 8 }, color: c.text, maxRotation: 90, minRotation: window.innerWidth < 600 ? 90 : 50, autoSkip: false }, afterFit: (scale: any) => { scale.height = 155 } }, y: { ...o.scales.y, min: 0, max: 10 } }, plugins: { ...o.plugins, legend: { display: false } } },
         })
       }
 
       function goToFlavor(id: number) {
-        showPage('flavors')
-        const sel = document.getElementById('flavor-select') as HTMLSelectElement
-        if (sel) sel.value = String(id)
+        const f = FLAVORS.find(x => x.id === id)
+        if (f) (document.getElementById('flavor-select') as HTMLSelectElement).value = String(id)
+        showPage('flavors', false)
         loadFlavorDetail()
+        if (f) history.pushState({ page: 'flavors', flavorId: id }, '', `/oreos/flavors/${flavorSlug(f)}`)
         window.scrollTo(0, 0)
       }
 
       function goToReviewer(id: number) {
-        showPage('reviewers')
+        const r = REVIEWERS.find(x => x.id === id)
+        showPage('reviewers', false)
         const sel = document.getElementById('reviewer-select') as HTMLSelectElement
         if (sel) sel.value = String(id)
         loadReviewerDetail()
+        if (r) history.pushState({ page: 'reviewers', reviewerId: id }, '', `/oreos/reviewers/${slugify(r.name)}`)
         window.scrollTo(0, 0)
       }
 
@@ -415,10 +439,11 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         const panel = document.getElementById('flavor-detail-panel')
         if (!panel) return
 
-        document.getElementById('flavor-type-badge')!.innerHTML = `<span class="flavor-tag type">${f.type.toUpperCase()}</span>`
+        const waferLabel = f.wafers.map((w: string) => w.toUpperCase()).join(' + ')
+        const profileBadges = `<div style="display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px 0;"><span class="flavor-tag type">${waferLabel} WAFER</span><span class="flavor-tag type">${f.type.toUpperCase()} FILLING</span></div>`
 
         if (f.unrated) {
-          panel.innerHTML = `<div class="card" style="margin-bottom:20px;"><div class="card-body"><div class="flavor-hero-inner">${imgSrc ? `<img src="${imgSrc}" alt="${f.name}">` : '<div class="flavor-image-placeholder">🍪</div>'}<div class="flavor-meta"><h2>${f.name}</h2><div class="flavor-tags">${f.tags.map((t: string) => `<span class="flavor-tag">🏷 ${t}</span>`).join('')}</div><div class="flavor-stat-notes unrated">↳ haven't tried this one yet — check back later!</div></div></div></div></div>`
+          panel.innerHTML = `<div class="card" style="margin-bottom:20px;"><div class="card-body"><div class="flavor-hero-inner">${imgSrc ? `<img src="${imgSrc}" alt="${f.name}">` : '<div class="flavor-image-placeholder">🍪</div>'}<div class="flavor-meta"><h2>${f.name}</h2>${profileBadges}<div class="flavor-tags">${f.tags.map((t: string) => `<span class="flavor-tag">🏷 ${t}</span>`).join('')}</div><div class="flavor-stat-notes unrated">↳ haven't tried this one yet — check back later!</div></div></div></div></div>`
           return
         }
 
@@ -436,6 +461,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
           <div class="card" style="margin-bottom:20px;"><div class="card-body"><div class="flavor-hero-inner">
             ${imgSrc ? `<img src="${imgSrc}" alt="${f.name}">` : '<div class="flavor-image-placeholder">🍪</div>'}
             <div class="flavor-meta"><h2>${f.name}</h2>
+              ${profileBadges}
               <div class="flavor-tags">${f.tags.map((t: string) => `<span class="flavor-tag">🏷 ${t}</span>`).join('')}</div>
               <div class="flavor-stats-row">
                 <div class="flavor-stat"><div class="flavor-stat-val">${f.avgRating!.toFixed(2)}</div><div class="flavor-stat-lbl">Average Rating</div></div>
@@ -490,13 +516,14 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         if (panel) panel.innerHTML = `<div class="reviewer-grid">${rated.map(makeCard).join('')}${unrated.length ? `<div style="grid-column:1/-1;margin-top:24px;margin-bottom:8px;font-size:11px;font-family:'DM Mono',monospace;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;border-top:1px solid var(--border);padding-top:16px;">Queued Flavors (${unrated.length})</div>${unrated.map(makeCard).join('')}` : ''}</div>`
         const backBtn = document.getElementById('flavor-back-btn')
         if (backBtn) backBtn.style.display = 'none'
-        document.getElementById('flavor-type-badge')!.innerHTML = ''
         ;(document.getElementById('flavor-select') as HTMLSelectElement).value = ''
       }
 
       function selectFlavorCard(id: number) {
+        const f = FLAVORS.find(x => x.id === id)
         ;(document.getElementById('flavor-select') as HTMLSelectElement).value = String(id)
         loadFlavorDetail()
+        if (f) history.pushState({ page: 'flavors', flavorId: id }, '', `/oreos/flavors/${flavorSlug(f)}`)
         window.scrollTo(0, 0)
       }
 
@@ -514,8 +541,10 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       }
 
       function selectReviewerCard(id: number) {
+        const r = REVIEWERS.find(x => x.id === id)
         ;(document.getElementById('reviewer-select') as HTMLSelectElement).value = String(id)
         loadReviewerDetail()
+        if (r) history.pushState({ page: 'reviewers', reviewerId: id }, '', `/oreos/reviewers/${slugify(r.name)}`)
         window.scrollTo(0, 0)
       }
 
@@ -720,11 +749,83 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
         if (el) el.textContent = val
         applyFilters()
       })
-      document.getElementById('flavor-select')?.addEventListener('change', loadFlavorDetail)
-      document.getElementById('reviewer-select')?.addEventListener('change', loadReviewerDetail)
-      document.getElementById('flavor-back-btn')?.addEventListener('click', () => { renderFlavorGrid(getFilteredFlavors()); window.scrollTo(0, 0) })
-      document.getElementById('reviewer-back-btn')?.addEventListener('click', () => { renderReviewerGrid(); window.scrollTo(0, 0) })
+      document.getElementById('flavor-select')?.addEventListener('change', (e: Event) => {
+        const id = parseInt((e.target as HTMLSelectElement).value)
+        if (id) {
+          selectFlavorCard(id)
+        } else {
+          history.pushState({ page: 'flavors' }, '', '/oreos/flavors')
+          loadFlavorDetail()
+        }
+      })
+      document.getElementById('reviewer-select')?.addEventListener('change', (e: Event) => {
+        const id = parseInt((e.target as HTMLSelectElement).value)
+        if (id) {
+          selectReviewerCard(id)
+        } else {
+          history.pushState({ page: 'reviewers' }, '', '/oreos/reviewers')
+          loadReviewerDetail()
+        }
+      })
+      document.getElementById('flavor-back-btn')?.addEventListener('click', () => {
+        history.pushState({ page: 'flavors' }, '', '/oreos/flavors')
+        renderFlavorGrid(getFilteredFlavors())
+        window.scrollTo(0, 0)
+      })
+      document.getElementById('reviewer-back-btn')?.addEventListener('click', () => {
+        history.pushState({ page: 'reviewers' }, '', '/oreos/reviewers')
+        renderReviewerGrid()
+        window.scrollTo(0, 0)
+      })
       document.getElementById('back-to-top')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) })
+
+      function getStateFromUrl(): { page: string; flavorId?: number | null; reviewerId?: number | null } {
+        const parts = window.location.pathname.replace(/^\/oreos\/?/, '').split('/').filter(Boolean)
+        if (!parts.length) return { page: 'overview' }
+        if (parts[0] === 'flavors') {
+          if (parts[1]) {
+            const flavor = FLAVORS.find(f => flavorSlug(f) === parts[1])
+            return { page: 'flavors', flavorId: flavor?.id ?? null }
+          }
+          return { page: 'flavors' }
+        }
+        if (parts[0] === 'reviewers') {
+          if (parts[1]) {
+            const reviewer = REVIEWERS.find(r => slugify(r.name) === parts[1])
+            return { page: 'reviewers', reviewerId: reviewer?.id ?? null }
+          }
+          return { page: 'reviewers' }
+        }
+        return { page: 'overview' }
+      }
+
+      function restoreState(state: { page: string; flavorId?: number | null; reviewerId?: number | null }) {
+        if (!state) return
+        if (state.page === 'flavors') {
+          if (state.flavorId) {
+            ;(document.getElementById('flavor-select') as HTMLSelectElement).value = String(state.flavorId)
+            showPage('flavors', false)
+            loadFlavorDetail()
+          } else {
+            showPage('flavors', false)
+            renderFlavorGrid(getFilteredFlavors())
+          }
+        } else if (state.page === 'reviewers') {
+          showPage('reviewers', false)
+          if (state.reviewerId) {
+            ;(document.getElementById('reviewer-select') as HTMLSelectElement).value = String(state.reviewerId)
+            loadReviewerDetail()
+          } else {
+            renderReviewerGrid()
+          }
+        } else {
+          showPage('overview', false)
+        }
+        window.scrollTo(0, 0)
+      }
+
+      const handlePopState = (e: PopStateEvent) => restoreState(e.state ?? getStateFromUrl())
+      window.addEventListener('popstate', handlePopState)
 
       // Sync oreo image
       function syncOreoImages() {
@@ -765,9 +866,15 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       buildAllFlavorsChart(FLAVORS)
       applyFilters()
 
+      // Restore state from URL so direct links and refresh work correctly
+      const initState = getStateFromUrl()
+      history.replaceState(initState, '', window.location.pathname)
+      if (initState.page !== 'overview') restoreState(initState)
+
       return () => {
         themeObserver.disconnect()
         window.removeEventListener('resize', onResize)
+        window.removeEventListener('popstate', handlePopState)
         delete (window as any).__oreo
         delete (window as any).__oreo_nav
         Object.values(charts).forEach(c => c?.destroy())
@@ -784,7 +891,7 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
       <nav className="sidebar" id="sidebar">
         <div className="sidebar-logo">
           <div className="logo-mark">🥛 OREO STATS</div>
-          <div className="logo-sub">Review Dashboard v1.1</div>
+          <div className="logo-sub">Review Dashboard v1.3</div>
         </div>
 
         <div className="sidebar-section">
@@ -875,7 +982,6 @@ export default function OreoDashboard({ flavors: rawFlavors, reviewers: rawRevie
               <select className="filter-select" id="flavor-select" style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--text-primary)', width: 'auto', minWidth: '200px' }}>
                 <option value="">— all oreos —</option>
               </select>
-              <div id="flavor-type-badge"></div>
             </div>
             <div id="flavor-detail-panel"></div>
           </div>
