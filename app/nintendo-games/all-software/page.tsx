@@ -5,6 +5,8 @@ import type { NintendoGame } from '@/lib/types'
 import NintendoAllSoftware from '@/components/NintendoAllSoftware'
 
 export default async function NintendoAllSoftwarePage() {
-  const games: NintendoGame[] = await getNintendoGames()
+  const games: NintendoGame[] = (await getNintendoGames())
+    .slice()
+    .sort((a, b) => a.title.localeCompare(b.title))
   return <NintendoAllSoftware games={games} />
 }
