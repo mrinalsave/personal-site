@@ -12,11 +12,12 @@ this is a repo for my personal / portfolio site.
 - interests
 
 ### 🗺️ explore
+- nintendo games
+- songs in rotation
+- art gallery
+- oreo review dashboard
 - pokémon cards
 - audio visualizer
-- nintendo games
-- oreo review dashboard
-- art
 
 ### 📑 blog
 - build notes / devlog for projects
