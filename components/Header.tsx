@@ -26,6 +26,7 @@ export default function Header({ onHamburgerClick }: HeaderProps) {
     '/pokemon-cards': 'favorite pokémon cards',
     '/oreos': 'oreo dashboard',
     '/audio-visualizer': 'audio visualizer',
+    '/songs-in-rotation': 'songs in rotation',
   }
   const pageTitle = pageTitles[pathname] ?? null
   const buildNotesHref = BUILD_NOTES[pathname] ?? null

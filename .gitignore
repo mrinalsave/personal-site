@@ -10,3 +10,6 @@ next-env.d.ts
 debug/
 content/blog/sample-post.mdx
 .env*
+
+# Spotify OAuth setup routes — kept locally, not committed
+app/api/spotify/

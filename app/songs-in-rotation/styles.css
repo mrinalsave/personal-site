@@ -1,0 +1,663 @@
+/* songs in rotation ------------------------------------------------------- */
+.songs-in-rotation-layout {
+  display: block; /* override the global `main { display: grid }` */
+  min-height: 100dvh;
+  padding-top: var(--header-h);
+  overflow: hidden;
+}
+
+.songs-in-rotation-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100dvh - var(--header-h));
+  gap: 0.25rem;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0.5;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-family: inherit;
+  line-height: 1.6;
+}
+body.dark .songs-in-rotation-error { color: var(--off-white); }
+
+.songs-in-rotation {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: calc(100dvh - var(--header-h));
+  user-select: none;
+}
+
+/* ── Title ───────────────────────────────────────────────────────────── */
+.mc-head {
+  text-align: center;
+  padding-top: 10px;
+  z-index: 3;
+}
+.mc-title {
+  font-family: 'alte-haas-font';
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+.mc-sub {
+  font-family: 'alte-haas-font';
+  margin: 2px 0 0;
+  color: var(--grey);
+  font-size: 0.9rem;
+}
+
+/* ── Playlist dropdown (upper-right whitespace) ──────────────────────── */
+.mc-picker {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+.mc-picker-label {
+  font-family: 'bootzy-font';
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.mc-select-wrap { position: relative; display: inline-flex; align-items: center; }
+.mc-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 9px 38px 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--ink);
+  font-family: 'alte-haas-font';
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.mc-select:hover { border-color: var(--grey); }
+.mc-select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.mc-select-caret {
+  position: absolute;
+  right: 13px;
+  color: var(--dark-grey);
+  pointer-events: none;
+}
+body.dark .mc-select { background: rgba(36, 37, 38, 0.7); color: var(--off-white); border-color: var(--light-border); }
+body.dark .mc-select:focus-visible { outline-color: var(--off-white); }
+body.dark .mc-select-caret { color: var(--off-off-white); }
+body.dark .mc-select option { background: var(--dark-background); color: var(--off-white); }
+
+/* ── Track count (upper-left, mirrors the playlist dropdown) ─────────── */
+.mc-track-count {
+  position: absolute;
+  top: 22px;
+  left: 44px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  line-height: 1.1;
+}
+.mc-track-count-num,
+.mc-track-count-label {
+  color: var(--off-off-white);
+  transition: color 400ms ease;
+}
+/* Match the light-mode watermark's subtlety against the dark background:
+   --dark-grey on --dark-background gives ~1.55 contrast, ≈ --off-off-white
+   on --off-white (~1.58) in light mode. */
+body.dark .mc-track-count-num,
+body.dark .mc-track-count-label {
+  color: var(--dark-grey);
+}
+.mc-track-count-num {
+  font-family: 'alte-haas-font';
+  font-size: 4.5rem;
+}
+.mc-track-count-label {
+  font-family: 'bootzy-font';
+  font-size: 2.0rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── 3D stage + ring ─────────────────────────────────────────────────── */
+.mc-stage {
+  position: relative;
+  z-index: 5; /* above .mc-track-count so the ring/selected album render over it */
+  flex: 1;
+  width: 100%;
+  perspective: 2600px;
+  perspective-origin: 50% 47%;
+  touch-action: none;
+  cursor: grab;
+  transition: perspective-origin 0.45s ease;
+}
+.mc-stage:active { cursor: grabbing; }
+
+/* Positioning wrapper — handles top/left placement and the idle CSS spin
+   animation (runs on the GPU compositor thread; JS rAF pauses while idle). */
+.mc-ring-spin {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  transition: top 0.45s ease;
+}
+
+/* Idle spin animations — landscape and portrait variants.
+   Keyframes bake in the tilt/side constants so the transform is a plain
+   rotateY/rotateX that the compositor can run without main-thread JS. */
+@keyframes mc-spin-land {
+  from { transform: translate(-50%, -50%) rotateX(-7deg) rotateY(0deg); }
+  to   { transform: translate(-50%, -50%) rotateX(-7deg) rotateY(-360deg); }
+}
+@keyframes mc-spin-port {
+  from { transform: translate(-50%, -50%) rotateY(10deg) rotateX(0deg); }
+  to   { transform: translate(-50%, -50%) rotateY(10deg) rotateX(-360deg); }
+}
+.mc-ring-spin.mc-spin-land {
+  animation: mc-spin-land 80s linear infinite;
+}
+.mc-ring-spin.mc-spin-port {
+  animation: mc-spin-port 80s linear infinite;
+}
+
+/* Covers stand like books in a ring on a turntable: a vertical cylinder of
+   square covers, each turned tangent to the circle so the front & back covers
+   show their thin "spine" edge while the covers at the sides show their face.
+   The whole cylinder is tipped toward the viewer (--tilt) so we look down onto
+   the ring — an ellipse with an empty centre. --rot spins it left/right. */
+.mc-ring {
+  width: 0;
+  height: 0;
+  --tilt: -7deg;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt)) rotateY(var(--rot, 0deg));
+}
+/* While the CSS idle animation runs, the ring's own transform is zeroed so
+   the wrapper's animation is the sole source of rotation. */
+.mc-ring--idle {
+  transform: none;
+}
+
+.mc-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--card);
+  height: var(--card);
+  margin: calc(var(--card) / -2) 0 0 calc(var(--card) / -2);
+  /* stand the (square) cover up around the cylinder at its angle --theta */
+  transform: rotateY(var(--theta)) translateZ(var(--radius));
+  transform-style: preserve-3d;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+  cursor: pointer;
+}
+
+/* NB: do not put opacity/filter on .mc-card to "dim" the others while a song is
+   focused — both create a stacking context that flattens this preserve-3d scene,
+   which makes the backface-culled covers vanish (the old "solo on an empty page"
+   bug). The selection stands out on its own by straightening, lifting and
+   growing, so the rest of the ring just stays as-is around it. */
+
+.mc-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%; /* hinge at the base, so each cover "sits" upright */
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Turned tangent so mainly the "spine" edge shows. Selecting straightens it
+     to face the viewer and lifts it forward — like taking a book off a shelf. */
+  transform: rotateY(90deg);
+}
+
+.mc-card.selected .mc-card-inner {
+  /* Straighten to face the viewer (cancel tilt), pop forward, then push down
+     into the lower whitespace and scale up. --sel-scale and --sel-ty are both
+     computed in JS proportional to the available below-ring space so the album
+     fills the gap consistently across viewport sizes and playlist lengths. */
+  transform:
+    rotateX(calc(var(--tilt) * -1))
+    translateZ(350px)
+    translateY(var(--sel-ty, 80px))
+    scale(var(--sel-scale, 2.0));
+}
+
+/* ── Album cover (square) ────────────────────────────────────────────── */
+.mc-cover {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0; /* sharp album corners, like the reference */
+  object-fit: cover;
+  pointer-events: none;
+  backface-visibility: hidden; /* show only the face pointing at the viewer */
+}
+/* The back face of the box — pushed to z=-depth so it seals the rear of the
+   extrusion and is visible as the back wall when cards rotate around the ring. */
+.mc-cover-back {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(calc(-1 * var(--depth))) rotateY(180deg);
+  backface-visibility: visible;
+}
+
+/* ── 3D box extrusion (gives each cover physical depth on the ring) ──── */
+.mc-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transform-style: preserve-3d;
+  --depth: calc(var(--card, 150px) * 0.16);
+}
+
+.mc-box-right,
+.mc-box-left,
+.mc-box-top,
+.mc-box-bottom {
+  position: absolute;
+  pointer-events: none;
+  background-image: var(--cover-url);
+  background-repeat: no-repeat;
+}
+
+.mc-box-right {
+  top: 0; left: 100%;
+  width: var(--depth); height: 100%;
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  background-size: var(--card, 150px) 100%;
+  background-position: right center;
+}
+.mc-box-left {
+  top: 0; right: 100%;
+  width: var(--depth); height: 100%;
+  transform-origin: right center;
+  transform: rotateY(-90deg);
+  background-size: var(--card, 150px) 100%;
+  background-position: left center;
+}
+.mc-box-bottom {
+  left: 0; top: 100%;
+  width: 100%; height: var(--depth);
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+  background-size: 100% var(--card, 150px);
+  background-position: center bottom;
+}
+.mc-box-top {
+  left: 0; bottom: 100%;
+  width: 100%; height: var(--depth);
+  transform-origin: bottom center;
+  transform: rotateX(90deg);
+  background-size: 100% var(--card, 150px);
+  background-position: center top;
+}
+
+/* ── Vinyl record (slides out from behind the sleeve) ────────────────── */
+.mc-vinyl {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* Landscape: the record slides out of the bottom of the sleeve. Portrait keeps
+   the sideways slide (overridden in the portrait media query below). */
+.mc-card.selected .mc-vinyl { transform: translateY(50%); }
+
+.mc-vinyl-disc {
+  width: 100%;
+  height: 100%;
+  background: url(/music/assets/images/record-dark.webp) center / contain no-repeat;
+}
+body.dark .mc-vinyl-disc {
+  background-image: url(/music/assets/images/record.webp);
+}
+/* Only promote the active disc to a GPU layer — not every disc in the ring. */
+.mc-card.selected .mc-vinyl-disc {
+  will-change: transform;
+}
+
+/* ── Track nav arrows (prev / next on the selected card) ─────────────── */
+/* Buttons live inside .mc-card-inner so they transform with the card in 3D.
+   They're hidden by default and only shown on the selected card. */
+.mc-nav-btn {
+  display: none;
+  position: absolute;
+  width: 6.65px;
+  height: 6.65px;
+  border: none;
+  background: none;
+  color: var(--ink);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: auto;
+  padding: 0;
+  /* Push slightly forward so it renders above the vinyl disc in 3D */
+  transform: translateZ(1px);
+  transition: opacity 0.15s ease;
+}
+.mc-nav-btn:hover  { opacity: 0.6; }
+.mc-nav-btn:active { opacity: 0.35; }
+body.dark .mc-nav-btn { color: var(--white); }
+
+.mc-card.selected .mc-nav-btn { display: flex; }
+
+/* Landscape: left/right of the vinyl, vertically centred on the exposed half.
+   Exposed vinyl occupies card → 1.5·card; midpoint = 1.25·card from card top. */
+.mc-nav-prev,
+.mc-nav-next {
+  top: calc(var(--card) * 1.25 - 3.325px);
+}
+.mc-nav-prev { left: -18px; }
+.mc-nav-next { right: -18px; }
+
+/* Track title shown under the landscape prev/next nav arrows. */
+.mc-nav-track-title {
+  margin: 0;
+  font-family: 'bootzy-font';
+  font-style: italic;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--ink);
+  line-height: 1.2;
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+body.dark .mc-nav-track-title { color: var(--white); }
+.mc-nav-track-label { color: var(--grey); }
+
+/* ── Details panel ───────────────────────────────────────────────────── */
+/* Pinned to the bottom as an overlay so it is always fully visible
+   regardless of how tall the ring is. */
+.mc-details {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 125px; /* clears the fixed footer */
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 78px;
+  padding: 0 18px;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.mc-details.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.mc-details-text { text-align: right; }
+.vertical .mc-details-text { text-align: center; }
+.mc-song-title {
+  font-family: 'alte-haas-font';
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  line-height: 1.1;
+}
+.mc-song-meta {
+  font-family: 'bootzy-font';
+  font-style: italic;
+  margin: 6px 0 0;
+  color: var(--grey);
+  font-size: 0.9rem;
+  letter-spacing: 0.02rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: flex-end;
+}
+.vertical .mc-song-meta { justify-content: center; }
+.mc-artist { color: var(--dark-grey); font-weight: 600; }
+body.dark .mc-artist { color: var(--off-white); }
+body.dark .mc-song-title { color: var(--white); }
+.mc-dot { opacity: 0.5; }
+
+.mc-play {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.mc-play svg { fill: currentColor; }
+.mc-play:hover { transform: scale(1.06); }
+.mc-play:active { transform: scale(0.96); }
+body.dark .mc-play { background: var(--off-white); color: var(--ink); }
+
+/* Pulsing ring while a preview is playing */
+.mc-play.is-playing {
+  --pulse: 0, 0, 0;
+  box-shadow: 0 0 0 0 rgba(var(--pulse), 0.25);
+  animation: mc-pulse 1.6s ease-out infinite;
+}
+body.dark .mc-play.is-playing {
+  --pulse: 255, 255, 255;
+}
+@keyframes mc-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(var(--pulse), 0.25); }
+  70%  { box-shadow: 0 0 0 10px rgba(var(--pulse), 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(var(--pulse), 0);    }
+}
+
+/* Playhead: shows preview playback position underneath the song details */
+.mc-playhead {
+  margin: 10px 0 0;
+  width: 100%;
+  max-width: 220px;
+  margin-left: auto;
+}
+.vertical .mc-playhead { margin: 10px auto 0; }
+.mc-playhead-track {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--border);
+}
+body.dark .mc-playhead-track { background: var(--light-border); }
+.mc-playhead-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--ink);
+}
+body.dark .mc-playhead-fill { background: var(--off-white); }
+.mc-playhead-thumb {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translate(-50%, -50%);
+}
+body.dark .mc-playhead-thumb { background: var(--off-white); }
+
+/* ── Hint line ───────────────────────────────────────────────────────── */
+.mc-hint {
+  font-family: 'alte-haas-font';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 42px; /* clears the fixed footer */
+  z-index: 999;
+  margin: 0;
+  text-align: center;
+  color: var(--grey);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Landscape: shift ring up on selection to clear the details panel ── */
+.songs-in-rotation:not(.vertical).has-selection .mc-stage {
+  perspective-origin: 50% 24%;
+}
+.songs-in-rotation:not(.vertical).has-selection .mc-ring-spin {
+  top: 24%;
+}
+/* Move details closer to the bottom so the vinyl record doesn't overlap them. */
+.songs-in-rotation:not(.vertical).has-selection .mc-details {
+  bottom: 60px;
+}
+/* Hint moves to the top (where the subtitle lives) on selection; subtitle hides. */
+.songs-in-rotation:not(.vertical).has-selection .mc-hint {
+  bottom: auto;
+  top: calc(var(--header-h) + 14px);
+}
+.songs-in-rotation:not(.vertical).has-selection .mc-sub {
+  visibility: hidden;
+}
+/* Track count fades to off-white when a track is selected. */
+.songs-in-rotation:not(.vertical).has-selection .mc-track-count-num,
+.songs-in-rotation:not(.vertical).has-selection .mc-track-count-label {
+  color: var(--off-white);
+}
+/* Dark mode: fade the track count into the background on selection. */
+body.dark .songs-in-rotation:not(.vertical).has-selection .mc-track-count-num,
+body.dark .songs-in-rotation:not(.vertical).has-selection .mc-track-count-label {
+  color: var(--dark-background);
+}
+
+/* ── Portrait tweaks ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  /* Portrait is a *vertical* loop: the same cylinder, but laid on its side so
+     its axis is horizontal. We spin it around X (drag up/down) and view it from
+     a slight side angle (--side). It's nudged left so the popped-out record and
+     the song title have the right-hand whitespace. */
+  .mc-stage {
+    perspective: 1600px;
+    perspective-origin: 38% 50%;
+  }
+  .vertical.has-selection .mc-stage { perspective-origin: 22% 50%; }
+
+  .mc-ring-spin {
+    left: 38%;
+    transition: left 0.45s ease;
+  }
+  .vertical.has-selection .mc-ring-spin { left: 22%; }
+
+  .mc-ring {
+    --side: 10deg; /* look at the vertical loop slightly from the side */
+    transform: rotateY(var(--side)) rotateX(var(--rot, 0deg));
+  }
+  .mc-ring--idle { transform: none; }
+
+  /* Stand each cover around the horizontal-axis cylinder (vertical ellipse). */
+  .mc-card {
+    transform: rotateX(var(--theta)) translateZ(var(--radius));
+  }
+  /* Turned tangent around the (now horizontal) axis — spine edge shows at the
+     front/back of the loop, faces show toward the top & bottom. */
+  .mc-card-inner {
+    transform: rotateX(90deg);
+  }
+  .mc-card.selected .mc-card-inner {
+    /* Stay put on the rim (no slide into the loop's hollow centre): cancel the
+       side angle to face the viewer, then lift forward and grow a little so it
+       pops out among its neighbours rather than floating off alone.
+       translateX shifts it right; translateY compensates for the bottom
+       transform-origin so the cover visually centres on the ring gap. */
+    transform:
+      rotateY(calc(var(--side) * -1))
+      translateZ(300px)
+      translateX(80px)
+      translateY(calc(var(--card, 150px) * 0.8))
+      scale(2.0);
+  }
+  /* Portrait keeps the record sliding out to the right of the sleeve. */
+  .vertical .mc-card.selected .mc-vinyl { transform: translateX(50%); }
+
+  .mc-head {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+  }
+  .mc-sub { display: none; }
+  .mc-picker { top: 16px; right: 16px; }
+  .mc-select { font-size: 0.82rem; padding: 8px 34px 8px 14px; }
+  .mc-track-count {
+    top: 78px;
+    left: auto;
+    right: 16px;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .mc-track-count-num { font-size: 2.5rem; }
+  .mc-track-count-label { font-size: 0.8rem; }
+
+  /* Song title + controls sit in the bottom-right whitespace, below the
+     popped-out cover which lives at ~45% screen height. */
+  .vertical .mc-details {
+    position: fixed;
+    left: auto;
+    right: 14px;
+    top: auto;
+    bottom: 90px; /* above the hint line */
+    width: 46%;
+    min-height: 0;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0;
+    transform: translateY(14px);
+  }
+  .vertical .mc-details.open { transform: translateY(0); }
+
+  .mc-song-title { font-size: 1.2rem; line-height: 1.15; }
+  .mc-song-meta { font-size: 0.82rem; }
+}
+
+/* ── Fonts ───────────────────────────────────────────────────────────── */
+
+@font-face {
+    font-family: 'alte-haas-font';
+    src: url('/music/assets/fonts/AlteHaasGroteskBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'bootzy-font';
+    src: url('/music/assets/fonts/BootzyTM.ttf') format('truetype');
+}

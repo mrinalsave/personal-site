@@ -8,11 +8,12 @@ const FILTERS = [
 ]
 
 const PROJECTS = [
-  { name: 'favorite pokémon cards', href: '/pokemon-cards/', tags: ['vanilla-tilt.js', 'games', 'catalog'] },
-  { name: 'audio visualizer',       href: '/audio-visualizer/', tags: ['three.js', 'webgl', 'music'] },
   { name: 'nintendo switch games',  href: '/nintendo-games/',   tags: ['games', 'catalog'] },
-  { name: 'oreo dashboard',         href: '/oreos/',            tags: ['chart.js', 'data visualization', 'catalog', 'food'] },
+  { name: 'songs in rotation',      href: '/songs-in-rotation/', tags: ['music', 'catalog'] },
   { name: 'art gallery',            href: '/art/',              tags: ['masonry.js', 'art', 'catalog'] },
+  { name: 'oreo dashboard',         href: '/oreos/',            tags: ['chart.js', 'data visualization', 'catalog', 'food'] },
+  { name: 'favorite pokémon cards', href: '/pokemon-cards/',    tags: ['vanilla-tilt.js', 'games', 'catalog'] },
+  { name: 'audio visualizer',       href: '/audio-visualizer/', tags: ['three.js', 'webgl', 'music'] },
 ]
 
 const COMING_SOON = [
