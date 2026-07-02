@@ -1,11 +1,26 @@
-// Server-only Spotify data for the /music carousel.
+// Server-only Spotify data for the /songs-in-rotation carousel.
 // Uses a one-time-authorized user refresh token (Authorization Code flow) so we
 // can read the owner's playlists and their tracks. The refresh token lives in
 // SPOTIFY_REFRESH_TOKEN (see app/api/spotify/login to mint it).
-// On any failure it falls back to the bundled mock playlists so the page
-// always renders.
 
-import { PLAYLISTS, type Playlist, type Track } from './musicMockData'
+import { unstable_cache } from 'next/cache'
+
+export interface Track {
+  id: string
+  title: string
+  artist: string
+  album: string
+  releaseDate: string
+  coverUrl?: string
+  spotifyUrl?: string
+  isrc?: string
+}
+
+export interface Playlist {
+  id: string
+  name: string
+  tracks: Track[]
+}
 
 /* ── Config (edit here) ─────────────────────────────────────────────── */
 export const PLAYLIST_LIMIT = 10   // max playlists shown in the carousel
@@ -64,6 +79,8 @@ interface SpotifyApiTrack {
   name: string
   type: string
   is_local: boolean
+  external_urls: { spotify: string }
+  external_ids?: { isrc?: string }
   artists: { name: string }[]
   album: { name: string; release_date: string; images: SpotifyImage[] }
 }
@@ -74,6 +91,8 @@ function mapTrack(entry: { item: SpotifyApiTrack | null }): Track | null {
   const t = entry?.item
   if (!t || !t.id || t.is_local || t.type !== 'track') return null
   const images = t.album?.images ?? []
+  // Empty images = track removed/unavailable from Spotify's catalog; skip it.
+  if (!images.length) return null
   return {
     id: t.id,
     title: t.name,
@@ -81,11 +100,13 @@ function mapTrack(entry: { item: SpotifyApiTrack | null }): Track | null {
     album: t.album?.name ?? '',
     releaseDate: t.album?.release_date ?? '',
     coverUrl: images[1]?.url ?? images[0]?.url, // ~300px, else largest
+    spotifyUrl: t.external_urls?.spotify,
+    isrc: t.external_ids?.isrc,
   }
 }
 
 const TRACK_FIELDS =
-  'total,items(item(id,name,type,is_local,artists(name),album(name,release_date,images)))'
+  'total,items(item(id,name,type,is_local,external_urls,external_ids(isrc),artists(name),album(name,release_date,images)))'
 
 async function fetchTracks(playlistId: string): Promise<Track[]> {
   const seen = new Set<string>()
@@ -101,7 +122,7 @@ async function fetchTracks(playlistId: string): Promise<Track[]> {
     }
     if (items.length < 50 || offset + 50 >= (data.total ?? 0)) break
   }
-  return out
+  return out.sort((a, b) => a.title.localeCompare(b.title))
 }
 
 interface Summary { id: string; name: string }
@@ -120,7 +141,7 @@ async function fetchBracketPlaylists(): Promise<Summary[]> {
 }
 
 /* ── Public entry point ──────────────────────────────────────────────── */
-export async function getMusicData(): Promise<{ playlists: Playlist[]; defaultId: string }> {
+async function fetchMusicData(): Promise<{ playlists: Playlist[]; defaultId: string; error: boolean }> {
   try {
     const summaries = await fetchBracketPlaylists()
 
@@ -131,9 +152,16 @@ export async function getMusicData(): Promise<{ playlists: Playlist[]; defaultId
     ).filter((p) => p.tracks.length > 0)
 
     if (!playlists.length) throw new Error('no tracks returned')
-    return { playlists, defaultId: playlists[0].id }
+    return { playlists, defaultId: playlists[0].id, error: false }
   } catch (err) {
-    console.error('[music] Spotify fetch failed, using mock data:', (err as Error).message)
-    return { playlists: PLAYLISTS, defaultId: PLAYLISTS[0].id }
+    console.error('[music] Spotify fetch failed:', (err as Error).message)
+    return { playlists: [], defaultId: '', error: true }
   }
 }
+
+// Cached indefinitely — invalidated only when revalidateTag('music') is called
+// (i.e. when the Vercel cron hits /api/revalidate on the configured schedule).
+export const getMusicData = unstable_cache(fetchMusicData, ['music-data'], {
+  revalidate: false,
+  tags: ['music'],
+})
