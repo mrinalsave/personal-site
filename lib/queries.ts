@@ -10,7 +10,7 @@ export async function getNintendoGames(): Promise<NintendoGame[]> {
   const { data, error } = await supabase
     .from('nintendo_games')
     .select('*')
-    .order('sort_order', { ascending: true })
+    .order('title', { ascending: true })
   if (error) { console.error('getNintendoGames:', error.message); return [] }
   return data
 }

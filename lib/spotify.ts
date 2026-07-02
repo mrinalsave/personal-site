@@ -36,7 +36,7 @@ async function getAccessToken(): Promise<string> {
   const secret = process.env.SPOTIFY_CLIENT_SECRET
   const refresh = process.env.SPOTIFY_REFRESH_TOKEN
   if (!id || !secret) throw new Error('SPOTIFY_CLIENT_ID/SECRET not set')
-  if (!refresh) throw new Error('SPOTIFY_REFRESH_TOKEN not set (run /api/spotify/login once)')
+  if (!refresh) throw new Error('SPOTIFY_REFRESH_TOKEN not set (re-run the Spotify OAuth setup to generate one)')
 
   const res = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
