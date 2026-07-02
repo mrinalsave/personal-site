@@ -4,8 +4,9 @@ import { revalidateTag } from 'next/cache'
 //   curl -X GET https://<your-domain>/api/revalidate \
 //        -H "Authorization: Bearer <CRON_SECRET>"
 //
-// Vercel automatically injects CRON_SECRET and sends the Authorization header
-// when this route is invoked by the cron job — no manual setup needed.
+// CRON_SECRET must be set manually as a project env var in Vercel. Once set,
+// Vercel includes it in the Authorization header when invoking the cron job.
+// Without it, this route rejects every request (including the cron) with 401.
 // For local testing, set CRON_SECRET in .env.local and pass it manually.
 
 export async function GET(req: Request) {
